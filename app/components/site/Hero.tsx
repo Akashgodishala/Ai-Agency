@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Seal } from "@/components/seal/Seal";
+import { MarkWall } from "@/components/site/MarkWall";
 import { MaskedLines } from "@/components/motion/MaskedLines";
 import { gsap, prefersReducedMotion } from "@/components/motion/gsap";
 import { useMagnetic } from "@/components/motion/hooks";
@@ -192,8 +193,11 @@ export function Hero({ agentCount }: { agentCount: number }) {
           </div>
         </div>
 
-        {/* ---------------- right: the struck disc ---------------- */}
+        {/* ---------------- right: the struck disc, over the wall ---------------- */}
         <div className="relative order-first flex flex-col items-center lg:order-none">
+          {/* Fifty workers, engraved and breathing, behind the die. */}
+          <MarkWall className="absolute inset-0 -z-10 hidden scale-[1.35] lg:block" />
+
           <div
             ref={sealRef}
             className="relative aspect-square w-[min(78vw,26rem)] opacity-0 lg:w-full lg:max-w-[30rem]"

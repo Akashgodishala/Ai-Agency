@@ -1,5 +1,6 @@
 import { TEMPLATES } from "@/lib/templates";
 import { Hero } from "@/components/site/Hero";
+import { TheFifty } from "@/components/site/TheFifty";
 import { Process } from "@/components/site/Process";
 import { Statement } from "@/components/site/Statement";
 import { Collection } from "@/components/site/Collection";
@@ -20,6 +21,7 @@ export default function Landing() {
     <>
       <span id="top" />
       <Hero agentCount={TEMPLATES.length} />
+      <TheFifty />
       <Process />
       <Statement />
       <Collection />

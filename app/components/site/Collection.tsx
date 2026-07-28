@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import { TEMPLATES, instantiateTemplate, type AgentTemplate } from "@/lib/templates";
 import { saveAgent, listAgents } from "@/lib/store";
-import { SealCanvas } from "@/components/seal/SealCanvas";
+import { AgentMark } from "@/components/seal/AgentMark";
 import { MaskedLines } from "@/components/motion/MaskedLines";
 import { useReveal } from "@/components/motion/hooks";
 import { gsap, Flip, prefersReducedMotion } from "@/components/motion/gsap";
@@ -219,16 +219,7 @@ function AgentPlate({
       }
     >
       <div className="flex items-start justify-between gap-3">
-        <div className="relative h-16 w-16 shrink-0">
-          <SealCanvas
-            text={`${t.name} ${t.tagline}`}
-            animate={false}
-            transparent
-            size={280}
-            steps={900}
-            className="h-full w-full transition-transform duration-700 ease-struck group-hover:rotate-[24deg]"
-          />
-        </div>
+        <AgentMark templateId={t.templateId} size={58} />
         <span className="assay border border-rule px-2.5 py-1 normal-case tracking-[0.08em]">
           {t.audience}
         </span>
