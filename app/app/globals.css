@@ -2,192 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-  AgentMint palette — "fresh mint on slate".
-  RGB triplets so Tailwind can apply alpha via rgb(var(--x) / <alpha>).
-*/
+/* ===========================================================================
+   THE MINT — visual system
+   A mint is where value gets struck. Obsidian ground, struck plate surfaces,
+   engraved hairlines, one hot accent, brass reserved for the strike.
+   Mirrors lib/design/tokens.ts — keep the two in step.
+   =========================================================================== */
 :root {
-  --ground: 247 249 247;      /* paper with a cool green whisper */
-  --surface: 255 255 255;
-  --raised: 240 244 241;
-  --ink: 18 26 23;
-  --muted: 96 110 104;
-  --line: 219 226 221;
-  --mint: 16 158 111;         /* the brand green */
-  --mint-deep: 11 110 78;
-  --mint-soft: 224 242 234;
-  --amber: 233 162 59;
+  --ink: 5 8 10;          /* obsidian, cold green undertone */
+  --plate: 11 17 19;      /* struck plate */
+  --plate2: 18 26 28;     /* nested surface */
+  --rule: 30 41 43;       /* engraved hairline */
+  --paper: 233 239 235;   /* struck highlight / primary type */
+  --muted: 122 140 134;
+  --dim: 78 93 88;
+  --mint: 56 224 166;     /* the one hot accent */
+  --mint-deep: 31 122 92;
+  --brass: 201 151 74;    /* the strike, and "planned not live" */
+  --danger: 232 131 107;
 
-  --font-display: "Avenir Next", "Segoe UI Variable Display", "Seravek", Futura, "Century Gothic", sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ground: 13 20 17;
-    --surface: 20 30 26;
-    --raised: 27 39 33;
-    --ink: 233 240 236;
-    --muted: 148 162 155;
-    --line: 39 53 46;
-    --mint: 58 209 155;
-    --mint-deep: 42 172 126;
-    --mint-soft: 22 51 40;
-    --amber: 240 180 92;
-  }
+  --radius: 2px;          /* struck metal has edges, not soft corners */
 }
 
-/* Viewer toggle wins in both directions. */
-:root[data-theme="light"] {
-  --ground: 247 249 247;
-  --surface: 255 255 255;
-  --raised: 240 244 241;
-  --ink: 18 26 23;
-  --muted: 96 110 104;
-  --line: 219 226 221;
-  --mint: 16 158 111;
-  --mint-deep: 11 110 78;
-  --mint-soft: 224 242 234;
-  --amber: 233 162 59;
-}
-:root[data-theme="dark"] {
-  --ground: 13 20 17;
-  --surface: 20 30 26;
-  --raised: 27 39 33;
-  --ink: 233 240 236;
-  --muted: 148 162 155;
-  --line: 39 53 46;
-  --mint: 58 209 155;
-  --mint-deep: 42 172 126;
-  --mint-soft: 22 51 40;
-  --amber: 240 180 92;
-}
+/* Committed single world: this brand is dark by design, so the palette does
+   not invert. The toggle in the viewer's browser has nothing to switch. */
 
 html {
   scroll-behavior: smooth;
+  background: rgb(var(--ink));
 }
 
 body {
-  background: rgb(var(--ground));
-  color: rgb(var(--ink));
-  font-family: var(--font-body);
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-display), "Didot", "Bodoni MT", Georgia, serif;
+  font-weight: 400;
   text-wrap: balance;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-  html { scroll-behavior: auto; }
+/* Optical sizing: didones want tighter tracking as they grow. */
+h1 { line-height: 0.96; letter-spacing: -0.022em; }
+h2 { line-height: 1.06; letter-spacing: -0.016em; }
+h3 { line-height: 1.16; }
+
+::selection {
+  background: rgb(var(--mint) / 0.28);
+  color: rgb(var(--paper));
 }
 
-/* Chat typing dots */
-.typing-dot {
-  animation: bounce 1.2s infinite;
-}
-.typing-dot:nth-child(2) { animation-delay: 0.15s; }
-.typing-dot:nth-child(3) { animation-delay: 0.3s; }
-@keyframes bounce {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-  30% { transform: translateY(-4px); opacity: 0.9; }
+:focus-visible {
+  outline: 2px solid rgb(var(--mint));
+  outline-offset: 3px;
 }
 
-/* ---- Hero atmosphere: soft radial mint aurora behind the magic box ---- */
-.hero-aurora {
+/* Engraved label — mono, tracked out, the mint's vernacular for metadata. */
+.assay {
+  font-family: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(var(--dim));
+}
+
+/* ---- Ambient plate light behind the hero. Not a glowing blob: a single
+   off-centre source, as if one lamp were raking across metal. ---- */
+.plate-light {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(600px 300px at 50% 20%, rgb(var(--mint) / 0.14), transparent 70%),
-    radial-gradient(500px 260px at 18% 65%, rgb(var(--mint) / 0.07), transparent 70%),
-    radial-gradient(500px 260px at 82% 60%, rgb(var(--amber) / 0.06), transparent 70%);
+    radial-gradient(760px 420px at 62% 34%, rgb(var(--mint) / 0.09), transparent 66%),
+    radial-gradient(520px 380px at 18% 72%, rgb(var(--brass) / 0.05), transparent 68%);
 }
 
-/* ---- The magic box: a slowly breathing gradient ring ---- */
-.magic-ring {
-  position: relative;
-  border-radius: 20px;
-  padding: 1.5px;
+/* ---- Engraved hairline rule ---- */
+.rule-line {
+  height: 1px;
   background: linear-gradient(
-    120deg,
-    rgb(var(--mint) / 0.9),
-    rgb(var(--line)),
-    rgb(var(--amber) / 0.55),
-    rgb(var(--line)),
-    rgb(var(--mint) / 0.9)
+    90deg,
+    transparent,
+    rgb(var(--rule)) 12%,
+    rgb(var(--rule)) 88%,
+    transparent
   );
-  background-size: 300% 300%;
-  animation: ring-drift 9s ease-in-out infinite;
-}
-@keyframes ring-drift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
 }
 
-/* ---- Gallery card hover glow ---- */
-.card-glow { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
-.card-glow:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 2px 4px rgb(0 0 0 / 0.04), 0 18px 44px -18px rgb(var(--mint) / 0.45);
+/* ---- Struck surface: a plate catching a little light at its top edge ---- */
+.struck {
+  background: linear-gradient(180deg, rgb(var(--plate2)), rgb(var(--plate)));
+  border: 1px solid rgb(var(--rule));
+  position: relative;
+}
+.struck::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--paper) / 0.09), transparent);
 }
 
-/* ---- Marquee of agent names in the hero ---- */
-.marquee {
-  display: flex;
-  gap: 0.75rem;
-  width: max-content;
-  animation: marquee-scroll 60s linear infinite;
-}
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+/* ---- Typing caret in the hero field ---- */
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
 }
 
-/* ---- Scroll reveals (driven by components/motion.tsx) ---- */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+/* ---- Strike flash, shared by button and field ---- */
+@keyframes strike-flash {
+  0% { box-shadow: 0 0 0 0 rgb(var(--brass) / 0.55); }
+  100% { box-shadow: 0 0 0 22px rgb(var(--brass) / 0); }
 }
-.reveal-visible {
-  opacity: 1;
-  transform: none;
-}
+.striking { animation: strike-flash 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
 
-/* ---- Hero entrance (page-load choreography) ---- */
-.hero-enter {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* ---- Scroll cue ---- */
+@keyframes cue-slide {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
 }
-@keyframes hero-in {
-  to { opacity: 1; transform: none; }
-}
+.cue { animation: cue-slide 2.4s ease-in-out infinite; }
 
-/* ---- Big statement section ---- */
-.statement-gradient {
-  background: linear-gradient(105deg, rgb(var(--ink)), rgb(var(--mint)) 55%, rgb(var(--amber)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
+/* ---- Reduced motion: everything resolves instantly and stays composed ---- */
 @media (prefers-reduced-motion: reduce) {
-  .marquee { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
-  .magic-ring { animation: none; }
-  /* Never hide content behind motion — show it all instantly. */
-  .reveal, .hero-enter { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html { scroll-behavior: auto; }
 }

@@ -1,37 +1,47 @@
 import type { Config } from "tailwindcss";
 
 /**
- * AgentMint design tokens.
- * The palette is defined as CSS variables in app/globals.css (light + dark);
- * Tailwind maps semantic names onto those variables so every component stays
- * theme-aware without per-component dark: overrides.
+ * Tailwind maps semantic names onto the CSS custom properties defined in
+ * app/globals.css, which mirror lib/design/tokens.ts. Components never name a
+ * raw colour — so rebranding is a one-file change.
  */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ground: "rgb(var(--ground) / <alpha-value>)",
-        surface: "rgb(var(--surface) / <alpha-value>)",
-        raised: "rgb(var(--raised) / <alpha-value>)",
         ink: "rgb(var(--ink) / <alpha-value>)",
+        plate: "rgb(var(--plate) / <alpha-value>)",
+        plate2: "rgb(var(--plate2) / <alpha-value>)",
+        rule: "rgb(var(--rule) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
         muted: "rgb(var(--muted) / <alpha-value>)",
-        line: "rgb(var(--line) / <alpha-value>)",
+        dim: "rgb(var(--dim) / <alpha-value>)",
         mint: "rgb(var(--mint) / <alpha-value>)",
         "mint-deep": "rgb(var(--mint-deep) / <alpha-value>)",
-        "mint-soft": "rgb(var(--mint-soft) / <alpha-value>)",
-        amber: "rgb(var(--amber) / <alpha-value>)",
+        brass: "rgb(var(--brass) / <alpha-value>)",
+        danger: "rgb(var(--danger) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)"],
-        body: ["var(--font-body)"],
-        mono: ["var(--font-mono)"],
+        display: ["var(--font-display)", "Didot", "Bodoni MT", "Georgia", "serif"],
+        sans: ["var(--font-geist-sans)", "-apple-system", "Helvetica", "Arial", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
+      },
+      fontSize: {
+        // A didone type scale: big jumps at the top, tight steps in the body.
+        display: ["clamp(3.1rem, 8.2vw, 7.4rem)", { lineHeight: "0.94", letterSpacing: "-0.024em" }],
+        title: ["clamp(2rem, 4.4vw, 3.6rem)", { lineHeight: "1.04", letterSpacing: "-0.018em" }],
+        head: ["clamp(1.4rem, 2.2vw, 1.9rem)", { lineHeight: "1.16", letterSpacing: "-0.01em" }],
       },
       borderRadius: {
-        card: "16px",
+        struck: "2px",
       },
-      boxShadow: {
-        card: "0 1px 2px rgb(0 0 0 / 0.04), 0 12px 32px -16px rgb(0 0 0 / 0.25)",
+      maxWidth: {
+        sheet: "1240px",
+        measure: "68ch",
+      },
+      transitionTimingFunction: {
+        struck: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
