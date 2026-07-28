@@ -32,6 +32,7 @@ Claude does the engineering.
 | 5 | [Roadmap](docs/05-roadmap.md) | Phases from here to launch and beyond |
 | 6 | [Founder Guide](docs/06-founder-guide.md) | Your role vs. Claude's, accounts you'll need, glossary |
 | 7 | [Go-Live Checklist](docs/07-go-live-checklist.md) | Creating your Anthropic account, connecting the key, and the capability ladder to voice agents |
+| 8 | [Integrations Blueprint](docs/08-integrations-blueprint.md) | How Stripe, Twilio, and VAPI power subscriptions, texts, payment links, and voice agents |
 
 ## Running the app (for whoever builds)
 

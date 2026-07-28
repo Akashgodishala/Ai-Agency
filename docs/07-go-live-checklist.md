@@ -60,9 +60,12 @@ plain-English refinement.
 | Rung | Capability | Also needs |
 |------|-----------|------------|
 | 1 | Publish: share link + website widget | accounts + a database |
-| 2 | Subscriptions (monthly & yearly) | your Stripe account |
-| 3 | Texts, notifications & payment links | a messaging provider + Stripe |
-| 4 | **Voice agents on a real phone number** | a telephony provider (e.g. Twilio) |
+| 2 | Subscriptions (monthly & yearly) | your **Stripe** account |
+| 3 | Texts, notifications & payment links | **Twilio** + Stripe payment links |
+| 4 | **Voice agents on a real phone number** | **VAPI** (vendor confirmed by the founder) |
+
+> Vendor stack confirmed: Stripe + Twilio + VAPI. The full plan for how they
+> plug together is in the [Integrations Blueprint](08-integrations-blueprint.md).
 
 > **The north-star example we build toward** (the founder's own words): a
 > liquor-store owner asks for a voice agent — it picks up the store's calls,
