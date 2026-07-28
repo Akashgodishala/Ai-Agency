@@ -155,7 +155,39 @@ h1, h2, h3 {
   mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
 }
 
+/* ---- Scroll reveals (driven by components/motion.tsx) ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Hero entrance (page-load choreography) ---- */
+.hero-enter {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes hero-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- Big statement section ---- */
+.statement-gradient {
+  background: linear-gradient(105deg, rgb(var(--ink)), rgb(var(--mint)) 55%, rgb(var(--amber)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
   .magic-ring { animation: none; }
+  /* Never hide content behind motion — show it all instantly. */
+  .reveal, .hero-enter { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
 }

@@ -23,6 +23,17 @@ export interface AgentTemplate extends Omit<AgentConfig, "id" | "createdAt" | "c
   category: string;
 }
 
+/**
+ * Capability aliases: extra search tags so common phrasings ("receptionist",
+ * "invoice review") always surface the right agents in the gallery search
+ * and the description-matcher.
+ */
+const EXTRA_TAGS: Record<string, string[]> = {
+  "customer-support-bot": ["receptionist", "reception", "front desk", "call support"],
+  "voice-agent": ["voice agents", "receptionist", "call support"],
+  "invoice-automation": ["invoice review", "invoice review agent"],
+};
+
 export const TEMPLATES: AgentTemplate[] = [
   ...FINANCE_AGENTS,
   ...REAL_ESTATE_AGENTS,
@@ -30,7 +41,7 @@ export const TEMPLATES: AgentTemplate[] = [
   ...MARKETING_AGENTS,
   ...COMMERCE_AGENTS,
   ...CAREER_AGENTS,
-];
+].map((t) => (EXTRA_TAGS[t.templateId] ? { ...t, tags: [...t.tags, ...EXTRA_TAGS[t.templateId]] } : t));
 
 export function getTemplate(templateId: string): AgentTemplate | undefined {
   return TEMPLATES.find((t) => t.templateId === templateId);
