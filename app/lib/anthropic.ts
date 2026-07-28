@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { AgentConfig, ChatMessage } from "./types";
-import { buildSystemPrompt } from "./engine";
+import { buildSystemPrompt, detectContact } from "./engine";
 import { newId } from "./templates";
 
 /**
@@ -96,24 +96,30 @@ export async function liveChat(
   config: AgentConfig,
   messages: ChatMessage[]
 ): Promise<{ reply: string; capture?: { summary: string; details: string } }> {
+  // The Anthropic Messages API requires the first message to be role "user".
+  // The playground seeds conversations with the agent's greeting (assistant),
+  // so strip leading assistant turns — otherwise every live chat 400s.
+  const turns = [...messages];
+  while (turns.length && turns[0].role === "assistant") turns.shift();
+  if (turns.length === 0) return { reply: config.greeting };
+
   const msg = await client().messages.create({
     model: MODEL,
     max_tokens: 700,
     system: buildSystemPrompt(config),
-    messages: messages.map((m) => ({ role: m.role, content: m.content })),
+    messages: turns.map((m) => ({ role: m.role, content: m.content })),
   });
   const block = msg.content.find((b) => b.type === "text");
   const reply = block && "text" in block ? block.text : "…";
 
   // Capture detection stays deterministic (regex) even in live mode —
   // the owner's inbox should never depend on model formatting.
-  const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
-  const email = lastUser.match(/[\w.+-]+@[\w-]+\.[\w.]+/);
-  const phone = lastUser.match(/(\+?\d[\d\s().-]{7,}\d)/);
+  const lastUser = [...turns].reverse().find((m) => m.role === "user")?.content ?? "";
+  const { email, phone } = detectContact(lastUser);
   const capture =
     config.captureRules.enabled && (email || phone)
       ? {
-          summary: `New contact captured${email ? `: ${email[0]}` : `: ${phone![0]}`}`,
+          summary: `New contact captured: ${email ?? phone}`,
           details: lastUser.slice(0, 400),
         }
       : undefined;
@@ -131,15 +137,35 @@ export async function liveRefine(
     `Current config:\n${JSON.stringify(config)}\n\nOwner instruction:\n${instruction}`,
     2000
   );
-  const p = safeJson<{ config?: AgentConfig; changed?: string }>(raw);
+  const p = safeJson<{ config?: Partial<AgentConfig>; changed?: string }>(raw);
   if (p?.config && typeof p.config === "object") {
-    // Preserve immutable fields regardless of model output.
+    const u = p.config;
+    // Validate field-by-field — never spread raw model output into a persisted
+    // object (a malformed field would brick the agent on every later chat).
+    const cr = u.captureRules;
     const updated: AgentConfig = {
-      ...config,
-      ...p.config,
       id: config.id,
       createdFrom: config.createdFrom,
       createdAt: config.createdAt,
+      name: str(u.name, config.name),
+      emoji: str(u.emoji, config.emoji).slice(0, 4),
+      tagline: str(u.tagline, config.tagline),
+      persona: str(u.persona, config.persona),
+      greeting: str(u.greeting, config.greeting),
+      suggestedQuestions: strArr(u.suggestedQuestions, config.suggestedQuestions),
+      // Knowledge changes only when the instruction is about knowledge.
+      knowledge: /knowledge|know|info|notes|facts/i.test(instruction)
+        ? str(u.knowledge, config.knowledge)
+        : config.knowledge,
+      guardrails: strArr(u.guardrails, config.guardrails),
+      captureRules:
+        cr && typeof cr === "object"
+          ? {
+              enabled: typeof cr.enabled === "boolean" ? cr.enabled : config.captureRules.enabled,
+              fields: strArr(cr.fields, config.captureRules.fields),
+              trigger: str(cr.trigger, config.captureRules.trigger),
+            }
+          : config.captureRules,
     };
     return { config: updated, changed: str(p.changed, "Updated the agent.") };
   }

@@ -46,13 +46,14 @@ export default function CreatePage() {
         throw new Error(data.error || "No questions returned");
       }
     } catch {
-      setError("Couldn't reach the factory. Check your connection and try again.");
+      setError("Couldn't reach the server. Check your connection and try again.");
       setStage("error");
     }
   }
 
   async function build() {
     setStage("building");
+    setError("");
     try {
       const answerMap: Record<string, string> = {};
       questions.forEach((q, i) => {
@@ -69,12 +70,19 @@ export default function CreatePage() {
         }),
       });
       const data = (await res.json()) as GenerateResponse;
-      if (!data.config) throw new Error(data.error || "The factory returned nothing.");
-      saveAgent(data.config);
+      if (!data.config) throw new Error(data.error || "No agent was returned.");
+      setEngine(data.engine);
+      if (!saveAgent(data.config)) {
+        setError(
+          "Your agent was built but couldn't be saved — this browser's storage is full. Delete an unused agent in “My agents”, then try again."
+        );
+        setStage("questions");
+        return;
+      }
       sessionStorage.removeItem("agentmint.pendingDescription");
       router.push(`/playground/${data.config.id}`);
     } catch {
-      setError("Something went wrong while building. Your answers are still here — try again.");
+      setError("Something went wrong while minting. Your answers are still here — try again.");
       setStage("questions");
     }
   }
@@ -82,16 +90,18 @@ export default function CreatePage() {
   return (
     <div className="mx-auto w-full max-w-2xl px-5 py-12">
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-mint">Minting your agent</p>
-      <h1 className="mt-3 text-3xl font-semibold">Almost there — a few quick questions.</h1>
+      <h1 className="mt-3 text-3xl font-semibold">
+        {stage === "error" ? "Hit a snag." : "Almost there — a few quick questions."}
+      </h1>
       <p className="mt-3 rounded-card border border-line bg-surface p-4 text-sm text-muted">
         <span className="font-semibold text-ink">Your agent:</span> {description}
       </p>
 
       {engine === "demo" && stage !== "loading-questions" && (
         <p className="mt-3 rounded-card border border-amber/40 bg-amber/10 px-4 py-3 text-xs text-muted">
-          <span className="font-semibold text-ink">Demo engine.</span> No AI key is connected yet, so
-          a simplified engine builds and runs your agent. Everything works — connect a key to make it
-          fully intelligent.
+          <span className="font-semibold text-ink">Demo mode.</span> Right now a simplified engine
+          builds and runs your agent — it answers only from the info you provide below. Full AI
+          conversation is coming soon, and everything you teach it carries over.
         </p>
       )}
 
@@ -173,7 +183,7 @@ export default function CreatePage() {
                 <Spinner light /> Minting your agent…
               </>
             ) : (
-              "Build my agent →"
+              "Mint my agent →"
             )}
           </button>
         </form>

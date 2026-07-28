@@ -23,8 +23,8 @@ export default function MyAgents() {
     <div className="mx-auto w-full max-w-6xl px-5 py-12">
       <h1 className="text-3xl font-semibold">My agents</h1>
       <p className="mt-2 text-muted">
-        Agents you've minted in this browser. (Accounts that sync across devices arrive with the
-        publish phase.)
+        For now, agents are saved in this browser. Accounts that sync across your devices are
+        coming soon.
       </p>
 
       {agents.length === 0 ? (

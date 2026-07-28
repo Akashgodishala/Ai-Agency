@@ -13,6 +13,8 @@ export interface AgentTemplate extends Omit<AgentConfig, "id" | "createdAt" | "c
   tags: string[];
   /** Who this is for — shown on gallery cards. */
   audience: string;
+  /** Gallery category, e.g. "Money & Finance". */
+  category: string;
 }
 
 export const TEMPLATES: AgentTemplate[] = [
@@ -20,6 +22,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "front-desk",
     tags: ["clinic", "dental", "doctor", "salon", "appointment", "front desk", "reception", "booking", "patients", "customers", "calls", "business", "shop", "store", "service"],
     audience: "Businesses & clinics",
+    category: "Marketing & Growth",
     name: "AI Front Desk",
     emoji: "📞",
     tagline: "Answers customer questions and captures every inquiry, 24/7.",
@@ -44,6 +47,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "study-buddy",
     tags: ["study", "student", "exam", "homework", "learn", "school", "college", "quiz", "flashcards", "test", "revision"],
     audience: "Students",
+    category: "Career & Life",
     name: "Study Buddy",
     emoji: "📚",
     tagline: "Turns your notes into explanations, quizzes, and revision plans.",
@@ -62,6 +66,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "trip-planner",
     tags: ["travel", "trip", "vacation", "itinerary", "holiday", "flight", "hotel", "visit", "tour", "backpacking"],
     audience: "Travelers",
+    category: "Career & Life",
     name: "Trip Planner",
     emoji: "🧭",
     tagline: "Plans day-by-day itineraries around your dates, budget, and taste.",
@@ -80,6 +85,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "shop-helper",
     tags: ["shop", "product", "ecommerce", "order", "sell", "etsy", "boutique", "brand", "catalog", "customers", "returns"],
     audience: "Online sellers",
+    category: "Commerce & Retail",
     name: "Shop Helper",
     emoji: "🛍️",
     tagline: "Answers product questions and turns browsers into buyers.",
@@ -103,6 +109,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "fitness-coach",
     tags: ["fitness", "workout", "gym", "exercise", "training", "run", "health", "diet", "weights", "yoga"],
     audience: "Everyday athletes",
+    category: "Career & Life",
     name: "Fitness Coach",
     emoji: "💪",
     tagline: "Builds workouts around your goals, gear, and schedule.",
@@ -121,6 +128,7 @@ export const TEMPLATES: AgentTemplate[] = [
     templateId: "resume-coach",
     tags: ["resume", "cv", "job", "interview", "career", "cover letter", "application", "hiring", "linkedin"],
     audience: "Job seekers",
+    category: "Career & Life",
     name: "Resume Coach",
     emoji: "💼",
     tagline: "Sharpens your resume and preps you for interviews.",

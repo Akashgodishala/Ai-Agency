@@ -12,37 +12,43 @@ import type { AgentConfig, Capture } from "./types";
 const AGENTS_KEY = "agentmint.agents";
 const CAPTURES_KEY = "agentmint.captures";
 
-function read<T>(key: string, fallback: T): T {
-  if (typeof window === "undefined") return fallback;
+function readArray<T>(key: string): T[] {
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    // Corruption / cross-tab weirdness must never take down a page.
+    return Array.isArray(parsed) ? (parsed as T[]) : [];
   } catch {
-    return fallback;
+    return [];
   }
 }
 
-function write<T>(key: string, value: T): void {
-  if (typeof window === "undefined") return;
+/** Returns false when storage is full or blocked — callers must surface it. */
+function write<T>(key: string, value: T): boolean {
+  if (typeof window === "undefined") return false;
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
+    return true;
   } catch {
-    // Storage full or blocked — the UI surfaces errors at the call site.
+    return false;
   }
 }
 
 export function listAgents(): AgentConfig[] {
-  return read<AgentConfig[]>(AGENTS_KEY, []);
+  return readArray<AgentConfig>(AGENTS_KEY);
 }
 
 export function getAgent(id: string): AgentConfig | undefined {
   return listAgents().find((a) => a.id === id);
 }
 
-export function saveAgent(config: AgentConfig): void {
+/** Returns false if the agent could not be persisted (storage full/blocked). */
+export function saveAgent(config: AgentConfig): boolean {
   const agents = listAgents().filter((a) => a.id !== config.id);
   agents.unshift(config);
-  write(AGENTS_KEY, agents);
+  return write(AGENTS_KEY, agents);
 }
 
 export function deleteAgent(id: string): void {
@@ -51,12 +57,31 @@ export function deleteAgent(id: string): void {
 }
 
 export function listCaptures(agentId?: string): Capture[] {
-  const all = read<Capture[]>(CAPTURES_KEY, []);
+  const all = readArray<Capture>(CAPTURES_KEY);
   return agentId ? all.filter((c) => c.agentId === agentId) : all;
 }
 
+const MAX_CAPTURES = 500;
+
 export function saveCapture(c: Capture): void {
-  const all = read<Capture[]>(CAPTURES_KEY, []);
+  const all = readArray<Capture>(CAPTURES_KEY);
   all.unshift(c);
-  write(CAPTURES_KEY, all);
+  write(CAPTURES_KEY, all.slice(0, MAX_CAPTURES));
+}
+
+// ---- Purchase interest (v1: checkout isn't live; we record intent) ----
+
+export interface PurchaseInterest {
+  agentId: string;
+  agentName: string;
+  email: string;
+  at: string;
+}
+
+const INTEREST_KEY = "agentmint.interest";
+
+export function saveInterest(i: PurchaseInterest): boolean {
+  const all = readArray<PurchaseInterest>(INTEREST_KEY);
+  all.unshift(i);
+  return write(INTEREST_KEY, all.slice(0, 100));
 }

@@ -20,6 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="relative inline-flex h-3 w-3 rounded-full bg-mint" />
               </span>
               AgentMint
+              <span className="rounded-full border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
+                early access
+              </span>
             </Link>
             <nav className="flex items-center gap-5 text-sm">
               <Link href="/#gallery" className="text-muted hover:text-ink">
@@ -32,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="/#create"
                 className="rounded-full bg-mint px-4 py-2 font-semibold text-white shadow-card hover:bg-mint-deep"
               >
-                Create an agent
+                Mint an agent
               </Link>
             </nav>
           </div>
@@ -43,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-line py-8 text-center text-sm text-muted">
           <p>
             <span className="font-display font-semibold text-ink">AgentMint</span> · describe it,
-            mint it, use it. <span className="opacity-70">Working name — rename anytime.</span>
+            mint it, make it yours.
           </p>
         </footer>
       </body>
