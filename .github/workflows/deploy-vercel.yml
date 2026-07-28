@@ -80,6 +80,22 @@ jobs:
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY production --token "$VT" || echo "(production value already set — keeping it)"
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY preview --token "$VT" || echo "(preview value already set — keeping it)"
 
+      - name: Make the draft publicly viewable
+        if: env.SKIP_DEPLOY != 'true'
+        run: |
+          # Vercel gates new projects behind a login wall by default, so the
+          # draft link would 302 to a sign-in page for anyone but the owner.
+          # Turning it off makes the URL work for anyone who has it (unlisted,
+          # not indexed). Re-enable any time in Project → Settings → Deployment
+          # Protection.
+          curl -sS -X PATCH \
+            "https://api.vercel.com/v9/projects/agentmint?teamId=$SCOPE" \
+            -H "Authorization: Bearer $VT" \
+            -H "Content-Type: application/json" \
+            -d '{"ssoProtection": null, "passwordProtection": null}' \
+            -o /tmp/protection.json -w 'protection update HTTP: %{http_code}\n'
+          python3 -c "import json;d=json.load(open('/tmp/protection.json'));print('ssoProtection now:', d.get('ssoProtection'))" || true
+
       - name: Deploy
         if: env.SKIP_DEPLOY != 'true'
         id: deploy
@@ -92,10 +108,14 @@ jobs:
       - name: Smoke test
         if: env.SKIP_DEPLOY != 'true'
         run: |
-          sleep 8
-          echo "engine status:"
-          curl -s "${{ steps.deploy.outputs.url }}/api/status"; echo
-          echo -n "landing page HTTP: "
-          curl -s -o /dev/null -w '%{http_code}\n' "${{ steps.deploy.outputs.url }}/"
-          echo -n "stable alias HTTP: "
-          curl -s -o /dev/null -w '%{http_code}\n' "https://agentmint-akashgodishala-3809s-projects.vercel.app/"
+          sleep 10
+          SHORT="https://agentmint-olive.vercel.app"
+          echo "== engine status (expect live) =="
+          curl -s "$SHORT/api/status"; echo
+          echo -n "short link HTTP (expect 200): "
+          curl -s -o /dev/null -w '%{http_code}\n' "$SHORT/"
+          echo -n "gallery renders 50 agents: "
+          curl -s "$SHORT/" | grep -c 'AI Fraud Detector\|AI Gift Recommender\|AI Contract Reviewer'
+          echo "== live chat end-to-end =="
+          CFG='{"config":{"id":"smoke01","name":"Smoke Agent","emoji":"🧪","tagline":"test","persona":"You are a concise test agent for a liquor store.","greeting":"hi","suggestedQuestions":[],"knowledge":"Hours: Mon-Sat 10am-9pm.\nPickup orders ready in 30 minutes.","guardrails":[],"captureRules":{"enabled":false,"fields":[],"trigger":""},"createdFrom":"custom","createdAt":"2026-01-01"},"messages":[{"role":"user","content":"what time do you close on saturday?"}]}'
+          curl -s -X POST "$SHORT/api/chat" -H 'Content-Type: application/json' -d "$CFG"; echo
