@@ -41,47 +41,58 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Credentials come from, in order: a repository secret (correct place),
+      # a manual dispatch input, or the temporary issue.
+      #
+      # If none is found this step FAILS. It used to skip the rest of the job
+      # and still report green — which meant two deploys silently shipped
+      # nothing while the run showed a checkmark. A deploy pipeline that
+      # reports success without deploying is worse than one that breaks.
       - name: Load credentials
         env:
           GH_TOKEN: ${{ github.token }}
+          SECRET_VT: ${{ secrets.VERCEL_TOKEN }}
+          SECRET_AK: ${{ secrets.ANTHROPIC_API_KEY }}
           IN_VT: ${{ inputs.vercel_token }}
           IN_AK: ${{ inputs.anthropic_key }}
         run: |
-          VT="$IN_VT"
-          AK="$IN_AK"
+          VT="${SECRET_VT:-$IN_VT}"
+          AK="${SECRET_AK:-$IN_AK}"
+          SOURCE="secret or dispatch input"
           if [ -z "$VT" ]; then
-            BODY=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${CRED_ISSUE}" --jq .body)
+            BODY=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${CRED_ISSUE}" --jq .body || echo "")
             VT=$(echo "$BODY" | grep -oP 'VERCEL_TOKEN=\S+' | head -1 | cut -d= -f2-)
-            AK=$(echo "$BODY" | grep -oP 'ANTHROPIC_API_KEY=\S+' | head -1 | cut -d= -f2-)
+            AK=${AK:-$(echo "$BODY" | grep -oP 'ANTHROPIC_API_KEY=\S+' | head -1 | cut -d= -f2-)}
+            SOURCE="issue #${CRED_ISSUE}"
           fi
           if [ -z "$VT" ]; then
-            echo "No Vercel token found (issue #${CRED_ISSUE} scrubbed and no dispatch input) — nothing to do."
-            echo "SKIP_DEPLOY=true" >> "$GITHUB_ENV"
-            exit 0
+            echo "::error::No Vercel token available. Add a repository secret named"
+            echo "::error::VERCEL_TOKEN (Settings → Secrets and variables → Actions),"
+            echo "::error::or restore it to issue #${CRED_ISSUE}. Refusing to report a"
+            echo "::error::successful deploy without deploying."
+            exit 1
           fi
+          echo "Credentials loaded from: $SOURCE"
           echo "::add-mask::$VT"
           [ -n "$AK" ] && echo "::add-mask::$AK"
           echo "VT=$VT" >> "$GITHUB_ENV"
           echo "AK=$AK" >> "$GITHUB_ENV"
 
       - name: Install Vercel CLI
-        if: env.SKIP_DEPLOY != 'true'
         run: npm install -g vercel@latest
 
       - name: Link project
-        if: env.SKIP_DEPLOY != 'true'
         working-directory: app
         run: vercel link --yes --project agentmint --scope "$SCOPE" --token "$VT"
 
       - name: Set ANTHROPIC_API_KEY on the project
-        if: env.SKIP_DEPLOY != 'true' && env.AK != ''
+        if: env.AK != ''
         working-directory: app
         run: |
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY production --token "$VT" || echo "(production value already set — keeping it)"
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY preview --token "$VT" || echo "(preview value already set — keeping it)"
 
       - name: Make the draft publicly viewable
-        if: env.SKIP_DEPLOY != 'true'
         run: |
           # Vercel gates new projects behind a login wall by default, so the
           # draft link would 302 to a sign-in page for anyone but the owner.
@@ -97,7 +108,6 @@ jobs:
           python3 -c "import json;d=json.load(open('/tmp/protection.json'));print('ssoProtection now:', d.get('ssoProtection'))" || true
 
       - name: Deploy
-        if: env.SKIP_DEPLOY != 'true'
         id: deploy
         working-directory: app
         run: |
@@ -105,17 +115,33 @@ jobs:
           echo "url=$URL" >> "$GITHUB_OUTPUT"
           echo "Deployed: $URL"
 
+      # The smoke test must PROVE the new code is what's being served, not just
+      # that something answers. Each assertion exits non-zero on failure.
       - name: Smoke test
-        if: env.SKIP_DEPLOY != 'true'
         run: |
           sleep 10
           SHORT="https://agentmint-olive.vercel.app"
+          HTML=$(curl -s "$SHORT/")
+
           echo "== engine status (expect live) =="
           curl -s "$SHORT/api/status"; echo
+
           echo -n "short link HTTP (expect 200): "
           curl -s -o /dev/null -w '%{http_code}\n' "$SHORT/"
-          echo -n "gallery renders 50 agents: "
-          curl -s "$SHORT/" | grep -c 'AI Fraud Detector\|AI Gift Recommender\|AI Contract Reviewer'
+
+          echo "== proving the deployed markup is current =="
+          for phrase in "Describe the work" "Mint the agent" "Agent worlds" "Assay marks" "One sentence"; do
+            if echo "$HTML" | grep -qi "$phrase"; then
+              echo "  ✓ found: $phrase"
+            else
+              echo "::error::Deployed page is missing \"$phrase\" — the live site is NOT running this commit."
+              exit 1
+            fi
+          done
+
+          echo -n "gallery renders the catalogue: "
+          echo "$HTML" | grep -c 'AI Fraud Detector\|AI Gift Recommender\|AI Contract Reviewer'
+
           echo "== live chat end-to-end =="
           CFG='{"config":{"id":"smoke01","name":"Smoke Agent","emoji":"🧪","tagline":"test","persona":"You are a concise test agent for a liquor store.","greeting":"hi","suggestedQuestions":[],"knowledge":"Hours: Mon-Sat 10am-9pm.\nPickup orders ready in 30 minutes.","guardrails":[],"captureRules":{"enabled":false,"fields":[],"trigger":""},"createdFrom":"custom","createdAt":"2026-01-01"},"messages":[{"role":"user","content":"what time do you close on saturday?"}]}'
           curl -s -X POST "$SHORT/api/chat" -H 'Content-Type: application/json' -d "$CFG"; echo
