@@ -11,6 +11,15 @@ This repository holds both the **product** (`app/`) and the **plan** (`docs/`),
 written for a non-technical founder. You make decisions and test the product;
 Claude does the engineering.
 
+## 🔗 The live draft
+
+**https://agentmint-olive.vercel.app**
+
+Running on live Claude AI with all 50 gallery agents. The link is unlisted (not
+indexed, not announced) but anyone who has it can open it — share it only with
+people you want testing. Every push to the working branch redeploys it
+automatically.
+
 ---
 
 ## The repo at a glance
