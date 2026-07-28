@@ -54,7 +54,8 @@ the UI). To go live: copy `app/.env.example` to `app/.env.local` and add an
 - [x] v1 scope set: agents that **answer from your knowledge + capture leads**, living at a **link + widget**
 - [x] App v1 phase ① built: magic box → follow-up questions → agent factory → playground (chat, refine, inbox, gallery)
 - [x] Planning docs rewritten for the platform vision
-- [ ] Founder picks the real name (AgentMint is a placeholder)
-- [ ] Anthropic API key connected (switches demo engine → live AI)
+- [x] Name for v1: **AgentMint** stays (founder decision; revisit before public launch)
+- [x] Anthropic API key connected — **live AI verified end-to-end** (factory, chat, capture all running on Claude; key lives in private env settings, never in the repo)
 - [ ] Phase ②: accounts, publish (share link + website widget)
-- [ ] Phase ③: billing (free tier + paid plans) and public launch
+- [ ] Phase ③: billing via Stripe (monthly & yearly plans) and public launch
+- [ ] Phase ④: Twilio texts + payment links; VAPI voice agents (see docs/08)
