@@ -1,51 +1,87 @@
 name: Deploy to Vercel
 
-# Manually triggered deploy: credentials arrive as run inputs (never committed
-# to the repo). The sandbox Claude works in cannot reach api.vercel.com, so
-# this runner is the deployment bridge. At public launch, move both values
-# into GitHub Actions secrets and add a push trigger for full CI/CD.
+# Deploys the platform to Vercel on every push to the working branch.
+# The sandbox Claude works in cannot reach api.vercel.com, and the GitHub
+# integration cannot press the manual "Run workflow" button — so this runs on
+# push, and credentials arrive via a temporary repo issue (#1) that gets
+# scrubbed right after a successful deploy. At public launch, move both values
+# into GitHub Actions secrets and delete the issue mechanism.
 
 on:
+  push:
+    branches: [claude/ai-agency-planning-07d0h3]
+    paths:
+      - "app/**"
+      - ".github/workflows/deploy-vercel.yml"
   workflow_dispatch:
     inputs:
       vercel_token:
-        description: "Vercel access token"
-        required: true
-      anthropic_key:
-        description: "Anthropic API key (optional; sets the project env before deploy)"
+        description: "Vercel access token (overrides issue #1)"
         required: false
         default: ""
+      anthropic_key:
+        description: "Anthropic API key (overrides issue #1)"
+        required: false
+        default: ""
+
+concurrency:
+  group: deploy-vercel
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      VT: ${{ inputs.vercel_token }}
-      AK: ${{ inputs.anthropic_key }}
       SCOPE: team_BXI4zZuyfGKt6CVFn6rGaTCS
+      CRED_ISSUE: "1"
     steps:
-      - name: Mask credentials in logs
-        run: |
-          echo "::add-mask::$VT"
-          if [ -n "$AK" ]; then echo "::add-mask::$AK"; fi
-
       - uses: actions/checkout@v4
 
+      - name: Load credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IN_VT: ${{ inputs.vercel_token }}
+          IN_AK: ${{ inputs.anthropic_key }}
+        run: |
+          VT="$IN_VT"
+          AK="$IN_AK"
+          if [ -z "$VT" ]; then
+            BODY=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${CRED_ISSUE}" --jq .body)
+            VT=$(echo "$BODY" | grep -oP 'VERCEL_TOKEN=\S+' | head -1 | cut -d= -f2-)
+            AK=$(echo "$BODY" | grep -oP 'ANTHROPIC_API_KEY=\S+' | head -1 | cut -d= -f2-)
+          fi
+          if [ -z "$VT" ]; then
+            echo "No Vercel token found (issue #${CRED_ISSUE} scrubbed and no dispatch input) — nothing to do."
+            echo "SKIP_DEPLOY=true" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          echo "::add-mask::$VT"
+          [ -n "$AK" ] && echo "::add-mask::$AK"
+          echo "VT=$VT" >> "$GITHUB_ENV"
+          echo "AK=$AK" >> "$GITHUB_ENV"
+
       - name: Install Vercel CLI
+        if: env.SKIP_DEPLOY != 'true'
         run: npm install -g vercel@latest
 
       - name: Link project
+        if: env.SKIP_DEPLOY != 'true'
         working-directory: app
         run: vercel link --yes --project agentmint --scope "$SCOPE" --token "$VT"
 
       - name: Set ANTHROPIC_API_KEY on the project
-        if: ${{ inputs.anthropic_key != '' }}
+        if: env.SKIP_DEPLOY != 'true' && env.AK != ''
         working-directory: app
         run: |
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY production --token "$VT" || echo "(production value already set — keeping it)"
           printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY preview --token "$VT" || echo "(preview value already set — keeping it)"
 
       - name: Deploy
+        if: env.SKIP_DEPLOY != 'true'
         id: deploy
         working-directory: app
         run: |
@@ -54,6 +90,7 @@ jobs:
           echo "Deployed: $URL"
 
       - name: Smoke test
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           sleep 8
           echo "engine status:"
