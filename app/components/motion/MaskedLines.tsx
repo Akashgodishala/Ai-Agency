@@ -18,6 +18,7 @@ export function MaskedLines({
   children,
   as: Tag = "h2",
   className = "",
+  id,
   delay = 0,
   stagger = 0.08,
   play = "load",
@@ -25,6 +26,8 @@ export function MaskedLines({
   children: ReactNode;
   as?: ElementType;
   className?: string;
+  /** Needed when a section labels itself with aria-labelledby. */
+  id?: string;
   delay?: number;
   stagger?: number;
   /** "load" reveals immediately; "scroll" waits until the element is in view. */
@@ -154,7 +157,7 @@ export function MaskedLines({
   }, []);
 
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} id={id} className={className}>
       {children}
     </Tag>
   );

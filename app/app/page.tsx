@@ -1,12 +1,19 @@
 import { TEMPLATES } from "@/lib/templates";
 import { Hero } from "@/components/site/Hero";
 import { Process } from "@/components/site/Process";
+import { Statement } from "@/components/site/Statement";
 import { Collection } from "@/components/site/Collection";
+import { Worlds } from "@/components/site/Worlds";
+import { Trust } from "@/components/site/Trust";
+import { Roadmap } from "@/components/site/Roadmap";
+import { FinalStrike } from "@/components/site/FinalStrike";
 
 /**
  * The landing experience.
- * Pass 1 ships the hero, the three-beat process, and the collection.
- * Passes 2–4 add philosophy, agent worlds, trust, roadmap, and the final CTA.
+ *
+ * The arc: strike (something is made) → understand (three beats) → believe
+ * (the statement) → browse (the collection and its worlds) → trust → what's
+ * coming → act. Every section earns its scroll.
  */
 export default function Landing() {
   return (
@@ -14,7 +21,12 @@ export default function Landing() {
       <span id="top" />
       <Hero agentCount={TEMPLATES.length} />
       <Process />
+      <Statement />
       <Collection />
+      <Worlds />
+      <Trust />
+      <Roadmap />
+      <FinalStrike />
     </>
   );
 }
