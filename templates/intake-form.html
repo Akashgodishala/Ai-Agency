@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--
+  CLIENT INTAKE FORM — Station 1 of the delivery system.
+  Fill this on a discovery call (or send the link to the client). Click
+  "Generate summary" to produce a clean text block you can paste into your
+  project tracker, an email, or hand to Claude to build the Agent Spec.
+  Works offline; nothing is sent anywhere — the summary is generated in-browser.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Intake — AI Front Desk</title>
+<style>
+  :root{ --ground:#F3F5F3; --surface:#FFFFFF; --ink:#0C1C18; --muted:#5A6B65; --line:#DBE2DE;
+    --primary:#0F6E57; --primary-deep:#0A4A3B; --primary-soft:#E3EFEA; --accent:#E9A23B;
+    --serif:"Iowan Old Style","Palatino Linotype",P052,Palatino,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,Menlo,Consolas,monospace; }
+  @media(prefers-color-scheme:dark){:root{ --ground:#0A1512; --surface:#10201B; --ink:#EAF0EC; --muted:#95A8A0;
+    --line:#22342C; --primary:#35C99E; --primary-deep:#2AA983; --primary-soft:#15352B; --accent:#F0B45C; }}
+  :root[data-theme="light"]{ --ground:#F3F5F3; --surface:#FFFFFF; --ink:#0C1C18; --muted:#5A6B65; --line:#DBE2DE; --primary:#0F6E57; --primary-deep:#0A4A3B; --primary-soft:#E3EFEA; --accent:#E9A23B;}
+  :root[data-theme="dark"]{ --ground:#0A1512; --surface:#10201B; --ink:#EAF0EC; --muted:#95A8A0; --line:#22342C; --primary:#35C99E; --primary-deep:#2AA983; --primary-soft:#15352B; --accent:#F0B45C;}
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); line-height:1.55}
+  .wrap{max-width:760px; margin:0 auto; padding:40px 22px 80px}
+  h1{font-family:var(--serif); font-size:2rem; margin:0 0 6px; letter-spacing:-.01em}
+  .sub{color:var(--muted); margin:0 0 28px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px 22px 8px; margin-bottom:18px}
+  .card > .legend{font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); font-weight:700; margin-bottom:4px}
+  .card > h2{font-family:var(--serif); font-size:1.2rem; margin:0 0 16px; font-weight:600}
+  label{display:block; font-weight:600; font-size:.92rem; margin:0 0 6px}
+  .q{margin-bottom:18px}
+  .hint{font-weight:400; color:var(--muted); font-size:.85rem}
+  input[type=text], textarea, select{width:100%; border:1px solid var(--line); background:var(--ground); color:var(--ink);
+    border-radius:10px; padding:10px 12px; font-size:.95rem; font-family:var(--sans); outline:none; resize:vertical}
+  input:focus, textarea:focus, select:focus{border-color:var(--primary)}
+  textarea{min-height:64px}
+  .checks{display:flex; flex-wrap:wrap; gap:10px}
+  .chk{display:flex; align-items:center; gap:.5em; border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:.9rem; cursor:pointer; user-select:none}
+  .chk input{accent-color:var(--primary)}
+  .bar{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+  .btn{font-family:var(--sans); font-weight:600; font-size:.95rem; border-radius:999px; padding:.75em 1.3em; cursor:pointer; border:1px solid transparent}
+  .btn-primary{background:var(--primary); color:#fff} .btn-primary:hover{background:var(--primary-deep)}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line)} .btn-ghost:hover{border-color:var(--primary)}
+  .out{margin-top:22px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; display:none}
+  .out.show{display:block}
+  .out h2{font-family:var(--serif); font-size:1.1rem; margin:0 0 10px}
+  pre{white-space:pre-wrap; word-wrap:break-word; font-family:var(--mono); font-size:.82rem; background:var(--ground); border:1px solid var(--line); border-radius:10px; padding:14px; margin:0; max-height:340px; overflow:auto}
+  .toggle{position:fixed; top:14px; right:14px; background:var(--surface); border:1px solid var(--line); color:var(--muted); width:36px; height:36px; border-radius:9px; cursor:pointer}
+</style>
+</head>
+<body>
+<button class="toggle" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">◐</button>
+<div class="wrap">
+  <h1>AI Front Desk — Client Intake</h1>
+  <p class="sub">Fill this in during your discovery call. It captures everything needed to design and build the agent. Nothing is submitted anywhere — click <b>Generate summary</b> at the end to copy a clean brief.</p>
+
+  <form id="intake">
+    <div class="card">
+      <div class="legend">The business</div>
+      <h2>Who we're building for</h2>
+      <div class="q"><label>Business name</label><input type="text" name="biz"></div>
+      <div class="q"><label>Contact person &amp; role</label><input type="text" name="contact"></div>
+      <div class="q"><label>Industry / type of business</label><input type="text" name="industry" placeholder="e.g. dental clinic, HVAC, law firm"></div>
+    </div>
+
+    <div class="card">
+      <div class="legend">The outcome</div>
+      <h2>What success looks like</h2>
+      <div class="q"><label>What business result do you want? <span class="hint">— the outcome, not the tech</span></label><textarea name="outcome" placeholder="e.g. Stop losing new patients to missed and after-hours calls"></textarea></div>
+      <div class="q"><label>How is this handled today? <span class="hint">Who does it, how long, what does it cost?</span></label><textarea name="today"></textarea></div>
+      <div class="q"><label>How will we measure success?</label><input type="text" name="metric" placeholder="e.g. # of appointments booked, calls answered, hours saved"></div>
+    </div>
+
+    <div class="card">
+      <div class="legend">Where it lives</div>
+      <h2>Channels</h2>
+      <div class="q"><label>Where should the agent work? <span class="hint">Pick all that apply</span></label>
+        <div class="checks" data-group="channels">
+          <label class="chk"><input type="checkbox" value="Website chat">Website chat</label>
+          <label class="chk"><input type="checkbox" value="SMS / text">SMS / text</label>
+          <label class="chk"><input type="checkbox" value="WhatsApp">WhatsApp</label>
+          <label class="chk"><input type="checkbox" value="Email">Email</label>
+          <label class="chk"><input type="checkbox" value="Phone / voice">Phone / voice</label>
+          <label class="chk"><input type="checkbox" value="Instagram / FB DM">Instagram / FB DM</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="legend">What it knows</div>
+      <h2>Knowledge</h2>
+      <div class="q"><label>What information must it know? <span class="hint">FAQs, hours, services, pricing, policies…</span></label><textarea name="knows" placeholder="List topics, or note which documents you'll share"></textarea></div>
+      <div class="q"><label>Where will that info come from? <span class="hint">Website, docs, spreadsheets, your notes</span></label><input type="text" name="sources"></div>
+    </div>
+
+    <div class="card">
+      <div class="legend">What it does</div>
+      <h2>Actions &amp; systems</h2>
+      <div class="q"><label>What actions should it take? <span class="hint">Pick all that apply</span></label>
+        <div class="checks" data-group="actions">
+          <label class="chk"><input type="checkbox" value="Answer questions">Answer questions</label>
+          <label class="chk"><input type="checkbox" value="Qualify & capture leads">Qualify &amp; capture leads</label>
+          <label class="chk"><input type="checkbox" value="Book appointments">Book appointments</label>
+          <label class="chk"><input type="checkbox" value="Send reminders">Send reminders</label>
+          <label class="chk"><input type="checkbox" value="Take messages">Take messages</label>
+          <label class="chk"><input type="checkbox" value="Route to a human">Route to a human</label>
+        </div>
+      </div>
+      <div class="q"><label>What systems must it connect to? <span class="hint">Calendar, CRM, email, spreadsheet…</span></label><input type="text" name="systems" placeholder="e.g. Google Calendar, HubSpot"></div>
+    </div>
+
+    <div class="card">
+      <div class="legend">Guardrails</div>
+      <h2>Rules &amp; limits</h2>
+      <div class="q"><label>What must it NEVER do? <span class="hint">Hard limits, compliance, sensitive topics</span></label><textarea name="never" placeholder="e.g. never give clinical/medical advice, never quote final prices, never process payments"></textarea></div>
+      <div class="q"><label>When should it hand off to a human?</label><input type="text" name="handoff" placeholder="e.g. emergencies, complaints, billing disputes"></div>
+      <div class="q"><label>Brand voice / tone</label><input type="text" name="tone" placeholder="e.g. warm, friendly, professional"></div>
+    </div>
+
+    <div class="bar">
+      <button type="button" class="btn btn-primary" id="genBtn">Generate summary</button>
+      <button type="reset" class="btn btn-ghost">Clear</button>
+    </div>
+  </form>
+
+  <div class="out" id="out">
+    <h2>Client brief — copy this into your tracker / send to Claude</h2>
+    <pre id="summary"></pre>
+    <div class="bar"><button class="btn btn-primary" id="copyBtn">Copy to clipboard</button></div>
+  </div>
+</div>
+
+<script>
+  const root=document.documentElement;
+  document.getElementById('themeBtn').onclick=()=>{const c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');root.setAttribute('data-theme',c==='dark'?'light':'dark');};
+  const f=document.getElementById('intake');
+  const val=n=>{const el=f.elements[n]; return el&&el.value.trim()?el.value.trim():'—';};
+  const checks=g=>[...f.querySelectorAll(`[data-group="${g}"] input:checked`)].map(i=>i.value).join(', ')||'—';
+  document.getElementById('genBtn').onclick=()=>{
+    const s=
+`AI FRONT DESK — CLIENT BRIEF
+============================
+BUSINESS
+  Name:      ${val('biz')}
+  Contact:   ${val('contact')}
+  Industry:  ${val('industry')}
+
+OUTCOME
+  Goal:      ${val('outcome')}
+  Today:     ${val('today')}
+  Success metric: ${val('metric')}
+
+CHANNELS
+  ${checks('channels')}
+
+KNOWLEDGE
+  Must know: ${val('knows')}
+  Sources:   ${val('sources')}
+
+ACTIONS
+  ${checks('actions')}
+  Connects to: ${val('systems')}
+
+GUARDRAILS
+  Never:     ${val('never')}
+  Handoff:   ${val('handoff')}
+  Tone:      ${val('tone')}
+
+NEXT STEP → turn this into an Agent Spec (see templates/agent-spec-template.md).`;
+    document.getElementById('summary').textContent=s;
+    document.getElementById('out').classList.add('show');
+    document.getElementById('out').scrollIntoView({behavior:'smooth'});
+  };
+  document.getElementById('copyBtn').onclick=async()=>{
+    try{ await navigator.clipboard.writeText(document.getElementById('summary').textContent);
+      const b=document.getElementById('copyBtn'); b.textContent='Copied ✓'; setTimeout(()=>b.textContent='Copy to clipboard',1500);
+    }catch(e){ alert('Select the text and copy manually.'); }
+  };
+</script>
+</body>
+</html>
