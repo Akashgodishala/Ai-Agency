@@ -1,0 +1,64 @@
+name: Deploy to Vercel
+
+# Manually triggered deploy: credentials arrive as run inputs (never committed
+# to the repo). The sandbox Claude works in cannot reach api.vercel.com, so
+# this runner is the deployment bridge. At public launch, move both values
+# into GitHub Actions secrets and add a push trigger for full CI/CD.
+
+on:
+  workflow_dispatch:
+    inputs:
+      vercel_token:
+        description: "Vercel access token"
+        required: true
+      anthropic_key:
+        description: "Anthropic API key (optional; sets the project env before deploy)"
+        required: false
+        default: ""
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VT: ${{ inputs.vercel_token }}
+      AK: ${{ inputs.anthropic_key }}
+      SCOPE: team_BXI4zZuyfGKt6CVFn6rGaTCS
+    steps:
+      - name: Mask credentials in logs
+        run: |
+          echo "::add-mask::$VT"
+          if [ -n "$AK" ]; then echo "::add-mask::$AK"; fi
+
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Link project
+        working-directory: app
+        run: vercel link --yes --project agentmint --scope "$SCOPE" --token "$VT"
+
+      - name: Set ANTHROPIC_API_KEY on the project
+        if: ${{ inputs.anthropic_key != '' }}
+        working-directory: app
+        run: |
+          printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY production --token "$VT" || echo "(production value already set — keeping it)"
+          printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY preview --token "$VT" || echo "(preview value already set — keeping it)"
+
+      - name: Deploy
+        id: deploy
+        working-directory: app
+        run: |
+          URL=$(vercel deploy --prod --yes --token "$VT")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Deployed: $URL"
+
+      - name: Smoke test
+        run: |
+          sleep 8
+          echo "engine status:"
+          curl -s "${{ steps.deploy.outputs.url }}/api/status"; echo
+          echo -n "landing page HTTP: "
+          curl -s -o /dev/null -w '%{http_code}\n' "${{ steps.deploy.outputs.url }}/"
+          echo -n "stable alias HTTP: "
+          curl -s -o /dev/null -w '%{http_code}\n' "https://agentmint-akashgodishala-3809s-projects.vercel.app/"
