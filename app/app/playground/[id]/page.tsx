@@ -22,6 +22,12 @@ export default function Playground() {
   const [engine, setEngine] = useState<Engine | null>(null);
   const [engineDowngraded, setEngineDowngraded] = useState(false);
   const [chatError, setChatError] = useState(false);
+  /**
+   * A calm, plain-English message from the server — hitting a limit, or AI
+   * being paused. Distinct from chatError: nothing went wrong, so this shows
+   * no "retry" button and no alarming red.
+   */
+  const [chatNotice, setChatNotice] = useState("");
   const [captures, setCaptures] = useState<Capture[]>([]);
   const [refineText, setRefineText] = useState("");
   const [refineNote, setRefineNote] = useState("");
@@ -45,6 +51,7 @@ export default function Playground() {
     setMessages([]);
     setEngineDowngraded(false);
     setChatError(false);
+    setChatNotice("");
     setRefineNote("");
     setKnowledgeNote("");
     setBuyOpen(false);
@@ -77,6 +84,7 @@ export default function Playground() {
     if (!config) return;
     setBusy(true);
     setChatError(false);
+    setChatNotice("");
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -84,6 +92,15 @@ export default function Playground() {
         body: JSON.stringify({ config, messages: next }),
       });
       const data = (await res.json()) as ChatResponse;
+
+      // 429 (limit reached) and 503 (AI paused) are expected states, not
+      // failures. The server already wrote the sentence to show, so show it
+      // rather than a generic error with a retry button that would just
+      // burn the visitor's remaining quota.
+      if (res.status === 429 || res.status === 503) {
+        setChatNotice(data.error || "Please try again shortly.");
+        return;
+      }
       if (data.error && !data.reply) throw new Error(data.error);
       if (engine === "live" && data.engine === "demo") setEngineDowngraded(true);
       setEngine(data.engine);
@@ -135,6 +152,11 @@ export default function Playground() {
         body: JSON.stringify({ config, instruction: refineText.trim() }),
       });
       const data = (await res.json()) as RefineResponse;
+      // Limits and pauses are expected states — show the server's sentence.
+      if (res.status === 429 || res.status === 503) {
+        setRefineNote(data.error || "Please try again shortly.");
+        return;
+      }
       if (data.config) {
         setConfig(data.config);
         saveAgent(data.config);
@@ -282,6 +304,13 @@ export default function Playground() {
                 >
                   Retry
                 </button>
+              </div>
+            )}
+            {chatNotice && (
+              // Not an error: a limit or a pause. Warm, no red, no retry
+              // button — retrying is exactly what wouldn't help here.
+              <div className="mx-auto max-w-[85%] rounded-xl border border-line bg-mint-soft/60 px-4 py-3 text-center text-sm text-muted">
+                {chatNotice}
               </div>
             )}
           </div>

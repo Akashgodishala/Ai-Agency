@@ -4,24 +4,24 @@ import { isIP } from "node:net";
 import type { GenerateRequest, GenerateResponse } from "@/lib/types";
 import { isLive, demoFollowups, demoGenerate, KNOWLEDGE_LIMIT } from "@/lib/engine";
 import { liveFollowups, liveGenerate } from "@/lib/anthropic";
-import { rateLimit, clientKey } from "@/lib/ratelimit";
+import { guardAI, retryHeaders, readJsonCapped } from "@/lib/ai-guard";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request): Promise<NextResponse<GenerateResponse>> {
-  if (!rateLimit(`gen:${clientKey(req)}`, 10, 60_000)) {
+  const gate = await guardAI(req, "generate");
+  if (!gate.allowed) {
     return NextResponse.json(
-      { engine: "demo", error: "Too many requests — give it a minute and try again." },
-      { status: 429 }
+      { engine: "demo", error: gate.message },
+      { status: gate.status, headers: retryHeaders(gate.retryAfter) }
     );
   }
 
-  let body: GenerateRequest;
-  try {
-    body = (await req.json()) as GenerateRequest;
-  } catch {
-    return NextResponse.json({ engine: "demo", error: "Invalid request." }, { status: 400 });
+  const parsed = await readJsonCapped<GenerateRequest>(req);
+  if (!parsed.ok) {
+    return NextResponse.json({ engine: "demo", error: parsed.message }, { status: parsed.status });
   }
+  const body = parsed.body;
 
   const description = (body.description ?? "").trim().slice(0, 2000);
   if (!description) {

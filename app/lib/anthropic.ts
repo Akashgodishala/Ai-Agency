@@ -9,16 +9,37 @@ import { newId } from "./templates";
  * chatting as that agent, and refining an agent from a plain-English note.
  */
 
-const MODEL = process.env.AGENTMINT_MODEL || "claude-sonnet-5";
+/**
+ * Model choice is a cost decision, so it lives in one place and defaults to the
+ * cheapest model that does this job well. These agents answer short,
+ * well-scoped questions from a system prompt — shop hours, expense categories,
+ * booking rules — which Haiku 4.5 handles at a fifth of Opus pricing and a
+ * third of Sonnet's. Override with AGENTMINT_MODEL if a workload needs more.
+ */
+const MODEL = process.env.AGENTMINT_MODEL || "claude-haiku-4-5";
+
+/**
+ * The hard ceiling on any single completion, whatever a caller asks for.
+ *
+ * max_tokens is an enforced cap on the model's OUTPUT — it does not limit the
+ * prompt, and the model is not told about it, so this bounds cost rather than
+ * shaping the answer. Output tokens are the expensive half (5x input on Haiku),
+ * which is why the ceiling sits here and not only at each call site.
+ */
+const MAX_OUTPUT_TOKENS = 1200;
+
+function capTokens(requested: number): number {
+  return Math.max(1, Math.min(requested, MAX_OUTPUT_TOKENS));
+}
 
 function client(): Anthropic {
   return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 }
 
-async function complete(system: string, userText: string, maxTokens = 1500): Promise<string> {
+async function complete(system: string, userText: string, maxTokens = 1000): Promise<string> {
   const msg = await client().messages.create({
     model: MODEL,
-    max_tokens: maxTokens,
+    max_tokens: capTokens(maxTokens),
     system,
     messages: [{ role: "user", content: userText }],
   });
@@ -92,6 +113,32 @@ export async function liveGenerate(
 
 // ---------- Chat ----------
 
+/**
+ * The conversation is the expensive part, and it grows every turn.
+ *
+ * Input is billed on the WHOLE history, resent on each message — so an
+ * unbounded transcript makes every subsequent reply cost more than the last,
+ * and a visitor pasting long blocks repeatedly is the cheapest way to drain an
+ * account. Cap the total characters and drop the OLDEST turns first: recent
+ * context is what the next reply actually depends on.
+ */
+const MAX_HISTORY_CHARS = 24_000;
+
+export function trimHistory(messages: ChatMessage[]): ChatMessage[] {
+  const kept: ChatMessage[] = [];
+  let total = 0;
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const m = messages[i];
+    const size = (m.content ?? "").length;
+    // Always keep the newest turn, even if it alone exceeds the budget — the
+    // route has already clamped any single message to a safe length.
+    if (kept.length > 0 && total + size > MAX_HISTORY_CHARS) break;
+    kept.unshift(m);
+    total += size;
+  }
+  return kept;
+}
+
 export async function liveChat(
   config: AgentConfig,
   messages: ChatMessage[]
@@ -99,13 +146,13 @@ export async function liveChat(
   // The Anthropic Messages API requires the first message to be role "user".
   // The playground seeds conversations with the agent's greeting (assistant),
   // so strip leading assistant turns — otherwise every live chat 400s.
-  const turns = [...messages];
+  const turns = trimHistory([...messages]);
   while (turns.length && turns[0].role === "assistant") turns.shift();
   if (turns.length === 0) return { reply: config.greeting };
 
   const msg = await client().messages.create({
     model: MODEL,
-    max_tokens: 700,
+    max_tokens: capTokens(700),
     system: buildSystemPrompt(config),
     messages: turns.map((m) => ({ role: m.role, content: m.content })),
   });
@@ -135,7 +182,7 @@ export async function liveRefine(
   const raw = await complete(
     `You update an AI agent's configuration based on the owner's plain-English instruction. Apply the smallest change that fulfills it. Return ONLY JSON: {"config": <the full updated config, same shape as given>, "changed": "one sentence describing what you changed"}. Never change the id, createdFrom, or createdAt fields. Keep "knowledge" unchanged unless the instruction is about knowledge.`,
     `Current config:\n${JSON.stringify(config)}\n\nOwner instruction:\n${instruction}`,
-    2000
+    1200
   );
   const p = safeJson<{ config?: Partial<AgentConfig>; changed?: string }>(raw);
   if (p?.config && typeof p.config === "object") {

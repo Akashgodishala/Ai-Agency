@@ -37,6 +37,12 @@ export default function CreatePage() {
         body: JSON.stringify({ description: desc }),
       });
       const data = (await res.json()) as GenerateResponse;
+      // Limits and pauses are expected states, not failures — the server
+      // already wrote a plain-English sentence, so show that verbatim.
+      if (res.status === 429 || res.status === 503) {
+        setError(data.error || "Please try again shortly.");
+        return;
+      }
       if (data.followupQuestions?.length) {
         setQuestions(data.followupQuestions);
         setAnswers(new Array(data.followupQuestions.length).fill(""));
@@ -70,6 +76,10 @@ export default function CreatePage() {
         }),
       });
       const data = (await res.json()) as GenerateResponse;
+      if (res.status === 429 || res.status === 503) {
+        setError(data.error || "Please try again shortly.");
+        return;
+      }
       if (!data.config) throw new Error(data.error || "No agent was returned.");
       setEngine(data.engine);
       if (!saveAgent(data.config)) {

@@ -3,27 +3,27 @@ import type { RefineRequest, RefineResponse } from "@/lib/types";
 import { isLive, demoRefine } from "@/lib/engine";
 import { liveRefine } from "@/lib/anthropic";
 import { normalizeConfig } from "@/lib/validate";
-import { rateLimit, clientKey } from "@/lib/ratelimit";
+import { guardAI, retryHeaders, readJsonCapped } from "@/lib/ai-guard";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request): Promise<NextResponse<RefineResponse>> {
-  if (!rateLimit(`refine:${clientKey(req)}`, 20, 60_000)) {
+  const gate = await guardAI(req, "refine");
+  if (!gate.allowed) {
     return NextResponse.json(
-      { engine: "demo", config: null as never, changed: "", error: "Too many changes at once — give it a minute." },
-      { status: 429 }
+      { engine: "demo", config: null as never, changed: "", error: gate.message },
+      { status: gate.status, headers: retryHeaders(gate.retryAfter) }
     );
   }
 
-  let body: RefineRequest;
-  try {
-    body = (await req.json()) as RefineRequest;
-  } catch {
+  const parsed = await readJsonCapped<RefineRequest>(req);
+  if (!parsed.ok) {
     return NextResponse.json(
-      { engine: "demo", config: null as never, changed: "", error: "Invalid request." },
-      { status: 400 }
+      { engine: "demo", config: null as never, changed: "", error: parsed.message },
+      { status: parsed.status }
     );
   }
+  const body = parsed.body;
 
   const config = normalizeConfig(body.config);
   const instruction = (body.instruction ?? "").trim().slice(0, 1000);
