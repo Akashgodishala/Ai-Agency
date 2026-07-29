@@ -2,8 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Seal } from "@/components/seal/Seal";
-import { MarkWall } from "@/components/site/MarkWall";
+import { HeroVideo } from "@/components/site/HeroVideo";
 import { MaskedLines } from "@/components/motion/MaskedLines";
 import { gsap, prefersReducedMotion } from "@/components/motion/gsap";
 import { useMagnetic } from "@/components/motion/hooks";
@@ -111,7 +110,7 @@ export function Hero({ agentCount }: { agentCount: number }) {
     >
       <div className="plate-light" aria-hidden="true" />
 
-      <div className="relative mx-auto grid max-w-sheet grid-cols-1 items-center gap-10 px-6 pb-20 pt-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:pb-28 lg:pt-24">
+      <div className="relative mx-auto grid max-w-sheet grid-cols-1 items-center gap-10 px-6 pb-20 pt-16 lg:grid-cols-[1fr_1.18fr] lg:gap-12 lg:pb-28 lg:pt-24">
         {/* ---------------- left: the argument ---------------- */}
         <div className="flex flex-col gap-7">
           <p data-enter="kicker" className="assay flex flex-wrap items-center gap-3 opacity-0">
@@ -193,24 +192,14 @@ export function Hero({ agentCount }: { agentCount: number }) {
           </div>
         </div>
 
-        {/* ---------------- right: the struck disc, over the wall ---------------- */}
+        {/* ---------------- right: the film ---------------- */}
         <div className="relative order-first flex flex-col items-center lg:order-none">
-          {/* Fifty workers, engraved and breathing, behind the die. */}
-          <MarkWall className="absolute inset-0 -z-10 hidden scale-[1.35] lg:block" />
-
           <div
             ref={sealRef}
-            className="relative aspect-square w-[min(78vw,26rem)] opacity-0 lg:w-full lg:max-w-[30rem]"
+            className="relative aspect-video w-[min(92vw,34rem)] overflow-hidden opacity-0 lg:w-full lg:max-w-none"
           >
-            <Seal
-              text={text || placeholder}
-              strikeSignal={strike}
-              className="h-full w-full"
-            />
+            <HeroVideo className="h-full w-full" />
           </div>
-          <p className="assay mt-4 text-center">
-            {text ? "Engraved from your words" : "Specimen · type to re-engrave"}
-          </p>
         </div>
       </div>
 

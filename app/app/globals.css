@@ -189,6 +189,13 @@ h3 { line-height: 1.16; }
 /* Marks are visible by default and animation only enhances them — never hide
    content behind a class that JavaScript has to come along and remove. */
 
+/* ---- Hero film: feather the outer edge so it sits in the page rather than
+   looking like a video pasted into a rectangle. ---- */
+.hero-film {
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%, #000 74%, transparent 100%);
+  mask-image: radial-gradient(120% 120% at 50% 50%, #000 74%, transparent 100%);
+}
+
 /* ---- Reduced motion: everything resolves instantly and stays composed ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
