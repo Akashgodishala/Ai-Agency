@@ -154,14 +154,14 @@ export function Hero({ agentCount }: { agentCount: number }) {
                   onKeyDown={(e) => e.key === "Enter" && mint()}
                   placeholder={placeholder}
                   aria-label="Describe the agent you need"
-                  className="min-w-0 flex-1 bg-transparent py-2.5 text-[15px] text-paper outline-none placeholder:text-dim"
+                  className="min-w-0 flex-1 bg-transparent py-2.5 text-[15px] text-ink outline-none placeholder:text-dim"
                 />
               </div>
               <button
                 ref={buttonRef}
                 type="button"
                 onClick={mint}
-                className="assay shrink-0 border border-brass bg-transparent px-6 py-3 text-brass transition-colors duration-200 ease-struck hover:bg-brass hover:text-ink"
+                className="strike-btn assay shrink-0 px-7 py-3"
               >
                 Strike it
               </button>
@@ -175,7 +175,7 @@ export function Hero({ agentCount }: { agentCount: number }) {
           <div data-enter="body" className="flex flex-wrap items-center gap-5 opacity-0">
             <a
               href="#collection"
-              className="group inline-flex items-center gap-2 text-[15px] font-medium text-paper transition-colors hover:text-mint"
+              className="group inline-flex items-center gap-2 text-[15px] font-medium text-ink transition-colors hover:text-mint"
             >
               Browse the collection
               <span
@@ -194,11 +194,13 @@ export function Hero({ agentCount }: { agentCount: number }) {
 
         {/* ---------------- right: the film ---------------- */}
         <div className="relative order-first flex flex-col items-center lg:order-none">
+          {/* No overflow-hidden here: the plate's cast shadow has to fall
+              outside its own box or it stops looking like a shadow. */}
           <div
             ref={sealRef}
-            className="relative aspect-video w-[min(92vw,34rem)] overflow-hidden opacity-0 lg:w-full lg:max-w-none"
+            className="relative w-[min(92vw,34rem)] opacity-0 lg:w-full lg:max-w-none"
           >
-            <HeroVideo className="h-full w-full" />
+            <HeroVideo className="w-full" />
           </div>
         </div>
       </div>

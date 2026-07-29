@@ -13,13 +13,13 @@ export function AgentMark({
   templateId,
   size = 56,
   className = "",
-  tone = "paper",
+  tone = "ink",
 }: {
   templateId: string;
   size?: number;
   className?: string;
-  /** "paper" for rest states, "mint" where the mark is already the focus. */
-  tone?: "paper" | "mint";
+  /** "ink" for rest states, "mint" where the mark is already the focus. */
+  tone?: "ink" | "mint";
 }) {
   const m = markFor(templateId);
 

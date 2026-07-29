@@ -52,11 +52,11 @@ export function Process() {
             <article
               key={b.n}
               data-beat
-              className="group relative flex flex-col gap-4 bg-ink p-8 opacity-0 transition-colors duration-300 ease-struck hover:bg-plate"
+              className="group relative flex flex-col gap-4 bg-ground p-8 opacity-0 transition-colors duration-300 ease-struck hover:bg-plate"
             >
               {/* The mark bleeds up over the rule, tying the beats to one line. */}
               <span
-                className="absolute -top-[9px] left-8 bg-ink px-2 font-mono text-[11px] tracking-[0.2em] text-mint"
+                className="absolute -top-[9px] left-8 bg-ground px-2 font-mono text-[11px] tracking-[0.2em] text-mint"
                 aria-hidden="true"
               >
                 {b.n}

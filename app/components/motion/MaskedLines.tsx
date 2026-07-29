@@ -1,8 +1,23 @@
 "use client";
 
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, type ElementType, type ReactNode } from "react";
 import { gsap, prefersReducedMotion } from "./gsap";
 import { motion } from "@/lib/design/tokens";
+
+/** Flatten a headline to plain text — these are always strings in practice. */
+function textOf(node: ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  return "";
+}
+
+const ESCAPE: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+};
 
 /**
  * Line-masked text reveal.
@@ -35,12 +50,20 @@ export function MaskedLines({
 }) {
   const ref = useRef<HTMLElement>(null);
 
+  // React must NOT own the text nodes inside this element: the effect below
+  // rewrites innerHTML to build line masks, and if React still held references
+  // to the original text nodes it would throw NotFoundError on unmount when it
+  // tried to remove children that no longer exist. dangerouslySetInnerHTML is
+  // the supported way to hand a subtree over — React removes the element
+  // itself and never reconciles what's inside it.
+  const original = useMemo(
+    () => textOf(children).replace(/[&<>"]/g, (c) => ESCAPE[c]),
+    [children]
+  );
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    // Keep the original markup so we can restore it on cleanup / re-split.
-    const original = el.innerHTML;
 
     const split = () => {
       el.innerHTML = original;
@@ -154,11 +177,14 @@ export function MaskedLines({
       el.innerHTML = original;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [original]);
 
   return (
-    <Tag ref={ref} id={id} className={className}>
-      {children}
-    </Tag>
+    <Tag
+      ref={ref}
+      id={id}
+      className={className}
+      dangerouslySetInnerHTML={{ __html: original }}
+    />
   );
 }

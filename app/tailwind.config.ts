@@ -10,17 +10,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "rgb(var(--ink) / <alpha-value>)",
+        /** The ground the page is printed on. */
+        ground: "rgb(var(--ground) / <alpha-value>)",
         plate: "rgb(var(--plate) / <alpha-value>)",
         plate2: "rgb(var(--plate2) / <alpha-value>)",
         rule: "rgb(var(--rule) / <alpha-value>)",
-        paper: "rgb(var(--paper) / <alpha-value>)",
+        /** Primary type. */
+        ink: "rgb(var(--ink) / <alpha-value>)",
         muted: "rgb(var(--muted) / <alpha-value>)",
         dim: "rgb(var(--dim) / <alpha-value>)",
         mint: "rgb(var(--mint) / <alpha-value>)",
         "mint-deep": "rgb(var(--mint-deep) / <alpha-value>)",
         brass: "rgb(var(--brass) / <alpha-value>)",
         danger: "rgb(var(--danger) / <alpha-value>)",
+
+        /**
+         * Vocabulary from the first build of the app pages, mapped onto The
+         * Mint so those screens inherit the system instead of rendering
+         * classes Tailwind never generated. Prefer the names above in new code.
+         */
+        surface: "rgb(var(--plate) / <alpha-value>)",
+        raised: "rgb(var(--plate2) / <alpha-value>)",
+        line: "rgb(var(--rule) / <alpha-value>)",
+        "mint-soft": "rgb(var(--mint-soft) / <alpha-value>)",
+        amber: "rgb(var(--brass) / <alpha-value>)",
+      },
+      boxShadow: {
+        card: "var(--lift-1)",
+        raised: "var(--lift-2)",
+        deep: "var(--lift-3)",
       },
       fontFamily: {
         display: ["var(--font-display)", "Didot", "Bodoni MT", "Georgia", "serif"],
@@ -35,6 +53,8 @@ const config: Config = {
       },
       borderRadius: {
         struck: "2px",
+        /** The app screens' own radius, from the first build. */
+        card: "4px",
       },
       maxWidth: {
         sheet: "1240px",

@@ -109,7 +109,7 @@ export function Collection() {
               key={s.q}
               type="button"
               onClick={() => transition(() => { setCategory("All"); setQuery(s.q); })}
-              className="assay border border-rule bg-plate px-4 py-2 normal-case tracking-[0.08em] text-muted transition-colors duration-200 ease-struck hover:border-mint-deep hover:text-paper"
+              className="assay border border-rule bg-plate px-4 py-2 normal-case tracking-[0.08em] text-muted transition-colors duration-200 ease-struck hover:border-mint-deep hover:text-ink"
             >
               {s.label}
             </button>
@@ -118,14 +118,14 @@ export function Collection() {
 
         {/* search + categories */}
         {/* z stays below the pinned Worlds section, which scrolls over this. */}
-        <div className="sticky top-[57px] z-20 -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
+        <div className="sticky top-[57px] z-20 -mx-6 mt-6 border-y border-rule bg-ground/92 px-6 py-3 backdrop-blur">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <input
               value={query}
               onChange={(e) => transition(() => setQuery(e.target.value))}
               placeholder={`Search ${TEMPLATES.length} agents`}
               aria-label="Search agents"
-              className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-paper outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs"
+              className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-ink outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs"
             />
             <div className="flex flex-wrap gap-1.5">
               {categories.map((c) => {
@@ -138,8 +138,8 @@ export function Collection() {
                     aria-pressed={active}
                     className={`assay px-3.5 py-2 normal-case tracking-[0.08em] transition-colors duration-200 ease-struck ${
                       active
-                        ? "bg-mint text-ink"
-                        : "border border-rule text-muted hover:border-mint-deep hover:text-paper"
+                        ? "strike-btn"
+                        : "border border-rule text-muted hover:border-mint-deep hover:text-ink"
                     }`}
                   >
                     {c}
@@ -164,7 +164,7 @@ export function Collection() {
             </p>
             <a
               href="#top"
-              className="assay mt-5 inline-block border border-mint px-6 py-3 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:bg-mint hover:text-ink"
+              className="strike-btn assay mt-5 inline-block px-6 py-3 normal-case tracking-[0.08em]"
             >
               Describe it instead — we'll strike it custom
             </a>

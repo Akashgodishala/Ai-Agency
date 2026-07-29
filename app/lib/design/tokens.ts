@@ -5,7 +5,9 @@
  *
  * Direction: a mint is where value gets struck. The visual language is coinage
  * and banknote engraving — guilloché relief, struck plate, beveled rims, assay
- * marks — in obsidian with one hot accent.
+ * marks — rendered on warm white paper with molten orange as the only accent.
+ *
+ * On a light ground, depth comes from shadow and warmth, never from glow.
  *
  * REBRANDING LATER: change colours, type, spacing, or motion here and the whole
  * site follows. Nothing visual is hard-coded in components.
@@ -16,37 +18,40 @@
  */
 
 export const palette = {
-  /** Obsidian ground — near-black with a cold green undertone, never pure #000. */
-  ink: "#05080A",
+  /** The ground the page is printed on. Warm white, never a clinical #FFF. */
+  ground: "#FFF9F2",
   /** Struck plate: the raised surface things sit on. */
-  plate: "#0B1113",
+  plate: "#FFFFFF",
   /** Second surface, for nested cards. */
-  plate2: "#121A1C",
+  plate2: "#FFF6ED",
   /** Hairline — engraved rule, not a border. */
-  rule: "#1E292B",
-  /** Struck highlight: primary type. Warm paper-white, never pure #FFF. */
-  paper: "#E9EFEB",
+  rule: "#EEDFD0",
+  /** Primary type. Warm near-black, never pure #000. */
+  ink: "#1A1206",
   /** Secondary type. */
-  muted: "#7A8C86",
+  muted: "#6B5949",
   /** Tertiary type, labels at rest. */
-  dim: "#4E5D58",
-  /** The one hot accent. Used for live state, links, and the mint action. */
-  mint: "#38E0A6",
-  mintDeep: "#1F7A5C",
+  dim: "#9C8877",
+  /**
+   * The one hot accent — molten orange. Used for live state, links, and the
+   * mint action. Named for the brand (AgentMint), not for the hue.
+   */
+  mint: "#F4560D",
+  mintDeep: "#B23A05",
   /** Reserved exclusively for the strike and for "planned, not live" state. */
-  brass: "#C9974A",
+  brass: "#C08A2E",
   /** Semantic, kept separate from the accent. */
-  danger: "#E8836B",
+  danger: "#C0392B",
 } as const;
 
 /** Numeric forms for Three.js (which wants hex numbers, not strings). */
 export const paletteHex = {
-  ink: 0x05080a,
-  plate: 0x0b1113,
-  paper: 0xe9efeb,
-  mint: 0x38e0a6,
-  brass: 0xc9974a,
-  rim: 0x26332f,
+  ground: 0xfff9f2,
+  plate: 0xffffff,
+  ink: 0x1a1206,
+  mint: 0xf4560d,
+  brass: 0xc08a2e,
+  rim: 0xe4cdb6,
 } as const;
 
 /**

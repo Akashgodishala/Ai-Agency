@@ -49,7 +49,7 @@ export function Trust() {
 
         <div ref={ref} className="mt-14 grid grid-cols-1 gap-px bg-rule md:grid-cols-2">
           {MARKS.map((m) => (
-            <article key={m.stamp} data-mark className="flex flex-col gap-3 bg-ink p-8 opacity-0">
+            <article key={m.stamp} data-mark className="flex flex-col gap-3 bg-ground p-8 opacity-0">
               <span className="assay w-fit border border-mint-deep px-2.5 py-1 text-mint">
                 {m.stamp}
               </span>

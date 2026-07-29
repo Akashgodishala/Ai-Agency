@@ -21,7 +21,7 @@ export function Nav() {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ease-struck ${
         scrolled
-          ? "border-b border-rule bg-ink/88 backdrop-blur"
+          ? "border-b border-rule bg-ground/88 backdrop-blur"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -42,19 +42,19 @@ export function Nav() {
         <div className="flex shrink-0 items-center gap-6">
           <Link
             href="/#collection"
-            className="assay hidden normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper md:inline"
+            className="assay hidden normal-case tracking-[0.08em] text-muted transition-colors hover:text-ink md:inline"
           >
             Collection
           </Link>
           <Link
             href="/agents"
-            className="assay whitespace-nowrap normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper"
+            className="assay whitespace-nowrap normal-case tracking-[0.08em] text-muted transition-colors hover:text-ink"
           >
             My agents
           </Link>
           <Link
             href="/#top"
-            className="assay whitespace-nowrap border border-paper px-4 py-2 normal-case tracking-[0.08em] text-paper transition-colors duration-200 ease-struck hover:bg-paper hover:text-ink"
+            className="strike-btn assay whitespace-nowrap px-4 py-2 normal-case tracking-[0.08em]"
           >
             Mint
             <span className="hidden sm:inline">&nbsp;an agent</span>

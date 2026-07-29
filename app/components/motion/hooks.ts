@@ -100,47 +100,18 @@ export function useMagnetic<T extends HTMLElement>(strength = 0.22): RefObject<T
 }
 
 /**
- * Pin a section and drive a timeline from scroll position.
- * Pinning is expensive attention, so the site spends it exactly twice.
+ * NOTE ON PINNING — read before adding another pinned section.
+ *
+ * ScrollTrigger's `pin` re-parents the pinned element into a generated
+ * `.pin-spacer` div. React does not know this happened and still believes the
+ * node it rendered is a direct child of its original parent, so on navigation
+ * it calls removeChild against the wrong parent and takes down the whole page
+ * with "NotFoundError: The node to be removed is not a child of this node".
+ *
+ * Always pin an element *nested inside* the component's outermost node — never
+ * the outermost node itself. Then the spacer lives inside a wrapper React never
+ * moves, and React only ever removes that wrapper. See Worlds.tsx.
  */
-export function useScrollScene<T extends HTMLElement>(
-  build: (tl: gsap.core.Timeline, root: T) => void,
-  options: { end?: string; scrub?: number | boolean; pin?: boolean } = {}
-): RefObject<T> {
-  const ref = useRef<T>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (prefersReducedMotion()) {
-      // Build the timeline, then jump to its finished state.
-      const tl = gsap.timeline({ paused: true });
-      build(tl, el);
-      tl.progress(1).kill();
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top top",
-          end: options.end ?? "+=180%",
-          scrub: options.scrub ?? 0.8,
-          pin: options.pin ?? true,
-          anticipatePin: 1,
-        },
-      });
-      build(tl, el);
-    }, el);
-
-    return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return ref;
-}
 
 /** Refresh ScrollTrigger after async content changes the page height. */
 export function refreshScroll(): void {

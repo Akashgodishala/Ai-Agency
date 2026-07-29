@@ -81,13 +81,13 @@ export function FinalStrike() {
               onKeyDown={(e) => e.key === "Enter" && mint()}
               placeholder="answer my store's calls and take pickup orders"
               aria-label="Describe the agent you need"
-              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[15px] text-paper outline-none placeholder:text-dim"
+              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[15px] text-ink outline-none placeholder:text-dim"
             />
             <button
               ref={buttonRef}
               type="button"
               onClick={mint}
-              className="assay shrink-0 border border-brass bg-transparent px-7 py-3 text-brass transition-colors duration-200 ease-struck hover:bg-brass hover:text-ink"
+              className="strike-btn assay shrink-0 px-8 py-3"
             >
               Strike it
             </button>

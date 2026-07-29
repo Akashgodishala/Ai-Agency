@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { AgentConfig } from "@/lib/types";
 import { listAgents, listCaptures } from "@/lib/store";
+import { AgentMark } from "@/components/seal/AgentMark";
 
 export default function MyAgents() {
   const [agents, setAgents] = useState<AgentConfig[] | null>(null);
@@ -47,8 +48,10 @@ export default function MyAgents() {
               className="group rounded-card border border-line bg-surface p-5 shadow-card transition hover:-translate-y-0.5 hover:border-mint"
             >
               <div className="flex items-start justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-mint-soft text-xl">
-                  {a.emoji}
+                {/* Its own struck mark — the same one it carries in the wall
+                    of fifty, so an agent looks like itself everywhere. */}
+                <span className="grid h-11 w-11 place-items-center">
+                  <AgentMark templateId={a.createdFrom} size={42} />
                 </span>
                 {captureCounts[a.id] > 0 && (
                   <span className="rounded-full bg-mint-soft px-2.5 py-1 text-[11px] font-semibold text-mint-deep">

@@ -149,8 +149,8 @@ export interface SealOptions {
  */
 export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void {
   const o: Required<SealOptions> = {
-    ink: "#38E0A6",
-    warm: "#C9974A",
+    ink: "#F4560D",
+    warm: "#C08A2E",
     heat: 0,
     spin: 0,
     chrome: true,
@@ -181,9 +181,9 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
       cy,
       size
     );
-    plate.addColorStop(0, "#16201F");
-    plate.addColorStop(0.55, "#0A1012");
-    plate.addColorStop(1, "#05090A");
+    plate.addColorStop(0, "#FFFFFF");
+    plate.addColorStop(0.55, "#FFF3E4");
+    plate.addColorStop(1, "#F6E3CF");
     ctx.beginPath();
     ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
     ctx.fillStyle = plate;
@@ -253,21 +253,21 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
   // Beveled rim.
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
-  ctx.strokeStyle = "#26332F";
+  ctx.strokeStyle = "#E7D0B8";
   ctx.lineWidth = size * 0.055;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.955, 0, Math.PI * 2);
-  ctx.strokeStyle = "#0B1113";
+  ctx.strokeStyle = "#D2B191";
   ctx.lineWidth = size * 0.02;
   ctx.stroke();
 
   // Rim light sweeping across the bevel — the thing that reads as metal.
   const sweep = ctx.createLinearGradient(cx - size, cy - size, cx + size, cy + size);
-  sweep.addColorStop(0, "rgba(233,239,235,0)");
-  sweep.addColorStop(0.42, o.heat > 0 ? "rgba(201,151,74,.9)" : "rgba(233,239,235,.55)");
-  sweep.addColorStop(0.6, "rgba(233,239,235,0)");
+  sweep.addColorStop(0, "rgba(255,255,255,0)");
+  sweep.addColorStop(0.42, o.heat > 0 ? "rgba(192,138,46,.95)" : "rgba(255,255,255,.9)");
+  sweep.addColorStop(0.6, "rgba(255,255,255,0)");
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
   ctx.strokeStyle = sweep;
@@ -277,7 +277,7 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
   // Milled edge — the reeding around a struck coin.
   ctx.save();
   ctx.translate(cx, cy);
-  ctx.strokeStyle = "rgba(233,239,235,.16)";
+  ctx.strokeStyle = "rgba(120,80,40,.22)";
   ctx.lineWidth = Math.max(1, size * 0.008);
   const teeth = 90;
   for (let i = 0; i < teeth; i++) {
@@ -294,6 +294,6 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
  * A compact engraved mark for agent cards — same maths, cheaper settings, and
  * no struck plate behind it so the engraving sits directly on the card.
  */
-export function drawMark(canvas: HTMLCanvasElement, text: string, ink = "#38E0A6"): void {
+export function drawMark(canvas: HTMLCanvasElement, text: string, ink = "#F4560D"): void {
   drawSeal(canvas, { text, ink, chrome: true, transparent: true, steps: 900 });
 }

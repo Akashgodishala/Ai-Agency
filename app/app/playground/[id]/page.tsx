@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import type { AgentConfig, Capture, ChatMessage, ChatResponse, RefineResponse } from "@/lib/types";
 import { getAgent, saveAgent, saveCapture, listCaptures, deleteAgent, saveInterest } from "@/lib/store";
 import { newId } from "@/lib/templates";
+import { AgentMark } from "@/components/seal/AgentMark";
+import { Rich } from "@/components/chat/Rich";
 
 type Engine = "live" | "demo";
 
@@ -32,6 +34,12 @@ export default function Playground() {
   const streamRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Arriving from a card halfway down the collection must not drop you
+    // halfway down the playground. ScrollTrigger's pinned sections restore
+    // scroll as they tear down, which can undo the router's own reset, so
+    // claim the top explicitly and without the page's smooth-scroll easing.
+    window.scrollTo({ top: 0, behavior: "auto" });
+
     // Full reset on id change — this component is reused across navigations.
     setNotFound(false);
     setMessages([]);
@@ -222,11 +230,13 @@ export default function Playground() {
         {/* ============ CHAT ============ */}
         <section className="flex h-[72vh] flex-col overflow-hidden rounded-card border border-line bg-surface shadow-card">
           <div className="flex items-center gap-3 border-b border-line bg-raised px-5 py-3.5">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-mint-soft text-lg">
-              {config.emoji}
+            {/* The agent's own struck mark, not a stock emoji — every one of
+                the fifty has an identity, and this is where its owner sees it. */}
+            <span className="group grid h-10 w-10 flex-none place-items-center">
+              <AgentMark templateId={config.createdFrom} size={38} />
             </span>
             <div className="min-w-0">
-              <h1 className="truncate font-display text-base font-semibold">{config.name}</h1>
+              <h1 className="truncate font-display text-lg text-ink">{config.name}</h1>
               <p className="truncate text-xs text-muted">{config.tagline}</p>
             </div>
             {engine && (
@@ -244,13 +254,16 @@ export default function Playground() {
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                   m.role === "user"
-                    ? "ml-auto rounded-br-md bg-mint text-white"
+                    ? "ml-auto whitespace-pre-wrap rounded-br-md bg-mint text-white"
                     : "mr-auto rounded-bl-md border border-line bg-raised"
                 }`}
               >
-                {m.content}
+                {/* The visitor's own words go through verbatim; the agent's
+                    reply gets its tables and lists laid out, because a raw
+                    pipe table is what a broken demo looks like. */}
+                {m.role === "user" ? m.content : <Rich text={m.content} />}
               </div>
             ))}
             {busy && (

@@ -86,14 +86,14 @@ export function MarkWall({ className = "" }: { className?: string }) {
                     key={i}
                     d={d}
                     fill="none"
-                    stroke="rgb(var(--paper))"
+                    stroke="rgb(var(--ink))"
                     strokeWidth="1.4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 ))}
                 {m.dots?.map(([cx, cy, r], i) => (
-                  <circle key={i} cx={cx} cy={cy} r={r} fill="rgb(var(--paper))" />
+                  <circle key={i} cx={cx} cy={cy} r={r} fill="rgb(var(--ink))" />
                 ))}
               </svg>
             </div>
