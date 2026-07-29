@@ -1,11 +1,19 @@
 name: Deploy to Vercel
 
 # Deploys the platform to Vercel on every push to the working branch.
-# The sandbox Claude works in cannot reach api.vercel.com, and the GitHub
-# integration cannot press the manual "Run workflow" button — so this runs on
-# push, and credentials arrive via a temporary repo issue (#1) that gets
-# scrubbed right after a successful deploy. At public launch, move both values
-# into GitHub Actions secrets and delete the issue mechanism.
+#
+# CREDENTIALS: GitHub Actions secrets, and nothing else.
+#   Settings → Secrets and variables → Actions
+#     VERCEL_TOKEN      (required)
+#     ANTHROPIC_API_KEY (optional — only needed to seed the Vercel project env
+#                        var on a fresh project; the key normally already lives
+#                        there, which is where it belongs)
+#
+# Secrets are referenced directly on the step that needs them and are never
+# copied into $GITHUB_ENV, written to a file, echoed, or read back out of any
+# repository surface. Values that arrive via `secrets.*` are masked in logs by
+# GitHub automatically; a value staged through $GITHUB_ENV or supplied as a
+# workflow input is not covered by that guarantee, which is why neither is used.
 
 on:
   push:
@@ -13,95 +21,104 @@ on:
     paths:
       - "app/**"
       - ".github/workflows/deploy-vercel.yml"
+  # Manual re-run button. Deliberately takes NO inputs: workflow_dispatch input
+  # values are recorded in the run's metadata and shown in the Actions UI to
+  # anyone who can read the repository, so they are not a safe way to pass a
+  # token — least of all once this repository is public.
   workflow_dispatch:
-    inputs:
-      vercel_token:
-        description: "Vercel access token (overrides issue #1)"
-        required: false
-        default: ""
-      anthropic_key:
-        description: "Anthropic API key (overrides issue #1)"
-        required: false
-        default: ""
 
 concurrency:
   group: deploy-vercel
   cancel-in-progress: true
 
+# Least privilege: the job only reads the checked-out code. It has no reason to
+# read issues, and must not be able to write anything back to the repository.
 permissions:
   contents: read
-  issues: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
+      # Vercel team identifier — an account identifier, not a credential.
       SCOPE: team_BXI4zZuyfGKt6CVFn6rGaTCS
-      CRED_ISSUE: "1"
     steps:
       - uses: actions/checkout@v4
 
-      # Credentials come from, in order: a repository secret (correct place),
-      # a manual dispatch input, or the temporary issue.
+      # Fail fast and loudly when the token is missing.
       #
-      # If none is found this step FAILS. It used to skip the rest of the job
-      # and still report green — which meant two deploys silently shipped
-      # nothing while the run showed a checkmark. A deploy pipeline that
-      # reports success without deploying is worse than one that breaks.
-      - name: Load credentials
+      # This tests only whether the secret is non-empty — it never prints,
+      # stores, or forwards the value. An earlier version of this pipeline fell
+      # back to other credential sources and, when those were empty too, skipped
+      # every remaining step and still reported a green checkmark: two passes of
+      # work shipped nothing while the run showed success. A deploy that reports
+      # success without deploying is worse than one that breaks, so this exits
+      # non-zero instead.
+      - name: Check deploy credentials are present
         env:
-          GH_TOKEN: ${{ github.token }}
-          SECRET_VT: ${{ secrets.VERCEL_TOKEN }}
-          SECRET_AK: ${{ secrets.ANTHROPIC_API_KEY }}
-          IN_VT: ${{ inputs.vercel_token }}
-          IN_AK: ${{ inputs.anthropic_key }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          VT="${SECRET_VT:-$IN_VT}"
-          AK="${SECRET_AK:-$IN_AK}"
-          SOURCE="secret or dispatch input"
-          if [ -z "$VT" ]; then
-            BODY=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${CRED_ISSUE}" --jq .body || echo "")
-            VT=$(echo "$BODY" | grep -oP 'VERCEL_TOKEN=\S+' | head -1 | cut -d= -f2-)
-            AK=${AK:-$(echo "$BODY" | grep -oP 'ANTHROPIC_API_KEY=\S+' | head -1 | cut -d= -f2-)}
-            SOURCE="issue #${CRED_ISSUE}"
-          fi
-          if [ -z "$VT" ]; then
-            echo "::error::No Vercel token available. Add a repository secret named"
-            echo "::error::VERCEL_TOKEN (Settings → Secrets and variables → Actions),"
-            echo "::error::or restore it to issue #${CRED_ISSUE}. Refusing to report a"
-            echo "::error::successful deploy without deploying."
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::Missing repository secret VERCEL_TOKEN."
+            echo "::error::Add it at Settings → Secrets and variables → Actions →"
+            echo "::error::New repository secret, named exactly VERCEL_TOKEN."
+            echo "::error::Refusing to report a successful deploy without deploying."
             exit 1
           fi
-          echo "Credentials loaded from: $SOURCE"
-          echo "::add-mask::$VT"
-          [ -n "$AK" ] && echo "::add-mask::$AK"
-          echo "VT=$VT" >> "$GITHUB_ENV"
-          echo "AK=$AK" >> "$GITHUB_ENV"
+          echo "VERCEL_TOKEN is present."
 
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
       - name: Link project
         working-directory: app
-        run: vercel link --yes --project agentmint --scope "$SCOPE" --token "$VT"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel link --yes --project agentmint --scope "$SCOPE" --token "$VERCEL_TOKEN"
 
-      - name: Set ANTHROPIC_API_KEY on the project
-        if: env.AK != ''
+      # Optional. The Anthropic key normally already lives in the Vercel
+      # project's environment variables; this step only exists to seed it on a
+      # fresh project. Skipped when the secret is absent, and never fatal.
+      # The presence check lives in the shell rather than in an `if:`
+      # expression: GitHub documents the `secrets` context as usable "only at
+      # certain places within a job", and a conditional that silently evaluates
+      # to false would skip this step without saying so. Inside the shell the
+      # variable is unambiguously available, and the skip is announced.
+      - name: Seed ANTHROPIC_API_KEY on the Vercel project
         working-directory: app
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY production --token "$VT" || echo "(production value already set — keeping it)"
-          printf '%s' "$AK" | vercel env add ANTHROPIC_API_KEY preview --token "$VT" || echo "(preview value already set — keeping it)"
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "No ANTHROPIC_API_KEY secret set — skipping."
+            echo "(Expected: the key already lives in the Vercel project's env vars.)"
+            exit 0
+          fi
+          printf '%s' "$ANTHROPIC_API_KEY" \
+            | vercel env add ANTHROPIC_API_KEY production --token "$VERCEL_TOKEN" \
+            || echo "(production value already set — keeping it)"
+          printf '%s' "$ANTHROPIC_API_KEY" \
+            | vercel env add ANTHROPIC_API_KEY preview --token "$VERCEL_TOKEN" \
+            || echo "(preview value already set — keeping it)"
 
       - name: Make the draft publicly viewable
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           # Vercel gates new projects behind a login wall by default, so the
           # draft link would 302 to a sign-in page for anyone but the owner.
           # Turning it off makes the URL work for anyone who has it (unlisted,
           # not indexed). Re-enable any time in Project → Settings → Deployment
           # Protection.
-          curl -sS -X PATCH \
+          #
+          # The token reaches curl through a config on STDIN (`-K -`), so it is
+          # never an argv flag (visible in the runner's process list) and never
+          # touches disk. /tmp/protection.json holds only the API's response,
+          # which contains no credential.
+          printf 'header = "Authorization: Bearer %s"\n' "$VERCEL_TOKEN" \
+          | curl -sS -K - -X PATCH \
             "https://api.vercel.com/v9/projects/agentmint?teamId=$SCOPE" \
-            -H "Authorization: Bearer $VT" \
             -H "Content-Type: application/json" \
             -d '{"ssoProtection": null, "passwordProtection": null}' \
             -o /tmp/protection.json -w 'protection update HTTP: %{http_code}\n'
@@ -110,13 +127,16 @@ jobs:
       - name: Deploy
         id: deploy
         working-directory: app
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          URL=$(vercel deploy --prod --yes --token "$VT")
+          URL=$(vercel deploy --prod --yes --token "$VERCEL_TOKEN")
           echo "url=$URL" >> "$GITHUB_OUTPUT"
           echo "Deployed: $URL"
 
       # The smoke test must PROVE the new code is what's being served, not just
       # that something answers. Each assertion exits non-zero on failure.
+      # It uses no credentials — every request below is one any visitor could make.
       - name: Smoke test
         run: |
           sleep 10
