@@ -98,6 +98,40 @@ first, and the disc alone filled the entire first screen and pushed the
 sentence below the fold. Struck currency carries engraving and lettering on the
 same face; keep it that way.
 
+## Pinning — the rule that cost a hotfix
+
+`Worlds` is the only pinned section. ScrollTrigger reserves a pin's scroll
+distance by wrapping the pinned element in a generated `.pin-spacer` and
+padding it out — about 1,800px here. Two things follow, and breaking either
+one produces the same bug: the next section arrives early and the pinned panel
+hangs over it.
+
+1. **No ancestor of the pinned element may have a fixed height or clip it.**
+   The section carried `lg:h-screen` + `overflow-hidden`, which capped the
+   spacer at 900px and threw the rest away. Viewport height belongs on the
+   pinned child, not on the section.
+2. **The pinned element needs its own opaque background.** It is
+   `position: fixed` for the whole pin while the section's background scrolls
+   away beneath it, so a transparent panel composites over whatever follows
+   instead of hiding it.
+
+Stacking order lives in the `z` object in `lib/design/tokens.ts`, mirrored to
+`--z-*` and Tailwind (`z-nav`, `z-pinned`, `z-sticky`…). Never write a bare
+`z-30`.
+
+## Testing
+
+`npm run test:scroll` (`app/test/scroll-integrity.mjs`) sweeps the homepage top
+to bottom at 1440×900 and 390×844, in normal and reduced motion, and fails if
+any headline or card from one section overlaps one from another. **Run it after
+any change to layout, type scale, or motion** — this class of bug is invisible
+to the build, to `tsc`, and to any single screenshot, because it only exists
+mid-scroll.
+
+It resolves Playwright at run time instead of declaring it, so it adds nothing
+to the install; set `PLAYWRIGHT_MODULE` if it isn't resolvable. Making it run
+in CI would mean adding `playwright` as a devDependency.
+
 ## Cost and abuse
 
 There are no user accounts, so anyone on the internet can trigger a paid
