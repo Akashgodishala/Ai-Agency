@@ -70,6 +70,18 @@ const config: Config = {
       transitionTimingFunction: {
         struck: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
+      /** One stacking scale, from lib/design/tokens.ts. Never a bare number. */
+      zIndex: {
+        scene: "var(--z-scene)",
+        content: "var(--z-content)",
+        sticky: "var(--z-sticky)",
+        pinned: "var(--z-pinned)",
+        nav: "var(--z-nav)",
+        overlay: "var(--z-overlay)",
+        skip: "var(--z-skip)",
+        cursor: "var(--z-cursor)",
+        preloader: "var(--z-preloader)",
+      },
     },
   },
   plugins: [],

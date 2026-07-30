@@ -49,6 +49,7 @@ export function FounderFilm() {
             start: "top 88%",
             end: "top 42%",
             scrub: 0.6,
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -103,7 +104,7 @@ export function FounderFilm() {
   return (
     <section
       ref={sectionRef}
-      className="border-t border-rule py-28 lg:py-40"
+      className="relative bg-ink border-t border-rule py-28 lg:py-40"
       aria-labelledby="founder-title"
     >
       <div className="mx-auto max-w-sheet px-6">

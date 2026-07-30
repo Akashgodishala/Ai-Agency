@@ -35,7 +35,7 @@ export function Statement() {
           letterSpacing: "-0.022em",
           opacity: 1,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 78%", end: "center 52%", scrub: 0.9 },
+          scrollTrigger: { trigger: el, start: "top 78%", end: "center 52%", scrub: 0.9, invalidateOnRefresh: true },
         }
       );
       gsap.fromTo(
@@ -44,7 +44,7 @@ export function Statement() {
         {
           scaleX: 1,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 70%", end: "center 55%", scrub: 0.9 },
+          scrollTrigger: { trigger: el, start: "top 70%", end: "center 55%", scrub: 0.9, invalidateOnRefresh: true },
         }
       );
       gsap.fromTo(
@@ -66,7 +66,7 @@ export function Statement() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden border-t border-rule py-28 lg:py-40"
+      className="relative overflow-hidden bg-ink border-t border-rule py-28 lg:py-40"
       aria-labelledby="statement"
     >
       <div className="mx-auto max-w-sheet px-6">

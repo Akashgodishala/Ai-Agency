@@ -68,12 +68,25 @@ export function Worlds() {
   return (
     <section
       ref={rootRef}
-      // Opaque and above the collection's sticky filter bar: while this section
-      // is pinned it travels over the top of the one before it.
-      className="relative z-30 overflow-hidden border-t border-rule bg-ink py-20 lg:h-screen lg:py-0"
+      /**
+       * NO FIXED HEIGHT HERE. This section must be free to grow.
+       *
+       * ScrollTrigger reserves a pin's scroll distance by wrapping the pinned
+       * element in a generated `.pin-spacer` and padding it out — here by about
+       * 1,800px. A fixed `h-screen` on this section capped it at 900px and
+       * `overflow-hidden` clipped the rest, so that reserved distance never
+       * reached the document: the next section started ~1,800px too early and
+       * the pinned panel hung over it. The viewport height belongs on the
+       * pinned child instead, where it describes the panel rather than
+       * strangling the spacer.
+       */
+      className="relative z-pinned overflow-hidden border-t border-rule bg-ink py-20 lg:py-0"
       aria-labelledby="worlds-title"
     >
-      <div ref={pinRef} className="h-full w-full">
+      {/* The pinned panel is `position: fixed` for the whole pin, so it needs
+          its OWN opaque ground — the section's background scrolls away beneath
+          it, and a transparent panel composites over whatever follows. */}
+      <div ref={pinRef} className="w-full bg-ink lg:h-screen">
       <div className="mx-auto flex h-full max-w-sheet flex-col justify-center px-6">
         <div className="shrink-0 lg:pt-24">
           <p className="assay">Agent worlds</p>

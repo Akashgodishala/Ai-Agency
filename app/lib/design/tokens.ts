@@ -95,12 +95,25 @@ export const layout = {
   measure: "68ch",
 } as const;
 
-/** Named z-layers, so nothing fights over stacking. */
+/**
+ * Named z-layers, so nothing fights over stacking.
+ *
+ * This is the ONLY place a stacking order is decided. Scattered `z-30`s are how
+ * a pinned section ends up compositing over the section it should sit above —
+ * the numbers drift apart and nobody can say what was meant. Mirrored as
+ * `--z-*` in globals.css and exposed to Tailwind as `z-nav`, `z-pinned`, etc.
+ */
 export const z = {
   scene: 0,
   content: 10,
+  /** Sticky sub-navigation, e.g. the collection's filter bar. */
+  sticky: 20,
+  /** A section pinned by ScrollTrigger, travelling over the one before it. */
+  pinned: 30,
   nav: 40,
   overlay: 60,
+  /** The skip link, which must clear everything chrome-like when focused. */
+  skip: 70,
   cursor: 80,
   preloader: 90,
 } as const;

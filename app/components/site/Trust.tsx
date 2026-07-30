@@ -38,7 +38,7 @@ export function Trust() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-mark]", stagger: 0.1 });
 
   return (
-    <section className="border-t border-rule py-28 lg:py-40" aria-labelledby="trust-title">
+    <section className="relative bg-ink border-t border-rule py-28 lg:py-40" aria-labelledby="trust-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay">Assay marks</p>

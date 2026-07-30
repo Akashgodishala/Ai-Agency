@@ -36,7 +36,7 @@ export function FinalStrike() {
 
   return (
     <section
-      className="relative overflow-hidden border-t border-rule py-32 lg:py-48"
+      className="relative overflow-hidden bg-ink border-t border-rule py-32 lg:py-48"
       aria-labelledby="final-title"
     >
       {/* The seal, enormous and low-contrast, sitting behind the words. */}

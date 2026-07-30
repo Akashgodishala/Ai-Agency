@@ -86,7 +86,7 @@ export function Collection() {
   }
 
   return (
-    <section id="collection" className="scroll-mt-20 border-t border-rule py-28 lg:py-40">
+    <section id="collection" className="relative scroll-mt-20 bg-ink border-t border-rule py-28 lg:py-40">
       <div className="mx-auto max-w-sheet px-6">
         <div ref={headRef} className="flex flex-col gap-4">
           <p data-r className="assay opacity-0">
@@ -118,7 +118,7 @@ export function Collection() {
 
         {/* search + categories */}
         {/* z stays below the pinned Worlds section, which scrolls over this. */}
-        <div className="sticky top-[57px] z-20 -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
+        <div className="sticky top-[57px] z-sticky -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <input
               value={query}

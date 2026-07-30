@@ -19,7 +19,7 @@ export function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ease-struck ${
+      className={`sticky top-0 z-nav transition-all duration-300 ease-struck ${
         scrolled
           ? "border-b border-rule bg-ink/88 backdrop-blur"
           : "border-b border-transparent bg-transparent"

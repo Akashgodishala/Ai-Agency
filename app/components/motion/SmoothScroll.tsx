@@ -57,6 +57,10 @@ export function SmoothScroll() {
       };
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
+
+      // Every trigger created before Lenis existed measured against the native
+      // scroller. Re-measure now that Lenis owns the scroll.
+      ScrollTrigger.refresh();
     };
 
     const stop = () => {
@@ -86,7 +90,27 @@ export function SmoothScroll() {
     sync();
     query.addEventListener("change", sync);
 
+    /**
+     * RE-MEASURE ONCE THE PAGE HAS STOPPED CHANGING SHAPE.
+     *
+     * Triggers are created during hydration, while the display serif is still
+     * loading. Bodoni Moda is far taller per line than the fallback, so a
+     * headline set at poster scale can gain hundreds of pixels the moment the
+     * real font swaps in — and every start/end computed before that is wrong by
+     * exactly that much. `document.fonts.ready` is the honest signal for it;
+     * `load` covers late images and anything else that shifts the page.
+     */
+    let disposed = false;
+    const remeasure = () => {
+      if (!disposed) ScrollTrigger.refresh();
+    };
+    document.fonts?.ready.then(remeasure);
+    if (document.readyState === "complete") remeasure();
+    else window.addEventListener("load", remeasure, { once: true });
+
     return () => {
+      disposed = true;
+      window.removeEventListener("load", remeasure);
       query.removeEventListener("change", sync);
       stop();
     };

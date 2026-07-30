@@ -39,7 +39,7 @@ export function TheFifty() {
   return (
     <section
       ref={rootRef}
-      className="relative overflow-hidden border-t border-rule py-28 lg:py-40"
+      className="relative overflow-hidden bg-ink border-t border-rule py-28 lg:py-40"
       aria-labelledby="fifty-title"
     >
       <div className="mx-auto max-w-sheet px-6">

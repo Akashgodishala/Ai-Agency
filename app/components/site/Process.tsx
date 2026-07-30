@@ -35,7 +35,7 @@ export function Process() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-beat]", stagger: 0.11 });
 
   return (
-    <section className="border-t border-rule py-28 lg:py-40" aria-labelledby="process-title">
+    <section className="relative bg-ink border-t border-rule py-28 lg:py-40" aria-labelledby="process-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay">How it works</p>

@@ -161,7 +161,7 @@ export function Hero({ agentCount }: { agentCount: number }) {
           and the lettering on the same face; so does this. */}
       <div
         ref={sealRef}
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 aspect-square w-[min(118vw,40rem)] -translate-x-1/2 -translate-y-[54%] opacity-0 lg:w-[min(64vw,46rem)]"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-scene aspect-square w-[min(118vw,40rem)] -translate-x-1/2 -translate-y-[54%] opacity-0 lg:w-[min(64vw,46rem)]"
         style={{ perspective: "1400px" }}
         aria-hidden="true"
       >
@@ -180,7 +180,7 @@ export function Hero({ agentCount }: { agentCount: number }) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-sheet px-6 pb-20 pt-20 lg:pb-28 lg:pt-28">
+      <div className="relative z-content mx-auto max-w-sheet px-6 pb-20 pt-20 lg:pb-28 lg:pt-28">
         <p
           data-enter="kicker"
           className="assay flex flex-wrap items-center gap-3 opacity-0"

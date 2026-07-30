@@ -65,7 +65,7 @@ export function Roadmap() {
         {
           scaleY: 1,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 68%", end: "bottom 78%", scrub: 0.7 },
+          scrollTrigger: { trigger: el, start: "top 68%", end: "bottom 78%", scrub: 0.7, invalidateOnRefresh: true },
         }
       );
       stops.forEach((stop) => {
@@ -93,7 +93,7 @@ export function Roadmap() {
   }
 
   return (
-    <section ref={ref} className="border-t border-rule py-28 lg:py-40" aria-labelledby="roadmap-title">
+    <section ref={ref} className="relative bg-ink border-t border-rule py-28 lg:py-40" aria-labelledby="roadmap-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay text-brass">In development · not yet live</p>
