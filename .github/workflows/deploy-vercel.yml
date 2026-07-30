@@ -174,11 +174,17 @@ jobs:
           fi
           echo "  stylesheet: $CSS_PATH"
           CSS=$(curl -s "$SHORT$CSS_PATH")
-          for token in "--ink: 10 10 10" "--paper: 242 237 228" "--mint: 255 107 26"; do
-            if echo "$CSS" | grep -qF "$token"; then
-              echo "  ✓ token live: $token"
+          # `--` starts the pattern, so every grep here needs the `--` end-of-options
+          # guard or grep reads the custom property name as flags. The value is
+          # matched with optional whitespace after the colon because the minifier
+          # is free to strip it.
+          for token in "ink:10 10 10" "paper:242 237 228" "mint:255 107 26"; do
+            name="--${token%%:*}"
+            value="${token#*:}"
+            if echo "$CSS" | grep -qE -- "$name:[[:space:]]*$value"; then
+              echo "  ✓ token live: $name: $value"
             else
-              echo "::error::Deployed CSS is missing \"$token\" — production is NOT serving the current palette."
+              echo "::error::Deployed CSS is missing \"$name: $value\" — production is NOT serving the current palette."
               exit 1
             fi
           done
