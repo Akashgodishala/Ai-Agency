@@ -3,6 +3,7 @@ import { Bodoni_Moda } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Nav } from "@/components/site/Nav";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import "./globals.css";
 
 /**
@@ -42,6 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
+        <SmoothScroll />
+
         <a
           href="#main"
           className="assay sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-mint focus:bg-ground focus:px-4 focus:py-2 focus:normal-case focus:text-mint"

@@ -34,8 +34,12 @@
    not invert. The toggle in the viewer's browser has nothing to switch. */
 :root { color-scheme: light; }
 
+/* No `scroll-behavior: smooth` here on purpose. Lenis drives smooth scrolling
+   and its own anchor handling (components/motion/SmoothScroll.tsx); the native
+   property fights it, because the browser and Lenis would both try to animate
+   the same jump. When Lenis is absent — reduced motion, or before hydration —
+   scrolling is instant, which is the correct behaviour in both cases. */
 html {
-  scroll-behavior: smooth;
   background: rgb(var(--ground));
 }
 
