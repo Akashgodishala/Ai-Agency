@@ -36,7 +36,7 @@ export function FinalStrike() {
 
   return (
     <section
-      className="relative overflow-hidden border-t border-rule py-24 lg:py-36"
+      className="relative overflow-hidden border-t border-rule py-32 lg:py-48"
       aria-labelledby="final-title"
     >
       {/* The seal, enormous and low-contrast, sitting behind the words. */}
@@ -81,7 +81,7 @@ export function FinalStrike() {
               onKeyDown={(e) => e.key === "Enter" && mint()}
               placeholder="answer my store's calls and take pickup orders"
               aria-label="Describe the agent you need"
-              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[15px] text-ink outline-none placeholder:text-dim"
+              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[15px] text-paper outline-none placeholder:text-dim"
             />
             <button
               ref={buttonRef}

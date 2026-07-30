@@ -21,7 +21,7 @@ export function Nav() {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ease-struck ${
         scrolled
-          ? "border-b border-rule bg-ground/88 backdrop-blur"
+          ? "border-b border-rule bg-ink/88 backdrop-blur"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -42,13 +42,13 @@ export function Nav() {
         <div className="flex shrink-0 items-center gap-6">
           <Link
             href="/#collection"
-            className="assay hidden normal-case tracking-[0.08em] text-muted transition-colors hover:text-ink md:inline"
+            className="assay hidden normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper md:inline"
           >
             Collection
           </Link>
           <Link
             href="/agents"
-            className="assay whitespace-nowrap normal-case tracking-[0.08em] text-muted transition-colors hover:text-ink"
+            className="assay whitespace-nowrap normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper"
           >
             My agents
           </Link>

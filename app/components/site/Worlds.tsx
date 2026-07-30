@@ -70,7 +70,7 @@ export function Worlds() {
       ref={rootRef}
       // Opaque and above the collection's sticky filter bar: while this section
       // is pinned it travels over the top of the one before it.
-      className="relative z-30 overflow-hidden border-t border-rule bg-ground py-20 lg:h-screen lg:py-0"
+      className="relative z-30 overflow-hidden border-t border-rule bg-ink py-20 lg:h-screen lg:py-0"
       aria-labelledby="worlds-title"
     >
       <div ref={pinRef} className="h-full w-full">
@@ -80,7 +80,7 @@ export function Worlds() {
           <MaskedLines
             as="h2"
             id="worlds-title"
-            className="text-title mt-3 max-w-[20ch]"
+            className="text-display mt-3 max-w-[20ch]"
             play="scroll"
           >
             Five kinds of work. Pick the one that's eating your week.
@@ -117,7 +117,7 @@ export function Worlds() {
                   </div>
                 </div>
 
-                <p className="font-display text-[1.05rem] italic text-ink/90">{w.line}</p>
+                <p className="font-display text-[1.05rem] italic text-paper/90">{w.line}</p>
                 <p className="line-clamp-3 text-[0.88rem] leading-relaxed text-muted">{w.body}</p>
 
                 {/* A real exchange, not a screenshot mock. */}
@@ -127,8 +127,8 @@ export function Worlds() {
                       key={i}
                       className={`max-w-[93%] px-2.5 py-1.5 text-[0.78rem] leading-snug ${
                         m.from === "them"
-                          ? "self-start border border-rule bg-ground text-muted"
-                          : "self-end bg-mint-deep/25 text-ink"
+                          ? "self-start border border-rule bg-plate text-muted"
+                          : "self-end bg-mint-deep/25 text-paper"
                       }`}
                     >
                       {m.text}

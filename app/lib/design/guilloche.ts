@@ -17,6 +17,8 @@
  * assets. The entire "asset pipeline" is a few hundred bytes of code.
  */
 
+import { engraving } from "./tokens";
+
 /** FNV-1a — small, fast, well-distributed. Same text always yields same seed. */
 export function seedFrom(text: string): number {
   let h = 2166136261;
@@ -140,6 +142,11 @@ export interface SealOptions {
   steps?: number;
   /** Transparent background instead of the struck plate. */
   transparent?: boolean;
+  /**
+   * 0-1. How much of the disc has been engraved yet, swept clockwise from
+   * twelve o'clock. Below 1 the seal is caught mid-strike; 1 is fully struck.
+   */
+  reveal?: number;
 }
 
 /**
@@ -147,15 +154,52 @@ export interface SealOptions {
  * Used three ways: the 2D fallback tier, every agent card's mark, and — with
  * `chrome: false` — as the relief map driving the WebGL disc.
  */
+/**
+ * Engrave the disc, optionally only part-way round.
+ *
+ * The strike is a lathe turning: the wedge from twelve o'clock sweeps
+ * clockwise and everything inside it is cut. Clipping the whole render rather
+ * than each curve is what keeps plate, engraving and rim arriving together —
+ * revealing them separately looks like three animations, not one impression.
+ */
 export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void {
+  const reveal = options.reveal ?? 1;
+  const ctx0 = canvas.getContext("2d");
+  if (!ctx0) return;
+
+  if (reveal >= 1) {
+    drawSealBody(canvas, options);
+    return;
+  }
+  ctx0.clearRect(0, 0, canvas.width, canvas.height);
+  if (reveal <= 0) return;
+
+  ctx0.save();
+  ctx0.beginPath();
+  ctx0.moveTo(canvas.width / 2, canvas.height / 2);
+  ctx0.arc(
+    canvas.width / 2,
+    canvas.height / 2,
+    Math.max(canvas.width, canvas.height),
+    -Math.PI / 2,
+    -Math.PI / 2 + Math.PI * 2 * reveal
+  );
+  ctx0.closePath();
+  ctx0.clip();
+  drawSealBody(canvas, options);
+  ctx0.restore();
+}
+
+function drawSealBody(canvas: HTMLCanvasElement, options: SealOptions): void {
   const o: Required<SealOptions> = {
-    ink: "#F4560D",
-    warm: "#C08A2E",
+    ink: engraving.line,
+    warm: engraving.warm,
     heat: 0,
     spin: 0,
     chrome: true,
     steps: 1400,
     transparent: false,
+    reveal: 1,
     ...options,
   };
 
@@ -181,9 +225,9 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
       cy,
       size
     );
-    plate.addColorStop(0, "#FFFFFF");
-    plate.addColorStop(0.55, "#FFF3E4");
-    plate.addColorStop(1, "#F6E3CF");
+    plate.addColorStop(0, engraving.plateHigh);
+    plate.addColorStop(0.55, engraving.plateMid);
+    plate.addColorStop(1, engraving.plateLow);
     ctx.beginPath();
     ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
     ctx.fillStyle = plate;
@@ -253,20 +297,20 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
   // Beveled rim.
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
-  ctx.strokeStyle = "#E7D0B8";
+  ctx.strokeStyle = engraving.rimLight;
   ctx.lineWidth = size * 0.055;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.955, 0, Math.PI * 2);
-  ctx.strokeStyle = "#D2B191";
+  ctx.strokeStyle = engraving.rimDark;
   ctx.lineWidth = size * 0.02;
   ctx.stroke();
 
   // Rim light sweeping across the bevel — the thing that reads as metal.
   const sweep = ctx.createLinearGradient(cx - size, cy - size, cx + size, cy + size);
   sweep.addColorStop(0, "rgba(255,255,255,0)");
-  sweep.addColorStop(0.42, o.heat > 0 ? "rgba(192,138,46,.95)" : "rgba(255,255,255,.9)");
+  sweep.addColorStop(0.42, o.heat > 0 ? "rgba(201,162,39,.95)" : "rgba(255,244,228,.72)");
   sweep.addColorStop(0.6, "rgba(255,255,255,0)");
   ctx.beginPath();
   ctx.arc(cx, cy, size * 0.93, 0, Math.PI * 2);
@@ -277,7 +321,7 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
   // Milled edge — the reeding around a struck coin.
   ctx.save();
   ctx.translate(cx, cy);
-  ctx.strokeStyle = "rgba(120,80,40,.22)";
+  ctx.strokeStyle = "rgba(255,244,228,.16)";
   ctx.lineWidth = Math.max(1, size * 0.008);
   const teeth = 90;
   for (let i = 0; i < teeth; i++) {
@@ -294,6 +338,6 @@ export function drawSeal(canvas: HTMLCanvasElement, options: SealOptions): void 
  * A compact engraved mark for agent cards — same maths, cheaper settings, and
  * no struck plate behind it so the engraving sits directly on the card.
  */
-export function drawMark(canvas: HTMLCanvasElement, text: string, ink = "#F4560D"): void {
+export function drawMark(canvas: HTMLCanvasElement, text: string, ink = engraving.line): void {
   drawSeal(canvas, { text, ink, chrome: true, transparent: true, steps: 900 });
 }

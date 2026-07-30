@@ -93,11 +93,11 @@ export function Roadmap() {
   }
 
   return (
-    <section ref={ref} className="border-t border-rule py-20 lg:py-28" aria-labelledby="roadmap-title">
+    <section ref={ref} className="border-t border-rule py-28 lg:py-40" aria-labelledby="roadmap-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay text-brass">In development · not yet live</p>
-          <MaskedLines as="h2" id="roadmap-title" className="text-title max-w-[18ch]" play="scroll">
+          <MaskedLines as="h2" id="roadmap-title" className="text-display max-w-[18ch]" play="scroll">
             Where this goes next.
           </MaskedLines>
           <p className="max-w-measure text-muted">
@@ -121,7 +121,7 @@ export function Roadmap() {
               <li key={m.id} data-stop className="relative opacity-0">
                 <span
                   className={`absolute -left-10 top-1.5 grid h-4 w-4 place-items-center rounded-full border sm:-left-14 ${
-                    m.state === "next" ? "border-brass bg-brass/25" : "border-rule bg-ground"
+                    m.state === "next" ? "border-brass bg-brass/25" : "border-rule bg-plate"
                   }`}
                   aria-hidden="true"
                 >
@@ -158,11 +158,11 @@ export function Roadmap() {
                         required
                         placeholder="you@email.com"
                         aria-label={`Email for ${m.title} updates`}
-                        className="min-w-0 flex-1 border border-rule bg-plate px-3.5 py-2 text-sm text-ink outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-brass"
+                        className="min-w-0 flex-1 border border-rule bg-plate px-3.5 py-2 text-sm text-paper outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-brass"
                       />
                       <button
                         type="submit"
-                        className="assay shrink-0 border border-brass px-4 py-2 text-brass transition-colors duration-200 ease-struck hover:bg-brass hover:text-ground"
+                        className="assay shrink-0 border border-brass px-4 py-2 text-brass transition-colors duration-200 ease-struck hover:bg-brass hover:text-ink"
                       >
                         Notify me
                       </button>

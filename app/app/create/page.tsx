@@ -104,12 +104,12 @@ export default function CreatePage() {
         {stage === "error" ? "Hit a snag." : "Almost there — a few quick questions."}
       </h1>
       <p className="mt-3 rounded-card border border-line bg-surface p-4 text-sm text-muted">
-        <span className="font-semibold text-ink">Your agent:</span> {description}
+        <span className="font-semibold text-paper">Your agent:</span> {description}
       </p>
 
       {engine === "demo" && stage !== "loading-questions" && (
         <p className="mt-3 rounded-card border border-amber/40 bg-amber/10 px-4 py-3 text-xs text-muted">
-          <span className="font-semibold text-ink">Demo mode.</span> Right now a simplified engine
+          <span className="font-semibold text-paper">Demo mode.</span> Right now a simplified engine
           builds and runs your agent — it answers only from the info you provide below. Full AI
           conversation is coming soon, and everything you teach it carries over.
         </p>
@@ -129,7 +129,7 @@ export default function CreatePage() {
               setStage("loading-questions");
               void fetchQuestions(description);
             }}
-            className="mt-4 rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+            className="mt-4 strike-btn rounded-full px-5 py-2.5 text-sm font-semibold"
           >
             Try again
           </button>
@@ -186,7 +186,7 @@ export default function CreatePage() {
           <button
             type="submit"
             disabled={stage === "building"}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-mint px-6 py-3 font-semibold text-white shadow-card hover:bg-mint-deep disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-full strike-btn px-6 py-3 font-semibold disabled:opacity-60"
           >
             {stage === "building" ? (
               <>

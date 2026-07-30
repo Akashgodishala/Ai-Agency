@@ -38,18 +38,18 @@ export function Trust() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-mark]", stagger: 0.1 });
 
   return (
-    <section className="border-t border-rule py-20 lg:py-28" aria-labelledby="trust-title">
+    <section className="border-t border-rule py-28 lg:py-40" aria-labelledby="trust-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay">Assay marks</p>
-          <MaskedLines as="h2" id="trust-title" className="text-title max-w-[19ch]" play="scroll">
+          <MaskedLines as="h2" id="trust-title" className="text-display max-w-[19ch]" play="scroll">
             What you can count on before you spend anything.
           </MaskedLines>
         </div>
 
         <div ref={ref} className="mt-14 grid grid-cols-1 gap-px bg-rule md:grid-cols-2">
           {MARKS.map((m) => (
-            <article key={m.stamp} data-mark className="flex flex-col gap-3 bg-ground p-8 opacity-0">
+            <article key={m.stamp} data-mark className="flex flex-col gap-3 border border-rule bg-plate p-8 opacity-0">
               <span className="assay w-fit border border-mint-deep px-2.5 py-1 text-mint">
                 {m.stamp}
               </span>

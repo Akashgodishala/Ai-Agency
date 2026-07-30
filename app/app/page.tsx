@@ -6,6 +6,7 @@ import { Statement } from "@/components/site/Statement";
 import { Collection } from "@/components/site/Collection";
 import { Worlds } from "@/components/site/Worlds";
 import { Trust } from "@/components/site/Trust";
+import { FounderFilm } from "@/components/site/FounderFilm";
 import { Roadmap } from "@/components/site/Roadmap";
 import { FinalStrike } from "@/components/site/FinalStrike";
 
@@ -13,8 +14,8 @@ import { FinalStrike } from "@/components/site/FinalStrike";
  * The landing experience.
  *
  * The arc: strike (something is made) → understand (three beats) → believe
- * (the statement) → browse (the collection and its worlds) → trust → what's
- * coming → act. Every section earns its scroll.
+ * (the statement) → browse (the collection and its worlds) → trust → hear it
+ * from the founder → what's coming → act. Every section earns its scroll.
  */
 export default function Landing() {
   return (
@@ -27,6 +28,7 @@ export default function Landing() {
       <Collection />
       <Worlds />
       <Trust />
+      <FounderFilm />
       <Roadmap />
       <FinalStrike />
     </>

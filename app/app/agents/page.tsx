@@ -34,7 +34,7 @@ export default function MyAgents() {
           <p className="mt-1.5 text-sm text-muted">Describe one, or grab one from the gallery.</p>
           <Link
             href="/"
-            className="mt-5 inline-block rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+            className="mt-5 inline-block strike-btn rounded-full px-5 py-2.5 text-sm font-semibold"
           >
             Mint your first agent →
           </Link>
@@ -54,7 +54,7 @@ export default function MyAgents() {
                   <AgentMark templateId={a.createdFrom} size={42} />
                 </span>
                 {captureCounts[a.id] > 0 && (
-                  <span className="rounded-full bg-mint-soft px-2.5 py-1 text-[11px] font-semibold text-mint-deep">
+                  <span className="rounded-full bg-mint-soft px-2.5 py-1 text-[11px] font-semibold text-mint">
                     {captureCounts[a.id]} in inbox
                   </span>
                 )}

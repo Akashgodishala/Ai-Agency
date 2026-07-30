@@ -3,55 +3,67 @@
  * THE MINT — the entire AgentMint design system, in one file.
  * ============================================================================
  *
- * Direction: a mint is where value gets struck. The visual language is coinage
- * and banknote engraving — guilloché relief, struck plate, beveled rims, assay
- * marks — rendered on warm white paper with molten orange as the only accent.
+ * Direction: a banknote engraver's studio at night. Ink black ground, cream
+ * paper type, one molten-orange accent like metal caught mid-strike. Depth
+ * comes from engraved line and from heat, never from a gradient wash.
  *
- * On a light ground, depth comes from shadow and warmth, never from glow.
+ * The rule that keeps this coherent: no component may name a raw colour.
+ * Everything below is mirrored as CSS custom properties in app/globals.css and
+ * consumed through Tailwind's semantic names. Change a value here and in the
+ * `:root` block and the whole site follows — rebranding stays a two-file edit.
  *
- * REBRANDING LATER: change colours, type, spacing, or motion here and the whole
- * site follows. Nothing visual is hard-coded in components.
- *
- * The CSS custom properties that mirror these live in app/globals.css; keep the
- * two in step (this file is the source of truth for code that needs the values
- * as numbers — the WebGL scene and the guilloché engine).
+ * This file is the source of truth for code that needs the values as data
+ * rather than as CSS: the guilloché engraving engine draws to a canvas and has
+ * to be handed real colour strings.
  */
 
 export const palette = {
-  /** The ground the page is printed on. Warm white, never a clinical #FFF. */
-  ground: "#FFF9F2",
-  /** Struck plate: the raised surface things sit on. */
-  plate: "#FFFFFF",
+  /** The ground everything is printed on. Ink black, warmed a hair off #000. */
+  ink: "#0A0A0A",
+  /** Raised surface — a plate lying on the ink. */
+  plate: "#141312",
   /** Second surface, for nested cards. */
-  plate2: "#FFF6ED",
-  /** Hairline — engraved rule, not a border. */
-  rule: "#EEDFD0",
-  /** Primary type. Warm near-black, never pure #000. */
-  ink: "#1A1206",
-  /** Secondary type. */
-  muted: "#6B5949",
-  /** Tertiary type, labels at rest. */
-  dim: "#9C8877",
+  plate2: "#1B1A18",
+  /** Hairline. An engraved rule, not a border. */
+  rule: "#2C2926",
+
+  /** Primary type. Cream paper stock, never a clinical #FFF. */
+  paper: "#F2EDE4",
+  /** Secondary type — running body copy. */
+  muted: "#B0A594",
+  /** Tertiary type: assay labels, metadata, captions. */
+  dim: "#8A8175",
+
   /**
-   * The one hot accent — molten orange. Used for live state, links, and the
-   * mint action. Named for the brand (AgentMint), not for the hue.
+   * The one hot accent — molten orange, the moment the die meets the blank.
+   * Lifted from the light-ground brand orange (#F4560D) so it still clears
+   * WCAG AA as text on the ink ground; the darker original does not.
    */
-  mint: "#F4560D",
-  mintDeep: "#B23A05",
-  /** Reserved exclusively for the strike and for "planned, not live" state. */
-  brass: "#C08A2E",
-  /** Semantic, kept separate from the accent. */
-  danger: "#C0392B",
+  mint: "#FF6B1A",
+  /** The same heat, cooled — for gradients and pressed states. */
+  mintDeep: "#C2450A",
+  /** Reserved for the strike itself and for "planned, not live". */
+  brass: "#C9A227",
+  /** Semantic, kept away from the accent so errors never read as brand. */
+  danger: "#E2564A",
 } as const;
 
-/** Numeric forms for Three.js (which wants hex numbers, not strings). */
-export const paletteHex = {
-  ground: 0xfff9f2,
-  plate: 0xffffff,
-  ink: 0x1a1206,
-  mint: 0xf4560d,
-  brass: 0xc08a2e,
-  rim: 0xe4cdb6,
+/**
+ * Colours the guilloché engine draws with. It renders to a 2D canvas and needs
+ * literal strings, so these exist to stop `guilloche.ts` inventing its own.
+ */
+export const engraving = {
+  /** The blank the seal is struck into. */
+  plateHigh: "#1E1C19",
+  plateMid: "#141312",
+  plateLow: "#0C0B0A",
+  /** The turned rim, catching the light. */
+  rimLight: "#4A423A",
+  rimDark: "#221F1C",
+  /** The engraved line itself. */
+  line: "#FF6B1A",
+  /** Heat, during a strike. */
+  warm: "#C9A227",
 } as const;
 
 /**
@@ -72,6 +84,8 @@ export const motion = {
   },
   /** Stagger between sibling reveals. */
   stagger: 0.06,
+  /** How long the strike preloader is allowed to hold the page. */
+  preloaderMs: 1500,
 } as const;
 
 export const layout = {
@@ -88,4 +102,5 @@ export const z = {
   nav: 40,
   overlay: 60,
   cursor: 80,
+  preloader: 90,
 } as const;

@@ -219,7 +219,7 @@ export default function Playground() {
         <p className="mt-3 text-muted">Agents are saved in the browser they were created in.</p>
         <Link
           href="/"
-          className="mt-6 inline-block rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+          className="mt-6 inline-block strike-btn rounded-full px-5 py-2.5 text-sm font-semibold"
         >
           Mint a new agent
         </Link>
@@ -258,13 +258,13 @@ export default function Playground() {
               <AgentMark templateId={config.createdFrom} size={38} />
             </span>
             <div className="min-w-0">
-              <h1 className="truncate font-display text-lg text-ink">{config.name}</h1>
+              <h1 className="truncate font-display text-lg text-paper">{config.name}</h1>
               <p className="truncate text-xs text-muted">{config.tagline}</p>
             </div>
             {engine && (
               <span
                 className={`ml-auto flex-none rounded-full px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest ${
-                  engine === "live" ? "bg-mint-soft text-mint-deep" : "bg-amber/15 text-amber"
+                  engine === "live" ? "bg-mint-soft text-mint" : "bg-amber/15 text-amber"
                 }`}
               >
                 {engine === "live" ? "● live AI" : "● demo engine"}
@@ -278,7 +278,7 @@ export default function Playground() {
                 key={i}
                 className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                   m.role === "user"
-                    ? "ml-auto whitespace-pre-wrap rounded-br-md bg-mint text-white"
+                    ? "ml-auto whitespace-pre-wrap rounded-br-md bg-mint text-ink"
                     : "mr-auto rounded-bl-md border border-line bg-raised"
                 }`}
               >
@@ -340,13 +340,13 @@ export default function Playground() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Message your agent…"
-              className="flex-1 rounded-full border border-line bg-ground px-4 py-2.5 text-sm outline-none focus:border-mint"
+              className="flex-1 rounded-full border border-line bg-plate px-4 py-2.5 text-sm outline-none focus:border-mint"
               aria-label="Message"
             />
             <button
               type="submit"
               disabled={busy || !input.trim()}
-              className="rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep disabled:opacity-40"
+              className="strike-btn rounded-full px-5 py-2.5 text-sm font-semibold disabled:opacity-40"
             >
               Send
             </button>
@@ -357,7 +357,7 @@ export default function Playground() {
         <aside className="flex flex-col gap-4">
           {/* GET THIS AGENT — the test-then-buy moment */}
           <div className="rounded-card border border-mint/50 bg-surface p-5 shadow-card">
-            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-mint-deep">
+            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-mint">
               Like what you see?
             </h2>
             <p className="mt-1.5 text-xs text-muted">
@@ -366,7 +366,7 @@ export default function Playground() {
             </p>
             <button
               onClick={() => setBuyOpen(true)}
-              className="mt-3 w-full rounded-full bg-mint px-4 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+              className="mt-3 w-full strike-btn rounded-full px-4 py-2.5 text-sm font-semibold"
             >
               Get this agent
             </button>
@@ -386,7 +386,7 @@ export default function Playground() {
               value={knowledgeDraft}
               onChange={(e) => setKnowledgeDraft(e.target.value)}
               rows={5}
-              className="mt-3 w-full rounded-xl border border-line bg-ground p-3 text-xs outline-none focus:border-mint"
+              className="mt-3 w-full rounded-xl border border-line bg-plate p-3 text-xs outline-none focus:border-mint"
               placeholder={"Hours: Mon–Fri 9–6\nPrices: from $25\nPolicy: 24h cancellation…"}
               aria-label="Agent knowledge"
             />
@@ -398,7 +398,7 @@ export default function Playground() {
               >
                 Save knowledge
               </button>
-              {knowledgeNote && <span className="text-[11px] text-mint-deep">{knowledgeNote}</span>}
+              {knowledgeNote && <span className="text-[11px] text-mint">{knowledgeNote}</span>}
             </div>
           </div>
 
@@ -422,7 +422,7 @@ export default function Playground() {
                 value={refineText}
                 onChange={(e) => setRefineText(e.target.value)}
                 placeholder="e.g. keep replies under two sentences"
-                className="flex-1 rounded-full border border-line bg-ground px-4 py-2.5 text-sm outline-none focus:border-mint"
+                className="flex-1 rounded-full border border-line bg-plate px-4 py-2.5 text-sm outline-none focus:border-mint"
                 aria-label="Refine instruction"
               />
               <button
@@ -433,7 +433,7 @@ export default function Playground() {
                 {refining ? "…" : "Apply"}
               </button>
             </form>
-            {refineNote && <p className="mt-2.5 text-xs font-medium text-mint-deep">{refineNote}</p>}
+            {refineNote && <p className="mt-2.5 text-xs font-medium text-mint">{refineNote}</p>}
           </div>
 
           {/* INBOX */}
@@ -441,7 +441,7 @@ export default function Playground() {
             <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted">
               Inbox{" "}
               {captures.length > 0 && (
-                <span className="ml-1 rounded-full bg-mint-soft px-2 py-0.5 text-[11px] text-mint-deep">
+                <span className="ml-1 rounded-full bg-mint-soft px-2 py-0.5 text-[11px] text-mint">
                   {captures.length}
                 </span>
               )}
@@ -547,7 +547,7 @@ export default function Playground() {
                 </p>
                 <button
                   onClick={() => setBuyOpen(false)}
-                  className="mt-5 w-full rounded-full bg-mint px-4 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+                  className="mt-5 w-full strike-btn rounded-full px-4 py-2.5 text-sm font-semibold"
                 >
                   Back to my agent
                 </button>
@@ -555,7 +555,7 @@ export default function Playground() {
             ) : (
               <>
                 <p className="mt-3 text-sm text-muted">
-                  Straight talk: <span className="font-semibold text-ink">checkout isn't open yet</span>{" "}
+                  Straight talk: <span className="font-semibold text-paper">checkout isn't open yet</span>{" "}
                   — we're in early access, and your agent is free to use right here while we build
                   it. Planned pricing:
                 </p>
@@ -586,12 +586,12 @@ export default function Playground() {
                     value={buyEmail}
                     onChange={(e) => setBuyEmail(e.target.value)}
                     placeholder="you@email.com"
-                    className="flex-1 rounded-full border border-line bg-ground px-4 py-2.5 text-sm outline-none focus:border-mint"
+                    className="flex-1 rounded-full border border-line bg-plate px-4 py-2.5 text-sm outline-none focus:border-mint"
                     aria-label="Your email"
                   />
                   <button
                     type="submit"
-                    className="rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-white hover:bg-mint-deep"
+                    className="strike-btn rounded-full px-5 py-2.5 text-sm font-semibold"
                   >
                     Notify me
                   </button>

@@ -39,13 +39,13 @@ export function TheFifty() {
   return (
     <section
       ref={rootRef}
-      className="relative overflow-hidden border-t border-rule py-20 lg:py-28"
+      className="relative overflow-hidden border-t border-rule py-28 lg:py-40"
       aria-labelledby="fifty-title"
     >
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay">The workforce</p>
-          <MaskedLines as="h2" id="fifty-title" className="text-title max-w-[16ch]" play="scroll">
+          <MaskedLines as="h2" id="fifty-title" className="text-display max-w-[16ch]" play="scroll">
             Fifty tools. Every one of them struck.
           </MaskedLines>
         </div>

@@ -35,11 +35,11 @@ export function Process() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-beat]", stagger: 0.11 });
 
   return (
-    <section className="border-t border-rule py-20 lg:py-28" aria-labelledby="process-title">
+    <section className="border-t border-rule py-28 lg:py-40" aria-labelledby="process-title">
       <div className="mx-auto max-w-sheet px-6">
         <div className="flex flex-col gap-4">
           <p className="assay">How it works</p>
-          <MaskedLines as="h2" className="text-title max-w-[16ch]" play="scroll">
+          <MaskedLines as="h2" className="text-display max-w-[16ch]" play="scroll">
             Three steps, and none of them are technical.
           </MaskedLines>
         </div>
@@ -52,11 +52,11 @@ export function Process() {
             <article
               key={b.n}
               data-beat
-              className="group relative flex flex-col gap-4 bg-ground p-8 opacity-0 transition-colors duration-300 ease-struck hover:bg-plate"
+              className="group relative flex flex-col gap-4 border border-rule bg-plate p-8 opacity-0 transition-colors duration-300 ease-struck hover:bg-plate2"
             >
               {/* The mark bleeds up over the rule, tying the beats to one line. */}
               <span
-                className="absolute -top-[9px] left-8 bg-ground px-2 font-mono text-[11px] tracking-[0.2em] text-mint"
+                className="absolute -top-[9px] left-8 bg-plate px-2 font-mono text-[11px] tracking-[0.2em] text-mint"
                 aria-hidden="true"
               >
                 {b.n}

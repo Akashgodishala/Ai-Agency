@@ -86,13 +86,13 @@ export function Collection() {
   }
 
   return (
-    <section id="collection" className="scroll-mt-20 border-t border-rule py-20 lg:py-28">
+    <section id="collection" className="scroll-mt-20 border-t border-rule py-28 lg:py-40">
       <div className="mx-auto max-w-sheet px-6">
         <div ref={headRef} className="flex flex-col gap-4">
           <p data-r className="assay opacity-0">
             The collection · {TEMPLATES.length} struck and ready
           </p>
-          <MaskedLines as="h2" className="text-title max-w-[18ch]" play="scroll">
+          <MaskedLines as="h2" className="text-display max-w-[18ch]" play="scroll">
             Take one off the shelf. Make it yours.
           </MaskedLines>
           <p data-r className="max-w-measure text-muted opacity-0">
@@ -109,7 +109,7 @@ export function Collection() {
               key={s.q}
               type="button"
               onClick={() => transition(() => { setCategory("All"); setQuery(s.q); })}
-              className="assay border border-rule bg-plate px-4 py-2 normal-case tracking-[0.08em] text-muted transition-colors duration-200 ease-struck hover:border-mint-deep hover:text-ink"
+              className="assay border border-rule bg-plate px-4 py-2 normal-case tracking-[0.08em] text-muted transition-colors duration-200 ease-struck hover:border-mint hover:text-paper"
             >
               {s.label}
             </button>
@@ -118,14 +118,14 @@ export function Collection() {
 
         {/* search + categories */}
         {/* z stays below the pinned Worlds section, which scrolls over this. */}
-        <div className="sticky top-[57px] z-20 -mx-6 mt-6 border-y border-rule bg-ground/92 px-6 py-3 backdrop-blur">
+        <div className="sticky top-[57px] z-20 -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <input
               value={query}
               onChange={(e) => transition(() => setQuery(e.target.value))}
               placeholder={`Search ${TEMPLATES.length} agents`}
               aria-label="Search agents"
-              className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-ink outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs"
+              className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-paper outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs"
             />
             <div className="flex flex-wrap gap-1.5">
               {categories.map((c) => {
@@ -139,7 +139,7 @@ export function Collection() {
                     className={`assay px-3.5 py-2 normal-case tracking-[0.08em] transition-colors duration-200 ease-struck ${
                       active
                         ? "strike-btn"
-                        : "border border-rule text-muted hover:border-mint-deep hover:text-ink"
+                        : "border border-rule text-muted hover:border-mint hover:text-paper"
                     }`}
                   >
                     {c}

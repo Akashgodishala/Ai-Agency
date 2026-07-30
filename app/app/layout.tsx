@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Nav } from "@/components/site/Nav";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { Cursor } from "@/components/motion/Cursor";
+import { Preloader } from "@/components/motion/Preloader";
 import "./globals.css";
 
 /**
@@ -42,12 +44,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${display.variable} ${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col">
+      <body className="grain flex min-h-screen flex-col">
         <SmoothScroll />
+        <Preloader />
+        <Cursor />
 
         <a
           href="#main"
-          className="assay sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-mint focus:bg-ground focus:px-4 focus:py-2 focus:normal-case focus:text-mint"
+          className="assay sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-mint focus:bg-ink focus:px-4 focus:py-2 focus:normal-case focus:text-mint"
         >
           Skip to content
         </a>
@@ -58,11 +62,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
 
-        <footer className="border-t border-rule py-12">
-          <div className="mx-auto flex max-w-sheet flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-display text-lg">
+        <footer className="relative border-t border-rule py-16">
+          <div className="mx-auto flex max-w-sheet flex-col gap-5 px-6 sm:flex-row sm:items-end sm:justify-between">
+            <p className="font-display text-3xl tracking-tight">
               AgentMint
-              <span className="ml-3 align-middle text-sm text-muted">
+              <span className="mt-2 block text-sm font-sans tracking-normal text-muted">
                 Describe the work. Mint the agent.
               </span>
             </p>

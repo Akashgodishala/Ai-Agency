@@ -26,7 +26,7 @@ function inline(text: string, keyBase: string): ReactNode[] {
     if (m.index > last) out.push(text.slice(last, m.index));
     if (m[2] !== undefined) {
       out.push(
-        <strong key={`${keyBase}-b${i}`} className="font-semibold text-ink">
+        <strong key={`${keyBase}-b${i}`} className="font-semibold text-paper">
           {m[2]}
         </strong>
       );
@@ -34,7 +34,7 @@ function inline(text: string, keyBase: string): ReactNode[] {
       out.push(
         <code
           key={`${keyBase}-c${i}`}
-          className="rounded bg-mint-soft px-1 py-0.5 font-mono text-[0.85em] text-mint-deep"
+          className="rounded bg-mint-soft px-1 py-0.5 font-mono text-[0.85em] text-mint"
         >
           {m[3]}
         </code>
