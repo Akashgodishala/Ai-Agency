@@ -162,6 +162,27 @@ jobs:
           echo -n "gallery renders the catalogue: "
           echo "$HTML" | grep -c 'AI Fraud Detector\|AI Gift Recommender\|AI Contract Reviewer'
 
+          echo "== proving the deployed CSS carries the design tokens =="
+          # The art direction lives entirely in the :root custom properties, so
+          # a deploy that builds and renders can still be serving the wrong
+          # palette. Pull the real stylesheet off the live site and assert the
+          # tokens are in it, rather than trusting that the markup looked right.
+          CSS_PATH=$(echo "$HTML" | grep -oE '/_next/static/css/[^"]+\.css' | head -1)
+          if [ -z "$CSS_PATH" ]; then
+            echo "::error::No stylesheet linked from the deployed page."
+            exit 1
+          fi
+          echo "  stylesheet: $CSS_PATH"
+          CSS=$(curl -s "$SHORT$CSS_PATH")
+          for token in "--ink: 10 10 10" "--paper: 242 237 228" "--mint: 255 107 26"; do
+            if echo "$CSS" | grep -qF "$token"; then
+              echo "  ✓ token live: $token"
+            else
+              echo "::error::Deployed CSS is missing \"$token\" — production is NOT serving the current palette."
+              exit 1
+            fi
+          done
+
           echo "== live chat end-to-end =="
           CFG='{"config":{"id":"smoke01","name":"Smoke Agent","emoji":"🧪","tagline":"test","persona":"You are a concise test agent for a liquor store.","greeting":"hi","suggestedQuestions":[],"knowledge":"Hours: Mon-Sat 10am-9pm.\nPickup orders ready in 30 minutes.","guardrails":[],"captureRules":{"enabled":false,"fields":[],"trigger":""},"createdFrom":"custom","createdAt":"2026-01-01"},"messages":[{"role":"user","content":"what time do you close on saturday?"}]}'
           curl -s -X POST "$SHORT/api/chat" -H 'Content-Type: application/json' -d "$CFG"; echo
