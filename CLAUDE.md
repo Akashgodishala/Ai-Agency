@@ -12,6 +12,7 @@ This file is the running record of where the build is. Read it first.
 | **Round 0 — safe to go public** | **CLOSED** | Credit-drain hardening, workflow credential hardening, full git-history secret audit. Verdict reached: `GREEN AND SAFE TO FLIP PUBLIC`. |
 | **Phase A — motion foundation** | **DONE** | Lenis smooth scroll wired to GSAP ScrollTrigger, one central motion module, reduced motion respected globally. |
 | **Phase B — The Re-Strike** | **SHIPPED** | Dark engraved art direction across the whole site, coin hero, founder film moved out of the hero, custom cursor, preloader. |
+| **The Agency dashboard** | **BUILT** | `/agency`: every agent from the open-source `msitarzewski/agency-agents` roster (282 at last sync) gathered into one searchable dashboard, with a sync script that regenerates the data. |
 
 ## Layout
 
@@ -22,6 +23,10 @@ This file is the running record of where the build is. Read it first.
       components/seal/        SealCanvas.tsx (the coin), AgentMark.tsx
       components/site/        page sections
       components/chat/        the playground transcript
+      components/agency/      the /agency dashboard: AgencyDashboard, AgentPlate,
+                              AgentDrawer, DivisionBars, Runbooks, AgencyMark
+      lib/agency/             agents.json (generated — never hand-edit) + index.ts
+      scripts/sync-agency.mjs regenerates lib/agency/agents.json from upstream
       lib/design/tokens.ts    THE source of truth for colour, type, motion
       lib/design/guilloche.ts the engraving engine that draws the coin
       lib/ratelimit.ts        durable per-IP + global limits
@@ -118,6 +123,36 @@ hangs over it.
 Stacking order lives in the `z` object in `lib/design/tokens.ts`, mirrored to
 `--z-*` and Tailwind (`z-nav`, `z-pinned`, `z-sticky`…). Never write a bare
 `z-30`.
+
+## The Agency dashboard
+
+`/agency` renders every agent in https://github.com/msitarzewski/agency-agents
+(MIT): 18 divisions, four runbook teams, one plate per agent, a detail panel,
+and a "Mint this agent" action that hands the agent's description to the
+existing `/create` flow through the same `sessionStorage` key the hero uses.
+
+The data is a generated file, `lib/agency/agents.json`. **Never edit it by
+hand.** Refresh it with
+
+    npm run sync:agency                       # shallow-clones upstream itself
+    npm run sync:agency -- --source ../path   # or point it at a checkout
+
+The script (`scripts/sync-agency.mjs`) reads upstream's `divisions.json`, every
+agent's YAML frontmatter and `##` headings, and `strategy/runbooks.json`, then
+writes one JSON with a `meta` block recording the upstream commit. It parses
+the frontmatter the way upstream's own `scripts/lib.sh` does — quoted scalars
+unquoted, indented continuation lines folded — and treats the clone as text
+only. Commit the regenerated JSON with the sync.
+
+Two upstream fields are carried but never rendered: `emoji` (banned on sight)
+and `color` (only `tokens.ts` may name a colour). The dashboard's marks are
+procedural instead — `AgencyMark` engraves each agent's initials into one of
+the six existing cartouches, mapped by division.
+
+The detail panel does not lock page scroll. It stops wheel events at the
+overlay so Lenis never sees them, and carries `data-lenis-prevent`; that is
+what keeps a scroll over the panel from moving the page. Re-test it in the
+playground's spirit if `SmoothScroll.tsx` changes.
 
 ## Testing
 

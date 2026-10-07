@@ -2,13 +2,14 @@
   "name": "agentmint",
   "version": "0.1.0",
   "private": true,
-  "description": "AgentMint \u2014 describe your use case, get your own AI agent.",
+  "description": "AgentMint — describe your use case, get your own AI agent.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:scroll": "node test/scroll-integrity.mjs"
+    "test:scroll": "node test/scroll-integrity.mjs",
+    "sync:agency": "node scripts/sync-agency.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",

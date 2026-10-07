@@ -39,12 +39,18 @@ export function Nav() {
         </Link>
 
         {/* Secondary links collapse below md; the mint action always stays. */}
-        <div className="flex shrink-0 items-center gap-6">
+        <div className="flex shrink-0 items-center gap-4 sm:gap-6">
           <Link
             href="/#collection"
             className="assay hidden normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper md:inline"
           >
             Collection
+          </Link>
+          <Link
+            href="/agency"
+            className="assay whitespace-nowrap normal-case tracking-[0.08em] text-muted transition-colors hover:text-paper"
+          >
+            Agency
           </Link>
           <Link
             href="/agents"

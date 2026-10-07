@@ -380,6 +380,42 @@ h3 { line-height: 1.16; }
 /* Marks are visible by default and animation only enhances them — never hide
    content behind a class that JavaScript has to come along and remove. */
 
+/* The agency's procedural monograms (components/agency/AgencyMark.tsx): two
+   initials in the display face, engraved in the same cartouches as the fifty.
+   They take the accent on hover exactly as a glyph's strokes do. */
+.mark-text {
+  fill: rgb(var(--paper) / 0.82);
+  font-family: var(--font-display), "Didot", "Bodoni MT", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: fill .45s cubic-bezier(.16,1,.3,1);
+}
+.mark-text.is-mint { fill: rgb(var(--mint)); }
+.group:hover .mark-text,
+.group:focus-visible .mark-text { fill: rgb(var(--mint)); }
+
+/* A plate arriving in the roster grid after a filter: a short settle, nothing
+   more. Reduced motion collapses it through the global rule below. */
+@keyframes plate-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.plate-in { animation: plate-in .36s cubic-bezier(.16,1,.3,1) both; }
+
+/* The agent detail panel (components/agency/AgentDrawer.tsx) slides in from
+   the right; the backdrop fades. */
+@keyframes drawer-in {
+  from { transform: translateX(24px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.drawer-panel { animation: drawer-in .42s cubic-bezier(.16,1,.3,1) both; }
+.drawer-backdrop { animation: fade-in .3s cubic-bezier(.16,1,.3,1) both; }
+
+
 /* ===========================================================================
    THE FOUNDER'S FILM — a plate resting on the ink, lower down the page
    No oval vignette: masking a rectangle into a blob is exactly what makes
