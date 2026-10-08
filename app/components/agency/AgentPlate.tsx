@@ -46,7 +46,7 @@ export function AgentPlate({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className="plate-in group relative flex h-full scroll-mt-[13rem] flex-col gap-4 bg-plate p-6 transition-colors duration-300 ease-struck focus-within:bg-plate2 hover:bg-plate2"
+      className="plate-in group relative flex h-full flex-col gap-4 bg-plate p-6 transition-colors duration-300 ease-struck focus-within:bg-plate2 hover:bg-plate2"
       style={
         {
           backgroundImage:
@@ -56,7 +56,9 @@ export function AgentPlate({
     >
       <div className="flex items-start justify-between gap-3">
         <AgencyMark name={a.name} division={a.division} size={54} />
-        <span className="assay max-w-[55%] truncate border border-rule px-2.5 py-1 normal-case tracking-[0.08em]">
+        {/* Dim labels lift to muted with the plate: on plate2 under the rim
+            light, dim alone slips under the 4.5:1 floor. */}
+        <span className="assay max-w-[55%] truncate border border-rule px-2.5 py-1 normal-case tracking-[0.08em] transition-colors duration-300 ease-struck group-focus-within:text-muted group-hover:text-muted">
           {divisionLabel(a.division)}
           {a.group ? ` · ${groupLabel(a.group)}` : ""}
         </span>
@@ -77,7 +79,7 @@ export function AgentPlate({
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-        <span className="assay truncate">
+        <span className="assay truncate transition-colors duration-300 ease-struck group-focus-within:text-muted group-hover:text-muted">
           {a.tools.length > 0
             ? `${a.tools.length} tools · ${formatCount(a.words)} words`
             : `${a.headings.length} sections · ${formatCount(a.words)} words`}
@@ -102,7 +104,10 @@ export function AgentPlate({
         aria-labelledby={titleId}
         aria-describedby={descId}
         onClick={(e) => onOpen(e.currentTarget)}
-        className="absolute inset-0 focus-visible:[outline-offset:-3px]"
+        // Keyboard focus scrolls THIS element into view, so the margin that
+        // clears the nav and the stuck controls has to live here, not on the
+        // article: 11rem on a phone (the bar wraps taller), 8.5rem above.
+        className="absolute inset-0 scroll-mt-[11rem] focus-visible:[outline-offset:-3px] sm:scroll-mt-[8.5rem]"
       />
     </article>
   );

@@ -151,11 +151,19 @@ the six existing cartouches, mapped by division.
 
 The route reads `searchParams` on the server (`?division=`, `?q=`, `?sort=`,
 `?agent=`) so a shared link paints the right view first; that is what makes
-`/agency` render per request rather than prerender. Interactive changes are
-written back with `replaceState`, **debounced** — Safari throws after a hundred
-history writes in thirty seconds, so a keystroke must never be a write of its
-own. The roster shows 48 plates at a time with "show more"; all 282 at once
-was a 95,000px page on a phone.
+`/agency` render per request rather than prerender. After mount the live URL
+is the source of truth. Interactive changes are written back with
+`replaceState(null, …)`, **debounced** — Safari throws after a hundred history
+writes in thirty seconds, so a keystroke must never be a write of its own —
+and the null state is what lets Next's patched `replaceState` keep its router
+state and update `useSearchParams`. The dashboard watches `useSearchParams`
+and adopts any URL it did not write itself (Back from `/create`, the nav's own
+`/agency` link while a filter is on); its own writes echo back through the
+same hook and are recognised by key and ignored, so typing is never clobbered.
+Passing `window.history.state` instead of null silently breaks all of this:
+Next short-circuits and never learns the URL changed. The roster shows 48
+plates at a time with "show more"; all 282 at once was a 95,000px page on a
+phone.
 
 The detail panel is a real modal: it portals onto `<body>`, marks every other
 child of `<body>` `inert` while open, traps Tab, closes on Escape, and returns
@@ -218,6 +226,10 @@ inputs, or `$GITHUB_ENV`.
 - `lib/design/tokens.ts` and the `:root` block in `globals.css` mirror each
   other. Change both or neither.
 - No component names a raw colour. Rebranding must stay a two-file change.
+- Opacity modifiers on colour utilities must sit on Tailwind's 5-step scale
+  (`bg-ink/90`, never `bg-ink/88` or `/92`): off-scale values emit **no CSS**
+  and the element silently has no background. Two sticky bars and the nav
+  shipped transparent this way. Odd values need the arbitrary form, `/[0.88]`.
 - Never print or commit a secret value.
 - When testing a production build locally, confirm the running server's asset
   hashes match what is on disk before trusting a result. A stale `next start`

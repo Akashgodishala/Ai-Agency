@@ -43,7 +43,7 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { lstatSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, lstatSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -69,10 +69,29 @@ function flag(name) {
 }
 const sourceArg = flag("--source");
 const outArg = flag("--out");
-for (const a of args) {
-  if (a.startsWith("--") && a !== "--source" && a !== "--out") {
-    console.error(`unknown flag ${a}`);
+{
+  // Anything that is not a known flag or its value is a mistake worth stopping
+  // for: a mistyped `-source` would otherwise clone upstream and overwrite the
+  // real data file as if nothing had been asked.
+  const known = new Set(["--source", "--out"]);
+  for (let i = 0; i < args.length; i++) {
+    if (known.has(args[i])) {
+      i++;
+      continue;
+    }
+    console.error(`unexpected argument ${args[i]} (usage: sync-agency.mjs [--source <dir>] [--out <file>])`);
     process.exit(2);
+  }
+  if (sourceArg !== undefined && !(existsSync(sourceArg) && statSync(sourceArg).isDirectory())) {
+    console.error(`--source ${sourceArg} is not a directory`);
+    process.exit(2);
+  }
+  if (outArg !== undefined) {
+    const dir = dirname(resolve(outArg));
+    if (!(existsSync(dir) && statSync(dir).isDirectory()) || (existsSync(outArg) && statSync(outArg).isDirectory())) {
+      console.error(`--out ${outArg} is not a writable file path`);
+      process.exit(2);
+    }
   }
 }
 
@@ -166,19 +185,14 @@ function parseFrontmatter(text) {
       continue;
     }
 
-    // A scalar. Plain scalars fold indented continuation lines, as upstream's
-    // get_field does. A quoted scalar is one line unless its closing quote is
-    // missing from that line, in which case indented lines complete it.
+    // A scalar. Exactly as upstream's get_field reads it: every indented line
+    // that follows is a continuation, folded in with a single space, whether
+    // the value is quoted or not. Only after folding does unquote decide
+    // whether one matching pair of outer quotes is delimiting it.
     let value = rest;
-    const t = rest.trim();
-    const q = t[0] === '"' || t[0] === "'" ? t[0] : null;
-    const closedOnLine = q !== null && t.length > 1 && t.endsWith(q);
-    if (q === null || !closedOnLine) {
-      while (i < end && /^[ \t]+\S/.test(lines[i]) && !/^[ \t]+-\s/.test(lines[i])) {
-        value += " " + lines[i].trim();
-        i++;
-        if (q !== null && value.trimEnd().endsWith(q)) break;
-      }
+    while (i < end && /^[ \t]+\S/.test(lines[i])) {
+      value += " " + lines[i].trim();
+      i++;
     }
     if (!(key in data)) data[key] = unquote(value);
   }
@@ -196,13 +210,14 @@ function parseFrontmatter(text) {
  * `Extended_Pictographic` alone is too wide — it also covers ©, ®, ™ and the
  * arrows (↔, ↩), which are punctuation in running text. So a character is
  * removed when it is pictographic AND sits at U+2600 or above (the symbol and
- * emoji blocks), or when it is explicitly given emoji presentation with U+FE0F.
- * Variation selectors, zero-width joiners, keycap combiners and regional
- * indicators go with them so nothing is left dangling. GitHub-style
- * `:shortcode:` emoji are text, so they get their own pattern.
+ * emoji blocks), or when it is explicitly given emoji or text presentation
+ * with U+FE0F / U+FE0E. Variation selectors, zero-width joiners, keycap
+ * combiners, skin-tone modifiers, flag tag characters and regional indicators
+ * go with them so nothing is left dangling. GitHub-style `:shortcode:` emoji
+ * are text, so they get their own pattern.
  */
 const EMOJI =
-  /(?:(?=\p{Extended_Pictographic})[\u2600-\u{10FFFF}]|\p{Extended_Pictographic}\uFE0F|\p{Regional_Indicator})[\uFE0F\u20E3]?|[\u200D\uFE0F\u20E3]/gu;
+  /(?:(?=\p{Extended_Pictographic})[\u2600-\u{10FFFF}]|\p{Extended_Pictographic}[\uFE0E\uFE0F]|\p{Regional_Indicator})[\uFE0E\uFE0F\u20E3\p{Emoji_Modifier}]?|[\u200D\uFE0E\uFE0F\u20E3\p{Emoji_Modifier}\u{E0020}-\u{E007F}]/gu;
 const SHORTCODE = /:(?=[a-z0-9_+-]*[a-z])[a-z0-9_+-]{2,}:/g;
 /** C0 and C1 control characters, which only ever arrive by corruption. */
 const CONTROL = /[\u0000-\u0008\u000B-\u001F\u007F-\u009F]/g;
@@ -218,11 +233,13 @@ function deEmoji(s) {
 
 /**
  * Two upstream files carry the wreckage of a bad encoding round-trip: each
- * heading emoji became `<`, `=` or `>` followed by one Latin-1 character (the
- * low bytes of its UTF-16 surrogate pair). It is unmistakable at the start of
- * a heading, so it is removed there and reported, never published.
+ * heading emoji became `<`, `=` or `>` followed by one control or Latin-1
+ * supplement character (the low bytes of its UTF-16 surrogate pair). That
+ * pairing is unmistakable at the start of a heading — a real heading such as
+ * "=> Migration" or ">= 90% coverage" has printable ASCII second, which is
+ * excluded — so it is removed there and reported, never published.
  */
-const MOJIBAKE = /^[<=>][\u0000-\u00FF](?=\s)/;
+const MOJIBAKE = /^[<=>][\u0000-\u001F\u007F-\u00FF](?=\s)/;
 
 /** `## 🧠 Your \& Memory` → "Your & Memory": emoji gone, escapes undone. */
 function cleanHeading(raw) {
@@ -273,8 +290,10 @@ function git(root, ...a) {
 /** Upstream's commit — only when `root` really is the upstream checkout. */
 function upstreamCommit(root) {
   try {
-    const top = resolve(git(root, "rev-parse", "--show-toplevel"));
-    if (top !== resolve(root)) return { commit: null, commitDate: null };
+    // git reports the real path; `root` may reach it through a symlink (the
+    // default clone does on macOS, where the temp dir lives under /var).
+    const top = realpathSync(git(root, "rev-parse", "--show-toplevel"));
+    if (top !== realpathSync(root)) return { commit: null, commitDate: null };
     return { commit: git(root, "rev-parse", "HEAD"), commitDate: git(root, "log", "-1", "--format=%cI") };
   } catch {
     return { commit: null, commitDate: null };
@@ -318,6 +337,10 @@ function main() {
       let files;
       const skipped = [];
       try {
+        if (lstatSync(dir).isSymbolicLink()) {
+          problems.push(`skipped symbolic link ${division}/ — the division directory itself is a link`);
+          continue;
+        }
         files = walk(dir, [], skipped).sort();
       } catch {
         problems.push(`division "${division}" is listed in divisions.json but has no directory`);
@@ -408,13 +431,17 @@ function main() {
       }
       seen.set(a.slug, a.path);
     }
+    // Refusals return rather than exit, so the finally below still removes
+    // the clone.
     if (collisions) {
       console.error(`${collisions} duplicate slug(s). Refusing to write.`);
-      process.exit(1);
+      process.exitCode = 1;
+      return;
     }
     if (agents.length === 0) {
       console.error("No agents found. Refusing to write an empty file.");
-      process.exit(1);
+      process.exitCode = 1;
+      return;
     }
 
     // Divisions, with counts, in upstream's order.

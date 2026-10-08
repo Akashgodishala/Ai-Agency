@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   AGENTS,
@@ -13,6 +13,8 @@ import {
   filterAgents,
   formatCount,
   formatDate,
+  initialKey,
+  initialStateFrom,
   type AgencyAgent,
   type AgencyInitial,
   type AgencySort,
@@ -38,9 +40,18 @@ import { Runbooks } from "./Runbooks";
  *
  * URL state: the page reads `?division=`, `?q=`, `?sort=` and `?agent=` on
  * the server and passes them in as `initial`, so a shared link paints right
- * the first time. Changes are written back with replaceState, debounced —
- * Safari caps history writes at a hundred per half minute and throws past
- * it, so a keystroke must never be a history write of its own.
+ * the first time. After that the live URL is the source of truth:
+ *
+ *   - Changes are written back with replaceState, debounced — Safari caps
+ *     history writes at a hundred per half minute and throws past it, so a
+ *     keystroke must never be a history write of its own. The call passes a
+ *     null state so Next's patched replaceState keeps its own router state
+ *     and tells `useSearchParams` about the new URL.
+ *   - When the URL changes under us for any other reason — Back from /create,
+ *     the nav's own /agency link while a filter is on — `useSearchParams`
+ *     moves and the state is adopted from it. Our own writes echo back
+ *     through the same hook and are recognised and ignored, so typing is
+ *     never clobbered by a stale echo.
  */
 
 const PENDING_KEY = "agentmint.pendingDescription";
@@ -64,20 +75,45 @@ export function AgencyDashboard({ initial }: { initial: AgencyInitial }) {
   const rosterTitleRef = useRef<HTMLHeadingElement>(null);
   const headRef = useReveal<HTMLDivElement>({ selector: "[data-r]" });
 
+  // The last state this component put in the URL (or arrived with). A URL
+  // change that matches it is our own write echoing back; anything else is a
+  // navigation to adopt.
+  const writtenRef = useRef<string>(initialKey(initial));
+
+  // ---- Adopt the URL when something other than us changes it ----
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
+  useEffect(() => {
+    const fromUrl = initialStateFrom(Object.fromEntries(new URLSearchParams(search)));
+    const key = initialKey(fromUrl);
+    if (key === writtenRef.current) return;
+    writtenRef.current = key;
+    setQuery(fromUrl.query);
+    setDivision(fromUrl.division);
+    setSort(fromUrl.sort);
+    setSelected(fromUrl.agent);
+  }, [search]);
+
   // ---- URL write-back, debounced and never allowed to throw ----
   useEffect(() => {
-    const p = new URLSearchParams();
-    if (division) p.set("division", division);
-    if (query.trim()) p.set("q", query.trim());
-    if (sort !== "division") p.set("sort", sort);
-    if (selected) p.set("agent", selected);
-    const qs = p.toString();
     const t = window.setTimeout(() => {
-      const url = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
-      if (url === `${window.location.pathname}${window.location.search}`) return;
+      // Start from what is there, so a campaign parameter or a fragment that
+      // arrived with the visitor survives the rewrite.
+      const p = new URLSearchParams(window.location.search);
+      for (const k of ["division", "q", "sort", "agent"]) p.delete(k);
+      if (division) p.set("division", division);
+      if (query.trim()) p.set("q", query.trim());
+      if (sort !== "division") p.set("sort", sort);
+      if (selected) p.set("agent", selected);
+      const qs = p.toString();
+      const url = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
+      const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      writtenRef.current = initialKey({ query: query.trim().slice(0, 120), division, sort, agent: selected });
+      if (url === current) return;
       try {
-        // Keep the router's own history state; only the URL changes.
-        window.history.replaceState(window.history.state, "", url);
+        // A null state lets Next's patched replaceState carry its own router
+        // state across and update the canonical URL it navigates from.
+        window.history.replaceState(null, "", url);
       } catch {
         /* a throttling browser leaves the address bar stale, nothing worse */
       }
@@ -264,8 +300,13 @@ export function AgencyDashboard({ initial }: { initial: AgencyInitial }) {
                 className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-paper outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs [&::-webkit-search-cancel-button]:appearance-none"
               />
               {/* One row that scrolls sideways on a phone, so the stuck bar
-                  stays short instead of stacking into a quarter of the screen. */}
-              <div className="-mx-6 flex items-center gap-1.5 overflow-x-auto px-6 pb-0.5 sm:mx-0 sm:px-0" role="group" aria-label="Sort">
+                  stays short instead of stacking into a quarter of the screen.
+                  The right edge fades so a clipped button reads as "more". */}
+              <div
+                className="-mx-6 flex items-center gap-1.5 overflow-x-auto px-6 pb-0.5 [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] sm:mx-0 sm:pl-0 sm:pr-8"
+                role="group"
+                aria-label="Sort"
+              >
                 {SORTS.map((s) => {
                   const active = sort === s.id;
                   return (
@@ -284,16 +325,18 @@ export function AgencyDashboard({ initial }: { initial: AgencyInitial }) {
                     </button>
                   );
                 })}
-                {(division || query.trim()) && (
-                  <button
-                    type="button"
-                    onClick={clearFilters}
-                    className="assay shrink-0 whitespace-nowrap px-3.5 py-2 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:text-paper"
-                  >
-                    Clear filters
-                  </button>
-                )}
               </div>
+              {/* Outside the scroller and the Sort group, so it is always in
+                  view and never announced as a sort option. */}
+              {(division || query.trim()) && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="assay shrink-0 self-start whitespace-nowrap px-3.5 py-2 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:text-paper sm:self-auto"
+                >
+                  Clear filters
+                </button>
+              )}
             </div>
           </div>
 

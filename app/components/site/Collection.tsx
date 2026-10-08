@@ -220,7 +220,7 @@ function AgentPlate({
     >
       <div className="flex items-start justify-between gap-3">
         <AgentMark templateId={t.templateId} size={58} />
-        <span className="assay border border-rule px-2.5 py-1 normal-case tracking-[0.08em]">
+        <span className="assay border border-rule px-2.5 py-1 normal-case tracking-[0.08em] transition-colors duration-300 ease-struck group-hover:text-muted group-focus-visible:text-muted">
           {t.audience}
         </span>
       </div>
@@ -231,7 +231,7 @@ function AgentPlate({
       </div>
 
       <div className="mt-auto flex items-center justify-between pt-2">
-        <span className="assay">{t.category}</span>
+        <span className="assay transition-colors duration-300 ease-struck group-hover:text-muted group-focus-visible:text-muted">{t.category}</span>
         <span className="assay flex items-center gap-1.5 normal-case tracking-[0.08em] text-mint">
           Take it
           <span

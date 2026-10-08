@@ -71,8 +71,10 @@ export function AgentDrawer({
       const first = items[0];
       const last = items[items.length - 1];
       const active = document.activeElement;
-      const inside = active instanceof Node && panel.contains(active);
-      if (e.shiftKey ? active === first || !inside : active === last || !inside) {
+      // Focus on the panel itself (a click on plain copy puts it there)
+      // counts as "no item": either direction wraps to an end.
+      const onItem = active instanceof Node && active !== panel && panel.contains(active);
+      if (e.shiftKey ? active === first || !onItem : active === last || !onItem) {
         e.preventDefault();
         (e.shiftKey ? last : first).focus();
       }
