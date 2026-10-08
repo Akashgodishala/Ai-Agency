@@ -28,16 +28,22 @@
  *   headings     the body's `##` sections, with their emoji stripped — what the
  *                spec covers, without shipping the spec.
  *   words        body length, as a rough measure of how deep the spec goes.
- *   sourceUrl    the file on GitHub, so the full persona is one click away.
+ *   path         the repo-relative path; lib/agency/index.ts derives the GitHub
+ *                URL from it rather than shipping 282 copies of the prefix.
  *
  * The frontmatter parser deliberately mirrors upstream's scripts/lib.sh: quoted
- * scalars lose their quotes, plain scalars fold indented continuation lines, and
- * only the first occurrence of a key counts. The repository is untrusted input —
- * it is only ever read as text here, never executed.
+ * scalars lose their quotes, plain scalars fold indented continuation lines, a
+ * fenced code block closes only on a fence of the same character and at least
+ * the same length, and only the first occurrence of a key counts. The
+ * repository is untrusted input — it is only ever read as text here, never
+ * executed, and symbolic links inside it are not followed.
+ *
+ * Exit codes: 0 wrote the file; 1 refused to (no agents, duplicate slugs);
+ * 2 bad arguments.
  */
 
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { lstatSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -53,10 +59,22 @@ const OUT = resolve(HERE, "../lib/agency/agents.json");
 const args = process.argv.slice(2);
 function flag(name) {
   const i = args.indexOf(name);
-  return i === -1 ? undefined : args[i + 1];
+  if (i === -1) return undefined;
+  const v = args[i + 1];
+  if (v === undefined || v.startsWith("--")) {
+    console.error(`${name} needs a value`);
+    process.exit(2);
+  }
+  return v;
 }
 const sourceArg = flag("--source");
 const outArg = flag("--out");
+for (const a of args) {
+  if (a.startsWith("--") && a !== "--source" && a !== "--out") {
+    console.error(`unknown flag ${a}`);
+    process.exit(2);
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Frontmatter — a YAML subset, matching what the agent files actually use
@@ -76,7 +94,8 @@ function unquote(v) {
 
 /**
  * Parse the block between the first two `---` fences.
- * Returns { data, bodyStart } or null when the file has no frontmatter.
+ * Returns { data, bodyStart, lines }, { unclosed: true } when the opening fence
+ * never closes, or null when the file has no frontmatter at all.
  *
  * Supported shapes (everything the 282 files use):
  *   key: scalar                      quoted or plain; plain may fold onto
@@ -95,7 +114,7 @@ function parseFrontmatter(text) {
       break;
     }
   }
-  if (end === -1) return null;
+  if (end === -1) return { unclosed: true };
 
   const data = {};
   let i = 1;
@@ -112,7 +131,7 @@ function parseFrontmatter(text) {
       continue;
     }
     const key = m[1];
-    let rest = m[2];
+    const rest = m[2];
     i++;
 
     if (rest.trim() === "") {
@@ -147,20 +166,18 @@ function parseFrontmatter(text) {
       continue;
     }
 
-    // Plain scalar, folding indented continuation lines like YAML does.
+    // A scalar. Plain scalars fold indented continuation lines, as upstream's
+    // get_field does. A quoted scalar is one line unless its closing quote is
+    // missing from that line, in which case indented lines complete it.
     let value = rest;
-    const quoted = /^\s*["']/.test(rest);
-    if (!quoted) {
+    const t = rest.trim();
+    const q = t[0] === '"' || t[0] === "'" ? t[0] : null;
+    const closedOnLine = q !== null && t.length > 1 && t.endsWith(q);
+    if (q === null || !closedOnLine) {
       while (i < end && /^[ \t]+\S/.test(lines[i]) && !/^[ \t]+-\s/.test(lines[i])) {
         value += " " + lines[i].trim();
         i++;
-      }
-    } else {
-      // A quoted scalar can also span lines until its closing quote.
-      const q = rest.trim()[0];
-      while (i < end && !new RegExp(`${q}\\s*$`).test(value)) {
-        value += " " + lines[i].trim();
-        i++;
+        if (q !== null && value.trimEnd().endsWith(q)) break;
       }
     }
     if (!(key in data)) data[key] = unquote(value);
@@ -173,40 +190,78 @@ function parseFrontmatter(text) {
 // ---------------------------------------------------------------------------
 
 /**
- * Remove emoji and pictographs from text that will be rendered. The house style
- * bans emoji; upstream uses them liberally in headings. Variation selectors,
- * zero-width joiners and keycap combiners are stripped with them so nothing is
- * left dangling.
+ * Remove emoji from text that will be rendered. The house style bans emoji;
+ * upstream uses them liberally in headings.
+ *
+ * `Extended_Pictographic` alone is too wide — it also covers ©, ®, ™ and the
+ * arrows (↔, ↩), which are punctuation in running text. So a character is
+ * removed when it is pictographic AND sits at U+2600 or above (the symbol and
+ * emoji blocks), or when it is explicitly given emoji presentation with U+FE0F.
+ * Variation selectors, zero-width joiners, keycap combiners and regional
+ * indicators go with them so nothing is left dangling. GitHub-style
+ * `:shortcode:` emoji are text, so they get their own pattern.
  */
-const EMOJI = /[\p{Extended_Pictographic}\p{Regional_Indicator}\u200D\uFE0F\u20E3]/gu;
+const EMOJI =
+  /(?:(?=\p{Extended_Pictographic})[\u2600-\u{10FFFF}]|\p{Extended_Pictographic}\uFE0F|\p{Regional_Indicator})[\uFE0F\u20E3]?|[\u200D\uFE0F\u20E3]/gu;
+const SHORTCODE = /:(?=[a-z0-9_+-]*[a-z])[a-z0-9_+-]{2,}:/g;
+/** C0 and C1 control characters, which only ever arrive by corruption. */
+const CONTROL = /[\u0000-\u0008\u000B-\u001F\u007F-\u009F]/g;
+
 function deEmoji(s) {
-  return s.replace(EMOJI, "").replace(/\s{2,}/g, " ").trim();
+  return s
+    .replace(EMOJI, "")
+    .replace(SHORTCODE, "")
+    .replace(CONTROL, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
-function slugify(s) {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+/**
+ * Two upstream files carry the wreckage of a bad encoding round-trip: each
+ * heading emoji became `<`, `=` or `>` followed by one Latin-1 character (the
+ * low bytes of its UTF-16 surrogate pair). It is unmistakable at the start of
+ * a heading, so it is removed there and reported, never published.
+ */
+const MOJIBAKE = /^[<=>][\u0000-\u00FF](?=\s)/;
+
+/** `## 🧠 Your \& Memory` → "Your & Memory": emoji gone, escapes undone. */
+function cleanHeading(raw) {
+  let h = raw;
+  const mojibake = MOJIBAKE.test(h);
+  if (mojibake) h = h.replace(MOJIBAKE, "");
+  h = deEmoji(h)
+    .replace(/\\([\\`*_{}[\]()#+\-.!&<>|~])/g, "$1")
+    .replace(/^[\s:—–-]+/, "")
+    .trim();
+  return { heading: h, mojibake };
 }
 
 /** `tools:` arrives as "A, B, C" in most files and as a YAML list in a few. */
 function toList(v) {
-  if (Array.isArray(v)) return v.map((x) => (typeof x === "string" ? x : "")).filter(Boolean);
-  if (typeof v === "string") return v.split(",").map((x) => x.trim()).filter(Boolean);
+  if (Array.isArray(v)) return v.map((x) => (typeof x === "string" ? deEmoji(x) : "")).filter(Boolean);
+  if (typeof v === "string") return v.split(",").map((x) => deEmoji(x)).filter(Boolean);
   return [];
+}
+
+function str(v) {
+  return typeof v === "string" ? deEmoji(v) : "";
 }
 
 // ---------------------------------------------------------------------------
 // Walk the repository
 // ---------------------------------------------------------------------------
 
-function walk(dir, out = []) {
+/** Every .md under dir. Symbolic links are skipped: the checkout is untrusted. */
+function walk(dir, out, skipped) {
   for (const entry of readdirSync(dir)) {
     const p = join(dir, entry);
-    const st = statSync(p);
-    if (st.isDirectory()) walk(p, out);
-    else if (entry.endsWith(".md")) out.push(p);
+    const st = lstatSync(p);
+    if (st.isSymbolicLink()) {
+      skipped.push(p);
+      continue;
+    }
+    if (st.isDirectory()) walk(p, out, skipped);
+    else if (st.isFile() && entry.endsWith(".md")) out.push(p);
   }
   return out;
 }
@@ -215,110 +270,158 @@ function git(root, ...a) {
   return execFileSync("git", ["-C", root, ...a], { encoding: "utf8" }).trim();
 }
 
+/** Upstream's commit — only when `root` really is the upstream checkout. */
+function upstreamCommit(root) {
+  try {
+    const top = resolve(git(root, "rev-parse", "--show-toplevel"));
+    if (top !== resolve(root)) return { commit: null, commitDate: null };
+    return { commit: git(root, "rev-parse", "HEAD"), commitDate: git(root, "log", "-1", "--format=%cI") };
+  } catch {
+    return { commit: null, commitDate: null };
+  }
+}
+
+// Fenced code, as upstream's fence_open_p / fence_closes_p read it: a fence
+// opens with 3+ backticks or tildes after 0–3 spaces, and closes only on the
+// same character, a run at least as long, and nothing but whitespace after.
+function fenceOpen(line) {
+  const m = /^ {0,3}(`{3,}|~{3,})/.exec(line);
+  return m ? { char: m[1][0], len: m[1].length } : null;
+}
+function fenceCloses(line, open) {
+  const m = /^ {0,3}(`{3,}|~{3,})[ \t]*$/.exec(line);
+  return !!m && m[1][0] === open.char && m[1].length >= open.len;
+}
+
 function main() {
   let root = sourceArg ? resolve(sourceArg) : null;
   let tmp = null;
-  if (!root) {
-    tmp = mkdtempSync(join(tmpdir(), "agency-agents-"));
-    console.log(`Cloning ${REPO_URL} (shallow) …`);
-    execFileSync("git", ["clone", "--depth", "1", "--quiet", REPO_URL, tmp], { stdio: "inherit" });
-    root = tmp;
-  }
+  const problems = [];
 
   try {
-    const divisionsFile = JSON.parse(readFileSync(join(root, "divisions.json"), "utf8"));
-    const divisionIds = Object.keys(divisionsFile.divisions);
-
-    let commit = null;
-    let commitDate = null;
-    try {
-      commit = git(root, "rev-parse", "HEAD");
-      commitDate = git(root, "log", "-1", "--format=%cI");
-    } catch {
-      /* not a git checkout — fine, the data is still good */
+    if (!root) {
+      tmp = mkdtempSync(join(tmpdir(), "agency-agents-"));
+      console.log(`Cloning ${REPO_URL} (shallow) …`);
+      execFileSync("git", ["clone", "--depth", "1", "--quiet", REPO_URL, tmp], { stdio: "inherit" });
+      root = tmp;
     }
 
+    const divisionsFile = JSON.parse(readFileSync(join(root, "divisions.json"), "utf8"));
+    const divisionIds = Object.keys(divisionsFile.divisions);
+    const { commit, commitDate } = upstreamCommit(root);
+    if (!commit) problems.push("source is not a git checkout of upstream, so meta.commit is null");
+
     const agents = [];
-    const problems = [];
 
     for (const division of divisionIds) {
       const dir = join(root, division);
       let files;
+      const skipped = [];
       try {
-        files = walk(dir).sort();
+        files = walk(dir, [], skipped).sort();
       } catch {
         problems.push(`division "${division}" is listed in divisions.json but has no directory`);
         continue;
       }
+      for (const s of skipped) problems.push(`skipped symbolic link ${relative(root, s)}`);
+
       for (const file of files) {
+        const relPath = relative(root, file).split("\\").join("/");
         const text = readFileSync(file, "utf8");
         const fm = parseFrontmatter(text);
         if (!fm) continue; // not an agent file (upstream's own rule: agents start with ---)
+        if (fm.unclosed) {
+          problems.push(`${relPath}: frontmatter never closes — skipped`);
+          continue;
+        }
         const { data, bodyStart, lines } = fm;
-        const relPath = relative(root, file).split("\\").join("/");
         const slug = basename(file, ".md");
-        const name = typeof data.name === "string" ? deEmoji(data.name) : "";
-        const description = typeof data.description === "string" ? deEmoji(data.description) : "";
+        const name = str(data.name);
+        const description = str(data.description);
         if (!name || !description) {
-          problems.push(`${relPath}: missing name or description`);
+          problems.push(`${relPath}: missing name or description — skipped`);
           continue;
         }
 
         const body = lines.slice(bodyStart);
         const headings = [];
-        let inFence = false;
+        let open = null;
+        let mojibake = false;
         for (const l of body) {
-          if (/^\s{0,3}(`{3,}|~{3,})/.test(l)) inFence = !inFence;
-          if (inFence) continue;
+          if (open) {
+            if (fenceCloses(l, open)) open = null;
+            continue;
+          }
+          const o = fenceOpen(l);
+          if (o) {
+            open = o;
+            continue;
+          }
           const h = /^##\s+(.+?)\s*$/.exec(l);
           if (h) {
-            const clean = deEmoji(h[1]).replace(/^[\s:—–-]+/, "");
-            if (clean && !headings.includes(clean)) headings.push(clean);
+            const c = cleanHeading(h[1]);
+            if (c.mojibake) mojibake = true;
+            if (c.heading && !headings.includes(c.heading)) headings.push(c.heading);
           }
         }
+        if (mojibake) problems.push(`${relPath}: headings carry corrupted emoji bytes upstream — stripped`);
         const words = body.join("\n").split(/\s+/).filter(Boolean).length;
 
         const parts = relPath.split("/");
         const group = parts.length > 2 ? parts[1] : null;
 
-        const agent = {
+        agents.push({
           slug,
-          nameSlug: slugify(name),
           name,
           division,
           group,
           description,
-          vibe: typeof data.vibe === "string" ? deEmoji(data.vibe) : "",
+          vibe: str(data.vibe),
           tools: toList(data.tools),
-          author: typeof data.author === "string" ? data.author.trim() : null,
+          author: typeof data.author === "string" ? deEmoji(data.author) || null : null,
           services: Array.isArray(data.services)
             ? data.services
-                .filter((s) => s && typeof s === "object" && s.name)
-                .map((s) => ({ name: s.name, url: s.url ?? null, tier: s.tier ?? null }))
+                .filter((s) => s && typeof s === "object" && typeof s.name === "string")
+                .map((s) => ({
+                  name: deEmoji(s.name),
+                  url: typeof s.url === "string" ? s.url.trim() : null,
+                  tier: typeof s.tier === "string" ? deEmoji(s.tier) : null,
+                }))
             : [],
           emoji: typeof data.emoji === "string" ? data.emoji.trim() : "",
           color: typeof data.color === "string" ? data.color.trim() : "",
           headings,
           words,
           path: relPath,
-          sourceUrl: `https://github.com/${REPO}/blob/main/${relPath}`,
-        };
-        agents.push(agent);
+        });
       }
     }
 
-    // Slugs must be unique: they are the id everywhere downstream.
+    // Slugs are the id everywhere downstream — React keys, lookups, deep links.
+    // A collision is not a note, it is a reason not to write the file.
     const seen = new Map();
+    let collisions = 0;
     for (const a of agents) {
-      if (seen.has(a.slug)) problems.push(`duplicate slug "${a.slug}": ${seen.get(a.slug)} and ${a.path}`);
+      if (seen.has(a.slug)) {
+        collisions++;
+        console.error(`duplicate slug "${a.slug}": ${seen.get(a.slug)} and ${a.path}`);
+      }
       seen.set(a.slug, a.path);
+    }
+    if (collisions) {
+      console.error(`${collisions} duplicate slug(s). Refusing to write.`);
+      process.exit(1);
+    }
+    if (agents.length === 0) {
+      console.error("No agents found. Refusing to write an empty file.");
+      process.exit(1);
     }
 
     // Divisions, with counts, in upstream's order.
     const divisions = divisionIds
       .map((id) => ({
         id,
-        label: divisionsFile.divisions[id].label,
+        label: deEmoji(String(divisionsFile.divisions[id]?.label ?? id)),
         count: agents.filter((a) => a.division === id).length,
       }))
       .filter((d) => d.count > 0);
@@ -328,29 +431,24 @@ function main() {
     try {
       const rb = JSON.parse(readFileSync(join(root, "strategy/runbooks.json"), "utf8"));
       runbooks = (rb.runbooks ?? []).map((r) => ({
-        slug: r.slug,
-        title: deEmoji(r.title ?? ""),
-        mode: r.mode ?? "",
-        duration: r.duration ?? "",
-        summary: deEmoji(r.summary ?? ""),
-        docUrl: r.doc ? `https://github.com/${REPO}/blob/main/${r.doc}` : null,
+        slug: String(r.slug ?? ""),
+        title: str(r.title),
+        mode: str(r.mode),
+        duration: str(r.duration),
+        summary: str(r.summary),
+        doc: typeof r.doc === "string" ? r.doc : null,
         roster: (r.roster ?? []).map((g) => ({
-          group: deEmoji(g.group ?? ""),
-          activation: g.activation ?? null,
+          group: str(g.group),
+          activation: typeof g.activation === "string" ? deEmoji(g.activation) || null : null,
           agents: (g.agents ?? []).filter((s) => {
             if (seen.has(s)) return true;
-            problems.push(`runbook "${r.slug}" names unknown agent "${s}"`);
+            problems.push(`runbook "${r.slug}" names unknown agent "${s}" — dropped`);
             return false;
           }),
         })),
       }));
     } catch {
       problems.push("strategy/runbooks.json not found or unreadable — runbooks left empty");
-    }
-
-    if (agents.length === 0) {
-      console.error("No agents found. Refusing to write an empty file.");
-      process.exit(1);
     }
 
     const out = {

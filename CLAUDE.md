@@ -149,10 +149,25 @@ and `color` (only `tokens.ts` may name a colour). The dashboard's marks are
 procedural instead — `AgencyMark` engraves each agent's initials into one of
 the six existing cartouches, mapped by division.
 
-The detail panel does not lock page scroll. It stops wheel events at the
-overlay so Lenis never sees them, and carries `data-lenis-prevent`; that is
-what keeps a scroll over the panel from moving the page. Re-test it in the
+The route reads `searchParams` on the server (`?division=`, `?q=`, `?sort=`,
+`?agent=`) so a shared link paints the right view first; that is what makes
+`/agency` render per request rather than prerender. Interactive changes are
+written back with `replaceState`, **debounced** — Safari throws after a hundred
+history writes in thirty seconds, so a keystroke must never be a write of its
+own. The roster shows 48 plates at a time with "show more"; all 282 at once
+was a 95,000px page on a phone.
+
+The detail panel is a real modal: it portals onto `<body>`, marks every other
+child of `<body>` `inert` while open, traps Tab, closes on Escape, and returns
+focus to whatever opened it. It does not lock page scroll. A wheel over the
+backdrop is cancelled and every wheel is stopped before it reaches the window,
+where Lenis listens; the panel carries `data-lenis-prevent` and
+`overscroll-behavior: contain` and scrolls itself. Re-test it in the
 playground's spirit if `SmoothScroll.tsx` changes.
+
+Plates are `<article>`s with a real heading and an invisible button stretched
+over them (`AgentPlate.tsx`) — a button wrapping the whole card would flatten
+the name and description into one label for assistive tech. Keep it that way.
 
 ## Testing
 

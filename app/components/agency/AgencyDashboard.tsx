@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   AGENTS,
   DIVISIONS,
@@ -14,6 +14,7 @@ import {
   formatCount,
   formatDate,
   type AgencyAgent,
+  type AgencyInitial,
   type AgencySort,
 } from "@/lib/agency";
 import { MaskedLines } from "@/components/motion/MaskedLines";
@@ -30,73 +31,130 @@ import { Runbooks } from "./Runbooks";
  *
  * Reads lib/agency/agents.json (see scripts/sync-agency.mjs) and lays it out
  * as: the headline numbers → agents per division (which is also the filter) →
- * search and sort → the roster → the four runbook teams. Selecting an agent
- * opens a panel with everything we know about it and a "Mint this agent"
- * action that hands its description to the existing /create flow.
+ * search and sort → the roster, a page at a time → the four runbook teams.
+ * Selecting an agent opens a panel with everything we know about it and a
+ * "Mint this agent" action that hands its description to the existing
+ * /create flow.
  *
- * URL state: `?division=`, `?q=` and `?agent=` are read on arrival and written
- * back with replaceState, so a filtered view or a single agent can be linked.
+ * URL state: the page reads `?division=`, `?q=`, `?sort=` and `?agent=` on
+ * the server and passes them in as `initial`, so a shared link paints right
+ * the first time. Changes are written back with replaceState, debounced —
+ * Safari caps history writes at a hundred per half minute and throws past
+ * it, so a keystroke must never be a history write of its own.
  */
 
 const PENDING_KEY = "agentmint.pendingDescription";
-const SORT_IDS = new Set<string>(SORTS.map((s) => s.id));
+/** Plates shown before "show more". Enough to browse, not a 90,000px page. */
+const PAGE = 48;
+const URL_DEBOUNCE_MS = 350;
+/** The condensed nav plus its rule — what the sticky controls tuck under. */
+const NAV_OFFSET = 57;
 
-export function AgencyDashboard() {
+export function AgencyDashboard({ initial }: { initial: AgencyInitial }) {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [division, setDivision] = useState<string | null>(null);
-  const [sort, setSort] = useState<AgencySort>("division");
-  const [selected, setSelected] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
+  const [query, setQuery] = useState(initial.query);
+  const [division, setDivision] = useState<string | null>(initial.division);
+  const [sort, setSort] = useState<AgencySort>(initial.sort);
+  const [selected, setSelected] = useState<string | null>(initial.agent);
+  const [mintError, setMintError] = useState("");
 
+  const openerRef = useRef<HTMLElement | null>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const rosterRef = useRef<HTMLElement>(null);
+  const rosterTitleRef = useRef<HTMLHeadingElement>(null);
   const headRef = useReveal<HTMLDivElement>({ selector: "[data-r]" });
 
-  // Arrive at a linked state.
+  // ---- URL write-back, debounced and never allowed to throw ----
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search);
-    const d = p.get("division");
-    if (d && DIVISIONS.some((x) => x.id === d)) setDivision(d);
-    const q = p.get("q");
-    if (q) setQuery(q.slice(0, 120));
-    const s = p.get("sort");
-    if (s && SORT_IDS.has(s)) setSort(s as AgencySort);
-    const a = p.get("agent");
-    if (a && agentBySlug(a)) setSelected(a);
-    setHydrated(true);
-  }, []);
-
-  // Write the state back without touching history.
-  useEffect(() => {
-    if (!hydrated) return;
     const p = new URLSearchParams();
     if (division) p.set("division", division);
     if (query.trim()) p.set("q", query.trim());
     if (sort !== "division") p.set("sort", sort);
     if (selected) p.set("agent", selected);
     const qs = p.toString();
-    const url = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
-    if (url !== `${window.location.pathname}${window.location.search}`) {
-      window.history.replaceState(null, "", url);
-    }
-  }, [hydrated, division, query, sort, selected]);
+    const t = window.setTimeout(() => {
+      const url = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
+      if (url === `${window.location.pathname}${window.location.search}`) return;
+      try {
+        // Keep the router's own history state; only the URL changes.
+        window.history.replaceState(window.history.state, "", url);
+      } catch {
+        /* a throttling browser leaves the address bar stale, nothing worse */
+      }
+    }, URL_DEBOUNCE_MS);
+    return () => window.clearTimeout(t);
+  }, [division, query, sort, selected]);
 
+  // ---- The roster ----
   const results = useMemo(
     () => filterAgents(AGENTS, { query, division, sort }),
     [query, division, sort]
   );
+  const filterKey = `${division ?? ""}|${sort}|${query.trim().toLowerCase()}`;
 
+  // How many plates are shown, reset whenever the filter changes. Kept with
+  // the key it belongs to so the reset happens in the same render as the new
+  // results rather than one paint later.
+  const [shown, setShown] = useState({ key: filterKey, limit: PAGE });
+  const limit = shown.key === filterKey ? shown.limit : PAGE;
+  const visible = results.slice(0, limit);
+  const focusIndexRef = useRef<number | null>(null);
+
+  // Typing while scrolled deep into the roster: the controls are stuck under
+  // the nav, and when the results shrink beneath them the stuck bar would be
+  // carried off the top of the screen. Keep the roster's head in view instead.
+  const lastFilter = useRef(filterKey);
+  useEffect(() => {
+    if (lastFilter.current === filterKey) return;
+    lastFilter.current = filterKey;
+    const el = rosterRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    if (window.scrollY > top) window.scrollTo({ top, behavior: "auto" });
+  }, [filterKey]);
+
+  // "Show more" hands focus to the first newly revealed plate.
+  useEffect(() => {
+    const i = focusIndexRef.current;
+    if (i === null) return;
+    focusIndexRef.current = null;
+    document
+      .querySelector<HTMLElement>(`[data-plate-index="${i}"]`)
+      ?.focus({ preventScroll: false });
+  }, [limit]);
+
+  function showMore(all: boolean) {
+    focusIndexRef.current = visible.length;
+    setShown({ key: filterKey, limit: all ? results.length : limit + PAGE });
+  }
+
+  function clearFilters() {
+    setDivision(null);
+    setQuery("");
+    // Both "clear" controls unmount themselves; focus must land somewhere real.
+    searchRef.current?.focus();
+  }
+
+  // ---- The panel ----
   const agent = agentBySlug(selected) ?? null;
 
+  const open = useCallback((slug: string, opener?: HTMLElement | null) => {
+    openerRef.current = opener ?? null;
+    setMintError("");
+    setSelected(slug);
+  }, []);
+
   const close = useCallback(() => {
-    const slug = selected;
     setSelected(null);
-    // Hand focus back to the plate that opened the panel.
-    if (slug) {
-      requestAnimationFrame(() => {
-        document.querySelector<HTMLElement>(`[data-slug="${slug}"]`)?.focus();
-      });
-    }
-  }, [selected]);
+    setMintError("");
+    const opener = openerRef.current;
+    openerRef.current = null;
+    // After the panel has unmounted and the page is no longer inert.
+    requestAnimationFrame(() => {
+      if (opener && opener.isConnected) opener.focus();
+      else rosterTitleRef.current?.focus({ preventScroll: true });
+    });
+  }, []);
 
   function mint(a: AgencyAgent) {
     // The /create flow reads this key and asks its follow-up questions. The
@@ -104,14 +162,20 @@ export function AgencyDashboard() {
     const description = `${a.name}: ${a.description}`.slice(0, 1800);
     try {
       sessionStorage.setItem(PENDING_KEY, description);
+      if (sessionStorage.getItem(PENDING_KEY) !== description) throw new Error("not stored");
     } catch {
-      /* storage blocked — /create will send the visitor back to the start */
+      // /create would only bounce back to the home page, so say why instead.
+      setMintError(
+        "This browser blocks site storage, so the description can't be handed to the minting flow. Copy it from above and paste it into the field on the home page instead."
+      );
+      return;
     }
     router.push("/create");
   }
 
   const total = AGENTS.length;
   const divisionName = division ? divisionLabel(division) : null;
+  const filtered = results.length !== total;
 
   return (
     <>
@@ -164,25 +228,34 @@ export function AgencyDashboard() {
       </section>
 
       {/* ---- Roster ---- */}
-      <section className="py-14" aria-labelledby="roster-title">
+      <section ref={rosterRef} className="py-14" aria-labelledby="roster-title">
         <div className="mx-auto max-w-sheet px-6">
           <div className="flex flex-col gap-3">
             <p className="assay">The roster</p>
-            <h2 id="roster-title" className="font-display text-head">
+            <h2 id="roster-title" ref={rosterTitleRef} tabIndex={-1} className="font-display text-head outline-none">
               {divisionName ? `${divisionName} division.` : "All divisions."}
               <span className="text-muted">
                 {" "}
-                {results.length === total
-                  ? `${formatCount(total)} agents.`
-                  : `${formatCount(results.length)} of ${formatCount(total)} agents.`}
+                {filtered
+                  ? `${formatCount(results.length)} of ${formatCount(total)} agents.`
+                  : `${formatCount(total)} agents.`}
               </span>
             </h2>
+            {/* What a screen reader hears when the filter changes. */}
+            <p role="status" aria-live="polite" className="sr-only">
+              {results.length === 0
+                ? "No agents match."
+                : filtered
+                  ? `${results.length} of ${total} agents match. Showing ${visible.length}.`
+                  : `All ${total} agents. Showing ${visible.length}.`}
+            </p>
           </div>
 
           {/* Controls. Sticks under the nav; stays below any pinned section. */}
-          <div className="sticky top-[57px] z-sticky -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
+          <div className="sticky top-[57px] z-sticky -mx-6 mt-6 border-y border-rule bg-ink/90 px-6 py-3 backdrop-blur">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <input
+                ref={searchRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={`Search ${formatCount(total)} agents`}
@@ -190,7 +263,9 @@ export function AgencyDashboard() {
                 type="search"
                 className="w-full border border-rule bg-plate px-4 py-2.5 text-sm text-paper outline-none transition-colors duration-200 ease-struck placeholder:text-dim focus:border-mint-deep sm:max-w-xs [&::-webkit-search-cancel-button]:appearance-none"
               />
-              <div className="flex flex-wrap items-center gap-1.5">
+              {/* One row that scrolls sideways on a phone, so the stuck bar
+                  stays short instead of stacking into a quarter of the screen. */}
+              <div className="-mx-6 flex items-center gap-1.5 overflow-x-auto px-6 pb-0.5 sm:mx-0 sm:px-0" role="group" aria-label="Sort">
                 {SORTS.map((s) => {
                   const active = sort === s.id;
                   return (
@@ -199,7 +274,7 @@ export function AgencyDashboard() {
                       type="button"
                       onClick={() => setSort(s.id)}
                       aria-pressed={active}
-                      className={`assay px-3.5 py-2 normal-case tracking-[0.08em] transition-colors duration-200 ease-struck ${
+                      className={`assay shrink-0 whitespace-nowrap px-3.5 py-2 normal-case tracking-[0.08em] transition-colors duration-200 ease-struck ${
                         active
                           ? "strike-btn"
                           : "border border-rule text-muted hover:border-mint hover:text-paper"
@@ -212,11 +287,8 @@ export function AgencyDashboard() {
                 {(division || query.trim()) && (
                   <button
                     type="button"
-                    onClick={() => {
-                      setDivision(null);
-                      setQuery("");
-                    }}
-                    className="assay px-3.5 py-2 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:text-paper"
+                    onClick={clearFilters}
+                    className="assay shrink-0 whitespace-nowrap px-3.5 py-2 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:text-paper"
                   >
                     Clear filters
                   </button>
@@ -233,24 +305,42 @@ export function AgencyDashboard() {
               </p>
               <button
                 type="button"
-                onClick={() => {
-                  setDivision(null);
-                  setQuery("");
-                }}
+                onClick={clearFilters}
                 className="strike-ghost assay mt-5 inline-block px-6 py-3 normal-case tracking-[0.08em]"
               >
                 Show every agent
               </button>
             </div>
           ) : (
-            <div
-              key={`${division ?? "all"}-${sort}-${query.trim()}`}
-              className="mt-8 grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {results.map((a) => (
-                <AgentPlate key={a.slug} agent={a} onOpen={() => setSelected(a.slug)} />
-              ))}
-            </div>
+            <>
+              <div className="mt-8 grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
+                {visible.map((a, i) => (
+                  <AgentPlate key={a.slug} agent={a} index={i} onOpen={(el) => open(a.slug, el)} />
+                ))}
+              </div>
+
+              {results.length > visible.length && (
+                <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
+                  <p className="assay">
+                    Showing {formatCount(visible.length)} of {formatCount(results.length)}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => showMore(false)}
+                    className="strike-ghost assay px-6 py-3 normal-case tracking-[0.08em]"
+                  >
+                    Show {Math.min(PAGE, results.length - visible.length)} more
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => showMore(true)}
+                    className="assay px-3 py-3 normal-case tracking-[0.08em] text-mint transition-colors duration-200 ease-struck hover:text-paper"
+                  >
+                    Show all {formatCount(results.length)}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -266,7 +356,7 @@ export function AgencyDashboard() {
                 <span className="text-muted"> Select any member to open their plate.</span>
               </h2>
             </div>
-            <Runbooks runbooks={RUNBOOKS} onOpen={setSelected} />
+            <Runbooks runbooks={RUNBOOKS} onOpen={open} />
           </div>
         </section>
       )}
@@ -283,6 +373,7 @@ export function AgencyDashboard() {
               className="text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-paper hover:decoration-mint"
             >
               {META.repo}
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
             , released under the {META.license} license. Names, descriptions and section
             lists are reproduced from it; the personas themselves live upstream. This copy
@@ -294,7 +385,7 @@ export function AgencyDashboard() {
         </div>
       </section>
 
-      <AgentDrawer agent={agent} onClose={close} onMint={mint} />
+      <AgentDrawer agent={agent} onClose={close} onMint={mint} mintError={mintError} />
     </>
   );
 }

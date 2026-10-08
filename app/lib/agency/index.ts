@@ -25,8 +25,6 @@ export interface AgencyService {
 export interface AgencyAgent {
   /** The upstream file stem — the id its runbooks use, so the id here too. */
   slug: string;
-  /** The slug upstream's installers derive from the display name. */
-  nameSlug: string;
   name: string;
   /** Top-level upstream directory, e.g. "engineering". */
   division: string;
@@ -46,8 +44,8 @@ export interface AgencyAgent {
   headings: string[];
   /** Body length in words — a rough depth gauge. */
   words: number;
+  /** Repo-relative path; see `sourceUrlOf` for the link. */
   path: string;
-  sourceUrl: string;
 }
 
 export interface AgencyDivision {
@@ -69,7 +67,8 @@ export interface AgencyRunbook {
   mode: string;
   duration: string;
   summary: string;
-  docUrl: string | null;
+  /** Repo-relative path of the prose runbook; see `runbookUrlOf`. */
+  doc: string | null;
   roster: AgencyRunbookGroup[];
 }
 
@@ -108,6 +107,15 @@ const DIVISION_ORDER = new Map(DIVISIONS.map((d, i) => [d.id, i]));
 
 export function agentBySlug(slug: string | null | undefined): AgencyAgent | undefined {
   return slug ? BY_SLUG.get(slug) : undefined;
+}
+
+/** The agent's file on GitHub. Derived here rather than stored 282 times. */
+export function sourceUrlOf(a: AgencyAgent): string {
+  return `${META.repoUrl}/blob/main/${a.path}`;
+}
+
+export function runbookUrlOf(r: AgencyRunbook): string | null {
+  return r.doc ? `${META.repoUrl}/blob/main/${r.doc}` : null;
 }
 
 export function divisionLabel(id: string): string {
@@ -189,6 +197,42 @@ export function filterAgents(list: readonly AgencyAgent[], f: AgencyFilter): Age
       );
   }
   return out;
+}
+
+/**
+ * The state a visitor can arrive with: `?division=`, `?q=`, `?sort=`, `?agent=`.
+ * Parsed on the server from the route's searchParams, so a shared link paints
+ * the right view first time instead of the full roster and then a jump.
+ * Anything unrecognised falls back to the default rather than erroring.
+ */
+export interface AgencyInitial {
+  query: string;
+  division: string | null;
+  sort: AgencySort;
+  agent: string | null;
+}
+
+export function initialStateFrom(
+  params?: Record<string, string | string[] | undefined>
+): AgencyInitial {
+  const one = (k: string): string => {
+    const v = params?.[k];
+    return typeof v === "string" ? v : Array.isArray(v) ? v[0] ?? "" : "";
+  };
+  const division = one("division");
+  const sort = one("sort");
+  const agent = one("agent");
+  return {
+    query: one("q").slice(0, 120),
+    division: DIVISIONS.some((d) => d.id === division) ? division : null,
+    sort: SORTS.some((s) => s.id === sort) ? (sort as AgencySort) : "division",
+    agent: agentBySlug(agent) ? agent : null,
+  };
+}
+
+/** A React key for the dashboard, so a new link remounts it with fresh state. */
+export function initialKey(i: AgencyInitial): string {
+  return [i.division ?? "", i.sort, i.query, i.agent ?? ""].join("\u0000");
 }
 
 /**

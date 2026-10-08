@@ -1,6 +1,6 @@
 "use client";
 
-import { agentBySlug, type AgencyRunbook } from "@/lib/agency";
+import { agentBySlug, runbookUrlOf, type AgencyRunbook } from "@/lib/agency";
 
 /**
  * The four scenario teams upstream assembles from the roster. Each chip is an
@@ -11,7 +11,8 @@ export function Runbooks({
   onOpen,
 }: {
   runbooks: readonly AgencyRunbook[];
-  onOpen: (slug: string) => void;
+  /** Receives the chip that was activated, so focus can return to it. */
+  onOpen: (slug: string, opener: HTMLElement) => void;
 }) {
   if (runbooks.length === 0) return null;
   return (
@@ -47,8 +48,8 @@ export function Runbooks({
                         <li key={slug}>
                           <button
                             type="button"
-                            onClick={() => onOpen(slug)}
-                            className="border border-rule px-2.5 py-1 text-[0.8rem] text-muted transition-colors duration-200 ease-struck hover:border-mint hover:text-paper"
+                            onClick={(e) => onOpen(slug, e.currentTarget)}
+                            className="border border-rule px-3 py-1.5 text-[0.8rem] text-muted transition-colors duration-200 ease-struck hover:border-mint hover:text-paper"
                           >
                             {a.name}
                           </button>
@@ -60,14 +61,14 @@ export function Runbooks({
               ))}
             </div>
 
-            {r.docUrl && (
+            {runbookUrlOf(r) && (
               <a
-                href={r.docUrl}
+                href={runbookUrlOf(r) ?? undefined}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="assay mt-auto w-fit normal-case tracking-[0.08em] text-mint transition-colors hover:text-paper"
               >
-                Read the runbook →
+                Read the runbook →<span className="sr-only"> (opens in a new tab)</span>
               </a>
             )}
           </article>

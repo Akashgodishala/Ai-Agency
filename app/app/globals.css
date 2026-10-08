@@ -412,8 +412,25 @@ h3 { line-height: 1.16; }
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-.drawer-panel { animation: drawer-in .42s cubic-bezier(.16,1,.3,1) both; }
-.drawer-backdrop { animation: fade-in .3s cubic-bezier(.16,1,.3,1) both; }
+.drawer-panel {
+  animation: drawer-in .42s cubic-bezier(.16,1,.3,1) both;
+  /* Reaching the end of the panel must not hand the gesture to the page. */
+  overscroll-behavior: contain;
+}
+.drawer-backdrop {
+  animation: fade-in .3s cubic-bezier(.16,1,.3,1) both;
+  /* A finger on the backdrop closes the panel; it never scrolls the page. */
+  touch-action: none;
+}
+
+/* The division bars (components/agency/DivisionBars.tsx) grow in from the
+   left, each a beat after the last. A CSS animation rather than a state flip,
+   so the bars exist in the server HTML and never wait on JavaScript. */
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.bar-grow { animation: bar-grow .7s cubic-bezier(.16,1,.3,1) both; }
 
 
 /* ===========================================================================
@@ -551,7 +568,11 @@ h3 { line-height: 1.16; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays go with durations, or a staggered reveal still plays as a
+       sequence of pops after each delay expires. */
+    animation-delay: 0s !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
   }
   html { scroll-behavior: auto; }
   /* The cursor and preloader are not rendered at all under reduced motion,

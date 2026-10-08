@@ -5,7 +5,7 @@
     "license": "MIT",
     "commit": "f99f6aa910a442b0197b768ce0ea7751e35e2060",
     "commitDate": "2026-10-07T11:45:46-05:00",
-    "syncedAt": "2026-10-07T22:58:10.835Z",
+    "syncedAt": "2026-10-08T03:35:50.061Z",
     "agentCount": 282,
     "divisionCount": 18
   },
@@ -104,7 +104,6 @@
   "agents": [
     {
       "slug": "academic-anthropologist",
-      "nameSlug": "anthropologist",
       "name": "Anthropologist",
       "division": "academic",
       "group": null,
@@ -127,12 +126,10 @@
         "Advanced Capabilities"
       ],
       "words": 1049,
-      "path": "academic/academic-anthropologist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-anthropologist.md"
+      "path": "academic/academic-anthropologist.md"
     },
     {
       "slug": "academic-geographer",
-      "nameSlug": "geographer",
       "name": "Geographer",
       "division": "academic",
       "group": null,
@@ -155,12 +152,10 @@
         "Advanced Capabilities"
       ],
       "words": 996,
-      "path": "academic/academic-geographer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-geographer.md"
+      "path": "academic/academic-geographer.md"
     },
     {
       "slug": "academic-historian",
-      "nameSlug": "historian",
       "name": "Historian",
       "division": "academic",
       "group": null,
@@ -183,12 +178,10 @@
         "Advanced Capabilities"
       ],
       "words": 964,
-      "path": "academic/academic-historian.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-historian.md"
+      "path": "academic/academic-historian.md"
     },
     {
       "slug": "academic-narratologist",
-      "nameSlug": "narratologist",
       "name": "Narratologist",
       "division": "academic",
       "group": null,
@@ -211,12 +204,10 @@
         "Advanced Capabilities"
       ],
       "words": 884,
-      "path": "academic/academic-narratologist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-narratologist.md"
+      "path": "academic/academic-narratologist.md"
     },
     {
       "slug": "academic-psychologist",
-      "nameSlug": "psychologist",
       "name": "Psychologist",
       "division": "academic",
       "group": null,
@@ -239,12 +230,10 @@
         "Advanced Capabilities"
       ],
       "words": 955,
-      "path": "academic/academic-psychologist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-psychologist.md"
+      "path": "academic/academic-psychologist.md"
     },
     {
       "slug": "academic-statistician",
-      "nameSlug": "statistician",
       "name": "Statistician",
       "division": "academic",
       "group": null,
@@ -267,12 +256,10 @@
         "Advanced Capabilities"
       ],
       "words": 1669,
-      "path": "academic/academic-statistician.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-statistician.md"
+      "path": "academic/academic-statistician.md"
     },
     {
       "slug": "design-brand-guardian",
-      "nameSlug": "brand-guardian",
       "name": "Brand Guardian",
       "division": "design",
       "group": null,
@@ -296,12 +283,10 @@
         "Advanced Capabilities"
       ],
       "words": 1457,
-      "path": "design/design-brand-guardian.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-brand-guardian.md"
+      "path": "design/design-brand-guardian.md"
     },
     {
       "slug": "design-image-prompt-engineer",
-      "nameSlug": "image-prompt-engineer",
       "name": "Image Prompt Engineer",
       "division": "design",
       "group": null,
@@ -324,12 +309,10 @@
         "Example Prompt Templates"
       ],
       "words": 1375,
-      "path": "design/design-image-prompt-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-image-prompt-engineer.md"
+      "path": "design/design-image-prompt-engineer.md"
     },
     {
       "slug": "design-inclusive-visuals-specialist",
-      "nameSlug": "inclusive-visuals-specialist",
       "name": "Inclusive Visuals Specialist",
       "division": "design",
       "group": null,
@@ -352,12 +335,10 @@
         "Advanced Capabilities"
       ],
       "words": 883,
-      "path": "design/design-inclusive-visuals-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-inclusive-visuals-specialist.md"
+      "path": "design/design-inclusive-visuals-specialist.md"
     },
     {
       "slug": "design-persona-walkthrough",
-      "nameSlug": "persona-walkthrough-specialist",
       "name": "Persona Walkthrough Specialist",
       "division": "design",
       "group": null,
@@ -381,12 +362,10 @@
         "Framework Quick-Reference"
       ],
       "words": 2438,
-      "path": "design/design-persona-walkthrough.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-persona-walkthrough.md"
+      "path": "design/design-persona-walkthrough.md"
     },
     {
       "slug": "design-ui-designer",
-      "nameSlug": "ui-designer",
       "name": "UI Designer",
       "division": "design",
       "group": null,
@@ -410,12 +389,10 @@
         "Advanced Capabilities"
       ],
       "words": 1620,
-      "path": "design/design-ui-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ui-designer.md"
+      "path": "design/design-ui-designer.md"
     },
     {
       "slug": "design-ui-finish-gate-reviewer",
-      "nameSlug": "ui-finish-gate-reviewer",
       "name": "UI Finish-Gate Reviewer",
       "division": "design",
       "group": null,
@@ -442,12 +419,10 @@
         "Communication Style"
       ],
       "words": 1278,
-      "path": "design/design-ui-finish-gate-reviewer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ui-finish-gate-reviewer.md"
+      "path": "design/design-ui-finish-gate-reviewer.md"
     },
     {
       "slug": "design-ux-architect",
-      "nameSlug": "ux-architect",
       "name": "UX Architect",
       "division": "design",
       "group": null,
@@ -471,12 +446,10 @@
         "Advanced Capabilities"
       ],
       "words": 1841,
-      "path": "design/design-ux-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ux-architect.md"
+      "path": "design/design-ux-architect.md"
     },
     {
       "slug": "design-ux-researcher",
-      "nameSlug": "ux-researcher",
       "name": "UX Researcher",
       "division": "design",
       "group": null,
@@ -500,12 +473,10 @@
         "Advanced Capabilities"
       ],
       "words": 1636,
-      "path": "design/design-ux-researcher.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ux-researcher.md"
+      "path": "design/design-ux-researcher.md"
     },
     {
       "slug": "design-visual-storyteller",
-      "nameSlug": "visual-storyteller",
       "name": "Visual Storyteller",
       "division": "design",
       "group": null,
@@ -527,12 +498,10 @@
         "Advanced Capabilities"
       ],
       "words": 882,
-      "path": "design/design-visual-storyteller.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-visual-storyteller.md"
+      "path": "design/design-visual-storyteller.md"
     },
     {
       "slug": "design-whimsy-injector",
-      "nameSlug": "whimsy-injector",
       "name": "Whimsy Injector",
       "division": "design",
       "group": null,
@@ -555,12 +524,10 @@
         "Advanced Capabilities"
       ],
       "words": 1925,
-      "path": "design/design-whimsy-injector.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/design/design-whimsy-injector.md"
+      "path": "design/design-whimsy-injector.md"
     },
     {
       "slug": "engineering-ai-data-remediation-engineer",
-      "nameSlug": "ai-data-remediation-engineer",
       "name": "AI Data Remediation Engineer",
       "division": "engineering",
       "group": null,
@@ -581,12 +548,10 @@
         "Your Success Metrics"
       ],
       "words": 1361,
-      "path": "engineering/engineering-ai-data-remediation-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-ai-data-remediation-engineer.md"
+      "path": "engineering/engineering-ai-data-remediation-engineer.md"
     },
     {
       "slug": "engineering-ai-engineer",
-      "nameSlug": "ai-engineer",
       "name": "AI Engineer",
       "division": "engineering",
       "group": null,
@@ -608,12 +573,10 @@
         "Advanced Capabilities"
       ],
       "words": 905,
-      "path": "engineering/engineering-ai-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-ai-engineer.md"
+      "path": "engineering/engineering-ai-engineer.md"
     },
     {
       "slug": "engineering-api-platform-engineer",
-      "nameSlug": "api-platform-engineer",
       "name": "API Platform Engineer",
       "division": "engineering",
       "group": null,
@@ -636,12 +599,10 @@
         "Advanced Capabilities"
       ],
       "words": 2028,
-      "path": "engineering/engineering-api-platform-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-api-platform-engineer.md"
+      "path": "engineering/engineering-api-platform-engineer.md"
     },
     {
       "slug": "engineering-ats-validator-architect",
-      "nameSlug": "ats-validator-architect",
       "name": "ATS Validator Architect",
       "division": "engineering",
       "group": null,
@@ -670,12 +631,10 @@
         "Collaboration With Other Agents"
       ],
       "words": 3844,
-      "path": "engineering/engineering-ats-validator-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-ats-validator-architect.md"
+      "path": "engineering/engineering-ats-validator-architect.md"
     },
     {
       "slug": "engineering-autonomous-optimization-architect",
-      "nameSlug": "autonomous-optimization-architect",
       "name": "Autonomous Optimization Architect",
       "division": "engineering",
       "group": null,
@@ -698,12 +657,10 @@
         "How This Agent Differs From Existing Roles"
       ],
       "words": 1188,
-      "path": "engineering/engineering-autonomous-optimization-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-autonomous-optimization-architect.md"
+      "path": "engineering/engineering-autonomous-optimization-architect.md"
     },
     {
       "slug": "engineering-backend-architect",
-      "nameSlug": "backend-architect",
       "name": "Backend Architect",
       "division": "engineering",
       "group": null,
@@ -725,12 +682,10 @@
         "Advanced Capabilities"
       ],
       "words": 1328,
-      "path": "engineering/engineering-backend-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-backend-architect.md"
+      "path": "engineering/engineering-backend-architect.md"
     },
     {
       "slug": "engineering-china-network-engineer",
-      "nameSlug": "china-network-engineer",
       "name": "China Network Engineer",
       "division": "engineering",
       "group": null,
@@ -748,12 +703,10 @@
         "Communication Style"
       ],
       "words": 2499,
-      "path": "engineering/engineering-china-network-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-china-network-engineer.md"
+      "path": "engineering/engineering-china-network-engineer.md"
     },
     {
       "slug": "engineering-cms-developer",
-      "nameSlug": "cms-developer",
       "name": "CMS Developer",
       "division": "engineering",
       "group": null,
@@ -776,12 +729,10 @@
         "When to Bring In Other Agents"
       ],
       "words": 2405,
-      "path": "engineering/engineering-cms-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-cms-developer.md"
+      "path": "engineering/engineering-cms-developer.md"
     },
     {
       "slug": "engineering-code-reviewer",
-      "nameSlug": "code-reviewer",
       "name": "Code Reviewer",
       "division": "engineering",
       "group": null,
@@ -801,12 +752,10 @@
         "Communication Style"
       ],
       "words": 418,
-      "path": "engineering/engineering-code-reviewer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-code-reviewer.md"
+      "path": "engineering/engineering-code-reviewer.md"
     },
     {
       "slug": "engineering-codebase-onboarding-engineer",
-      "nameSlug": "codebase-onboarding-engineer",
       "name": "Codebase Onboarding Engineer",
       "division": "engineering",
       "group": null,
@@ -829,12 +778,10 @@
         "Advanced Capabilities"
       ],
       "words": 1304,
-      "path": "engineering/engineering-codebase-onboarding-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-codebase-onboarding-engineer.md"
+      "path": "engineering/engineering-codebase-onboarding-engineer.md"
     },
     {
       "slug": "engineering-data-engineer",
-      "nameSlug": "data-engineer",
       "name": "Data Engineer",
       "division": "engineering",
       "group": null,
@@ -857,12 +804,10 @@
         "Advanced Capabilities"
       ],
       "words": 1704,
-      "path": "engineering/engineering-data-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-data-engineer.md"
+      "path": "engineering/engineering-data-engineer.md"
     },
     {
       "slug": "engineering-data-visualization-engineer",
-      "nameSlug": "data-visualization-engineer",
       "name": "Data Visualization Engineer",
       "division": "engineering",
       "group": null,
@@ -885,12 +830,10 @@
         "Advanced Capabilities"
       ],
       "words": 1983,
-      "path": "engineering/engineering-data-visualization-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-data-visualization-engineer.md"
+      "path": "engineering/engineering-data-visualization-engineer.md"
     },
     {
       "slug": "engineering-database-optimizer",
-      "nameSlug": "database-optimizer",
       "name": "Database Optimizer",
       "division": "engineering",
       "group": null,
@@ -908,12 +851,10 @@
         "Communication Style"
       ],
       "words": 806,
-      "path": "engineering/engineering-database-optimizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-database-optimizer.md"
+      "path": "engineering/engineering-database-optimizer.md"
     },
     {
       "slug": "engineering-database-reliability-engineer",
-      "nameSlug": "database-reliability-engineer",
       "name": "Database Reliability Engineer",
       "division": "engineering",
       "group": null,
@@ -936,12 +877,10 @@
         "Advanced Capabilities"
       ],
       "words": 2345,
-      "path": "engineering/engineering-database-reliability-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-database-reliability-engineer.md"
+      "path": "engineering/engineering-database-reliability-engineer.md"
     },
     {
       "slug": "engineering-desktop-app-engineer",
-      "nameSlug": "desktop-app-engineer",
       "name": "Desktop App Engineer",
       "division": "engineering",
       "group": null,
@@ -964,12 +903,10 @@
         "Advanced Capabilities"
       ],
       "words": 2026,
-      "path": "engineering/engineering-desktop-app-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-desktop-app-engineer.md"
+      "path": "engineering/engineering-desktop-app-engineer.md"
     },
     {
       "slug": "engineering-developer-tooling-engineer",
-      "nameSlug": "developer-tooling-engineer",
       "name": "Developer Tooling Engineer",
       "division": "engineering",
       "group": null,
@@ -992,12 +929,10 @@
         "Advanced Capabilities"
       ],
       "words": 1934,
-      "path": "engineering/engineering-developer-tooling-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-developer-tooling-engineer.md"
+      "path": "engineering/engineering-developer-tooling-engineer.md"
     },
     {
       "slug": "engineering-devops-automator",
-      "nameSlug": "devops-automator",
       "name": "DevOps Automator",
       "division": "engineering",
       "group": null,
@@ -1021,12 +956,10 @@
         "Advanced Capabilities"
       ],
       "words": 1514,
-      "path": "engineering/engineering-devops-automator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-devops-automator.md"
+      "path": "engineering/engineering-devops-automator.md"
     },
     {
       "slug": "engineering-drupal-performance",
-      "nameSlug": "drupal-performance-engineer",
       "name": "Drupal Performance Engineer",
       "division": "engineering",
       "group": null,
@@ -1050,12 +983,10 @@
         "Advanced Capabilities"
       ],
       "words": 3178,
-      "path": "engineering/engineering-drupal-performance.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-drupal-performance.md"
+      "path": "engineering/engineering-drupal-performance.md"
     },
     {
       "slug": "engineering-drupal-shopping-cart",
-      "nameSlug": "drupal-shopping-cart-engineer",
       "name": "Drupal Shopping Cart Engineer",
       "division": "engineering",
       "group": null,
@@ -1079,12 +1010,10 @@
         "Advanced Capabilities"
       ],
       "words": 2718,
-      "path": "engineering/engineering-drupal-shopping-cart.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-drupal-shopping-cart.md"
+      "path": "engineering/engineering-drupal-shopping-cart.md"
     },
     {
       "slug": "engineering-email-intelligence-engineer",
-      "nameSlug": "email-intelligence-engineer",
       "name": "Email Intelligence Engineer",
       "division": "engineering",
       "group": null,
@@ -1106,12 +1035,10 @@
         "Advanced Capabilities"
       ],
       "words": 2017,
-      "path": "engineering/engineering-email-intelligence-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-email-intelligence-engineer.md"
+      "path": "engineering/engineering-email-intelligence-engineer.md"
     },
     {
       "slug": "engineering-embedded-firmware-engineer",
-      "nameSlug": "embedded-firmware-engineer",
       "name": "Embedded Firmware Engineer",
       "division": "engineering",
       "group": null,
@@ -1129,17 +1056,15 @@
         "Your Technical Deliverables",
         "Your Workflow Process",
         "Your Communication Style",
-        "Learning \\& Memory",
+        "Learning & Memory",
         "Your Success Metrics",
         "Advanced Capabilities"
       ],
       "words": 987,
-      "path": "engineering/engineering-embedded-firmware-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-embedded-firmware-engineer.md"
+      "path": "engineering/engineering-embedded-firmware-engineer.md"
     },
     {
       "slug": "engineering-feishu-integration-developer",
-      "nameSlug": "feishu-integration-developer",
       "name": "Feishu Integration Developer",
       "division": "engineering",
       "group": null,
@@ -1160,12 +1085,10 @@
         "Success Metrics"
       ],
       "words": 2549,
-      "path": "engineering/engineering-feishu-integration-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-feishu-integration-developer.md"
+      "path": "engineering/engineering-feishu-integration-developer.md"
     },
     {
       "slug": "engineering-filament-optimization-specialist",
-      "nameSlug": "filament-optimization-specialist",
       "name": "Filament Optimization Specialist",
       "division": "engineering",
       "group": null,
@@ -1189,12 +1112,10 @@
         "Advanced Optimizations"
       ],
       "words": 1797,
-      "path": "engineering/engineering-filament-optimization-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-filament-optimization-specialist.md"
+      "path": "engineering/engineering-filament-optimization-specialist.md"
     },
     {
       "slug": "engineering-finops-engineer",
-      "nameSlug": "finops-engineer",
       "name": "FinOps Engineer",
       "division": "engineering",
       "group": null,
@@ -1217,12 +1138,10 @@
         "Advanced Capabilities"
       ],
       "words": 1900,
-      "path": "engineering/engineering-finops-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-finops-engineer.md"
+      "path": "engineering/engineering-finops-engineer.md"
     },
     {
       "slug": "engineering-frontend-developer",
-      "nameSlug": "frontend-developer",
       "name": "Frontend Developer",
       "division": "engineering",
       "group": null,
@@ -1246,12 +1165,10 @@
         "Advanced Capabilities"
       ],
       "words": 1116,
-      "path": "engineering/engineering-frontend-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-frontend-developer.md"
+      "path": "engineering/engineering-frontend-developer.md"
     },
     {
       "slug": "engineering-gaussdb-expert",
-      "nameSlug": "gaussdb-expert-engineer",
       "name": "GaussDB Expert Engineer",
       "division": "engineering",
       "group": null,
@@ -1270,12 +1187,10 @@
         "Communication Style"
       ],
       "words": 1996,
-      "path": "engineering/engineering-gaussdb-expert.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-gaussdb-expert.md"
+      "path": "engineering/engineering-gaussdb-expert.md"
     },
     {
       "slug": "engineering-git-workflow-master",
-      "nameSlug": "git-workflow-master",
       "name": "Git Workflow Master",
       "division": "engineering",
       "group": null,
@@ -1295,12 +1210,10 @@
         "Communication Style"
       ],
       "words": 458,
-      "path": "engineering/engineering-git-workflow-master.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-git-workflow-master.md"
+      "path": "engineering/engineering-git-workflow-master.md"
     },
     {
       "slug": "engineering-i18n-engineer",
-      "nameSlug": "internationalization-engineer",
       "name": "Internationalization Engineer",
       "division": "engineering",
       "group": null,
@@ -1323,12 +1236,10 @@
         "Advanced Capabilities"
       ],
       "words": 1886,
-      "path": "engineering/engineering-i18n-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-i18n-engineer.md"
+      "path": "engineering/engineering-i18n-engineer.md"
     },
     {
       "slug": "engineering-identity-access-engineer",
-      "nameSlug": "identity-access-engineer",
       "name": "Identity & Access Engineer",
       "division": "engineering",
       "group": null,
@@ -1351,12 +1262,10 @@
         "Advanced Capabilities"
       ],
       "words": 2131,
-      "path": "engineering/engineering-identity-access-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-identity-access-engineer.md"
+      "path": "engineering/engineering-identity-access-engineer.md"
     },
     {
       "slug": "engineering-incident-response-commander",
-      "nameSlug": "incident-response-commander",
       "name": "Incident Response Commander",
       "division": "engineering",
       "group": null,
@@ -1379,12 +1288,10 @@
         "Advanced Capabilities"
       ],
       "words": 2837,
-      "path": "engineering/engineering-incident-response-commander.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-incident-response-commander.md"
+      "path": "engineering/engineering-incident-response-commander.md"
     },
     {
       "slug": "engineering-iot-fleet-engineer",
-      "nameSlug": "iot-fleet-engineer",
       "name": "IoT Fleet Engineer",
       "division": "engineering",
       "group": null,
@@ -1407,12 +1314,10 @@
         "Advanced Capabilities"
       ],
       "words": 1939,
-      "path": "engineering/engineering-iot-fleet-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-iot-fleet-engineer.md"
+      "path": "engineering/engineering-iot-fleet-engineer.md"
     },
     {
       "slug": "engineering-it-service-manager",
-      "nameSlug": "it-service-manager",
       "name": "IT Service Manager",
       "division": "engineering",
       "group": null,
@@ -1436,12 +1341,10 @@
         "Advanced Capabilities"
       ],
       "words": 3681,
-      "path": "engineering/engineering-it-service-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-it-service-manager.md"
+      "path": "engineering/engineering-it-service-manager.md"
     },
     {
       "slug": "engineering-knowledge-graph-engineer",
-      "nameSlug": "knowledge-graph-engineer",
       "name": "Knowledge Graph Engineer",
       "division": "engineering",
       "group": null,
@@ -1469,12 +1372,10 @@
         "Advanced Capabilities"
       ],
       "words": 3105,
-      "path": "engineering/engineering-knowledge-graph-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-knowledge-graph-engineer.md"
+      "path": "engineering/engineering-knowledge-graph-engineer.md"
     },
     {
       "slug": "engineering-llm-post-training-engineer",
-      "nameSlug": "llm-post-training-engineer",
       "name": "LLM Post-Training Engineer",
       "division": "engineering",
       "group": null,
@@ -1497,12 +1398,10 @@
         "Advanced Capabilities"
       ],
       "words": 1515,
-      "path": "engineering/engineering-llm-post-training-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-llm-post-training-engineer.md"
+      "path": "engineering/engineering-llm-post-training-engineer.md"
     },
     {
       "slug": "engineering-minimal-change-engineer",
-      "nameSlug": "minimal-change-engineer",
       "name": "Minimal Change Engineer",
       "division": "engineering",
       "group": null,
@@ -1525,12 +1424,10 @@
         "Advanced Capabilities"
       ],
       "words": 1784,
-      "path": "engineering/engineering-minimal-change-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-minimal-change-engineer.md"
+      "path": "engineering/engineering-minimal-change-engineer.md"
     },
     {
       "slug": "engineering-mobile-app-builder",
-      "nameSlug": "mobile-app-builder",
       "name": "Mobile App Builder",
       "division": "engineering",
       "group": null,
@@ -1542,24 +1439,22 @@
       "emoji": "📲",
       "color": "purple",
       "headings": [
-        ">à Your Identity & Memory",
-        "<¯ Your Core Mission",
-        "=¨ Critical Rules You Must Follow",
-        "=Ë Your Technical Deliverables",
-        "=\u0004 Your Workflow Process",
-        "=Ë Your Deliverable Template",
+        "Your Identity & Memory",
+        "Your Core Mission",
+        "Critical Rules You Must Follow",
+        "Your Technical Deliverables",
+        "Your Workflow Process",
+        "Your Deliverable Template",
         "Your Communication Style",
-        "=\u0004 Learning & Memory",
-        "<¯ Your Success Metrics",
-        "= Advanced Capabilities"
+        "Learning & Memory",
+        "Your Success Metrics",
+        "Advanced Capabilities"
       ],
       "words": 1757,
-      "path": "engineering/engineering-mobile-app-builder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-mobile-app-builder.md"
+      "path": "engineering/engineering-mobile-app-builder.md"
     },
     {
       "slug": "engineering-mobile-release-engineer",
-      "nameSlug": "mobile-release-engineer",
       "name": "Mobile Release Engineer",
       "division": "engineering",
       "group": null,
@@ -1582,12 +1477,10 @@
         "Advanced Capabilities"
       ],
       "words": 1888,
-      "path": "engineering/engineering-mobile-release-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-mobile-release-engineer.md"
+      "path": "engineering/engineering-mobile-release-engineer.md"
     },
     {
       "slug": "engineering-multi-agent-systems-architect",
-      "nameSlug": "multi-agent-systems-architect",
       "name": "Multi-Agent Systems Architect",
       "division": "engineering",
       "group": null,
@@ -1615,12 +1508,10 @@
         "Architecture Review Checklist"
       ],
       "words": 4354,
-      "path": "engineering/engineering-multi-agent-systems-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-multi-agent-systems-architect.md"
+      "path": "engineering/engineering-multi-agent-systems-architect.md"
     },
     {
       "slug": "engineering-network-engineer",
-      "nameSlug": "network-engineer",
       "name": "Network Engineer",
       "division": "engineering",
       "group": null,
@@ -1643,12 +1534,10 @@
         "Advanced Capabilities"
       ],
       "words": 1733,
-      "path": "engineering/engineering-network-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-network-engineer.md"
+      "path": "engineering/engineering-network-engineer.md"
     },
     {
       "slug": "engineering-orgscript-engineer",
-      "nameSlug": "orgscript-engineer",
       "name": "OrgScript Engineer",
       "division": "engineering",
       "group": null,
@@ -1670,12 +1559,10 @@
         "Your Success Metrics"
       ],
       "words": 731,
-      "path": "engineering/engineering-orgscript-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-orgscript-engineer.md"
+      "path": "engineering/engineering-orgscript-engineer.md"
     },
     {
       "slug": "engineering-payments-billing-engineer",
-      "nameSlug": "payments-billing-engineer",
       "name": "Payments & Billing Engineer",
       "division": "engineering",
       "group": null,
@@ -1698,12 +1585,10 @@
         "Advanced Capabilities"
       ],
       "words": 1996,
-      "path": "engineering/engineering-payments-billing-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-payments-billing-engineer.md"
+      "path": "engineering/engineering-payments-billing-engineer.md"
     },
     {
       "slug": "engineering-pdf-engine-architect",
-      "nameSlug": "pdf-engine-architect",
       "name": "PDF Engine Architect",
       "division": "engineering",
       "group": null,
@@ -1726,12 +1611,10 @@
         "Collaboration With Other Agents"
       ],
       "words": 3723,
-      "path": "engineering/engineering-pdf-engine-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-pdf-engine-architect.md"
+      "path": "engineering/engineering-pdf-engine-architect.md"
     },
     {
       "slug": "engineering-platform-engineer",
-      "nameSlug": "platform-engineer",
       "name": "Platform Engineer",
       "division": "engineering",
       "group": null,
@@ -1754,12 +1637,10 @@
         "Advanced Capabilities"
       ],
       "words": 1650,
-      "path": "engineering/engineering-platform-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-platform-engineer.md"
+      "path": "engineering/engineering-platform-engineer.md"
     },
     {
       "slug": "engineering-privacy-engineer",
-      "nameSlug": "privacy-engineer",
       "name": "Privacy Engineer",
       "division": "engineering",
       "group": null,
@@ -1782,12 +1663,10 @@
         "Advanced Capabilities"
       ],
       "words": 2056,
-      "path": "engineering/engineering-privacy-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-privacy-engineer.md"
+      "path": "engineering/engineering-privacy-engineer.md"
     },
     {
       "slug": "engineering-prompt-engineer",
-      "nameSlug": "prompt-engineer",
       "name": "Prompt Engineer",
       "division": "engineering",
       "group": null,
@@ -1810,12 +1689,10 @@
         "Advanced Capabilities"
       ],
       "words": 1325,
-      "path": "engineering/engineering-prompt-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-prompt-engineer.md"
+      "path": "engineering/engineering-prompt-engineer.md"
     },
     {
       "slug": "engineering-rag-pipeline-engineer",
-      "nameSlug": "rag-pipeline-engineer",
       "name": "RAG Pipeline Engineer",
       "division": "engineering",
       "group": null,
@@ -1838,12 +1715,10 @@
         "Advanced Capabilities"
       ],
       "words": 2276,
-      "path": "engineering/engineering-rag-pipeline-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-rag-pipeline-engineer.md"
+      "path": "engineering/engineering-rag-pipeline-engineer.md"
     },
     {
       "slug": "engineering-rapid-prototyper",
-      "nameSlug": "rapid-prototyper",
       "name": "Rapid Prototyper",
       "division": "engineering",
       "group": null,
@@ -1867,12 +1742,10 @@
         "Advanced Capabilities"
       ],
       "words": 1855,
-      "path": "engineering/engineering-rapid-prototyper.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-rapid-prototyper.md"
+      "path": "engineering/engineering-rapid-prototyper.md"
     },
     {
       "slug": "engineering-realtime-collaboration-engineer",
-      "nameSlug": "realtime-collaboration-engineer",
       "name": "Realtime Collaboration Engineer",
       "division": "engineering",
       "group": null,
@@ -1895,12 +1768,10 @@
         "Advanced Capabilities"
       ],
       "words": 2014,
-      "path": "engineering/engineering-realtime-collaboration-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-realtime-collaboration-engineer.md"
+      "path": "engineering/engineering-realtime-collaboration-engineer.md"
     },
     {
       "slug": "engineering-rust-refactoring-specialist",
-      "nameSlug": "rust-refactoring-specialist",
       "name": "Rust Refactoring Specialist",
       "division": "engineering",
       "group": null,
@@ -1923,12 +1794,10 @@
         "Advanced Capabilities"
       ],
       "words": 1934,
-      "path": "engineering/engineering-rust-refactoring-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-rust-refactoring-specialist.md"
+      "path": "engineering/engineering-rust-refactoring-specialist.md"
     },
     {
       "slug": "engineering-search-relevance-engineer",
-      "nameSlug": "search-relevance-engineer",
       "name": "Search Relevance Engineer",
       "division": "engineering",
       "group": null,
@@ -1951,12 +1820,10 @@
         "Advanced Capabilities"
       ],
       "words": 1995,
-      "path": "engineering/engineering-search-relevance-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-search-relevance-engineer.md"
+      "path": "engineering/engineering-search-relevance-engineer.md"
     },
     {
       "slug": "engineering-section-508-specialist",
-      "nameSlug": "section-508-accessibility-specialist",
       "name": "Section 508 Accessibility Specialist",
       "division": "engineering",
       "group": null,
@@ -1980,12 +1847,10 @@
         "Advanced Capabilities"
       ],
       "words": 3672,
-      "path": "engineering/engineering-section-508-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-section-508-specialist.md"
+      "path": "engineering/engineering-section-508-specialist.md"
     },
     {
       "slug": "engineering-senior-developer",
-      "nameSlug": "senior-developer",
       "name": "Senior Developer",
       "division": "engineering",
       "group": null,
@@ -2008,12 +1873,10 @@
         "Advanced Capabilities"
       ],
       "words": 770,
-      "path": "engineering/engineering-senior-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-senior-developer.md"
+      "path": "engineering/engineering-senior-developer.md"
     },
     {
       "slug": "engineering-servicenow-developer-mentor",
-      "nameSlug": "servicenow-developer-mentor",
       "name": "ServiceNow Developer & Mentor",
       "division": "engineering",
       "group": null,
@@ -2036,12 +1899,10 @@
         "Advanced Capabilities"
       ],
       "words": 1644,
-      "path": "engineering/engineering-servicenow-developer-mentor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-servicenow-developer-mentor.md"
+      "path": "engineering/engineering-servicenow-developer-mentor.md"
     },
     {
       "slug": "engineering-software-architect",
-      "nameSlug": "software-architect",
       "name": "Software Architect",
       "division": "engineering",
       "group": null,
@@ -2061,12 +1922,10 @@
         "Communication Style"
       ],
       "words": 870,
-      "path": "engineering/engineering-software-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-software-architect.md"
+      "path": "engineering/engineering-software-architect.md"
     },
     {
       "slug": "engineering-solidity-smart-contract-engineer",
-      "nameSlug": "solidity-smart-contract-engineer",
       "name": "Solidity Smart Contract Engineer",
       "division": "engineering",
       "group": null,
@@ -2089,12 +1948,10 @@
         "Advanced Capabilities"
       ],
       "words": 2519,
-      "path": "engineering/engineering-solidity-smart-contract-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-solidity-smart-contract-engineer.md"
+      "path": "engineering/engineering-solidity-smart-contract-engineer.md"
     },
     {
       "slug": "engineering-sre",
-      "nameSlug": "sre-site-reliability-engineer",
       "name": "SRE (Site Reliability Engineer)",
       "division": "engineering",
       "group": null,
@@ -2115,12 +1972,10 @@
         "Communication Style"
       ],
       "words": 522,
-      "path": "engineering/engineering-sre.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-sre.md"
+      "path": "engineering/engineering-sre.md"
     },
     {
       "slug": "engineering-technical-writer",
-      "nameSlug": "technical-writer",
       "name": "Technical Writer",
       "division": "engineering",
       "group": null,
@@ -2143,12 +1998,10 @@
         "Advanced Capabilities"
       ],
       "words": 1841,
-      "path": "engineering/engineering-technical-writer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-technical-writer.md"
+      "path": "engineering/engineering-technical-writer.md"
     },
     {
       "slug": "engineering-universal-document-compiler",
-      "nameSlug": "universal-document-compiler",
       "name": "Universal Document Compiler",
       "division": "engineering",
       "group": null,
@@ -2171,12 +2024,10 @@
         "Advanced Capabilities"
       ],
       "words": 2356,
-      "path": "engineering/engineering-universal-document-compiler.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-universal-document-compiler.md"
+      "path": "engineering/engineering-universal-document-compiler.md"
     },
     {
       "slug": "engineering-uswds-developer",
-      "nameSlug": "uswds-developer",
       "name": "USWDS Developer",
       "division": "engineering",
       "group": null,
@@ -2200,12 +2051,10 @@
         "Advanced Capabilities"
       ],
       "words": 3221,
-      "path": "engineering/engineering-uswds-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-uswds-developer.md"
+      "path": "engineering/engineering-uswds-developer.md"
     },
     {
       "slug": "engineering-video-streaming-engineer",
-      "nameSlug": "video-streaming-engineer",
       "name": "Video Streaming Engineer",
       "division": "engineering",
       "group": null,
@@ -2228,12 +2077,10 @@
         "Advanced Capabilities"
       ],
       "words": 1843,
-      "path": "engineering/engineering-video-streaming-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-video-streaming-engineer.md"
+      "path": "engineering/engineering-video-streaming-engineer.md"
     },
     {
       "slug": "engineering-voice-ai-integration-engineer",
-      "nameSlug": "voice-ai-integration-engineer",
       "name": "Voice AI Integration Engineer",
       "division": "engineering",
       "group": null,
@@ -2256,12 +2103,10 @@
         "Advanced Capabilities"
       ],
       "words": 3245,
-      "path": "engineering/engineering-voice-ai-integration-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-voice-ai-integration-engineer.md"
+      "path": "engineering/engineering-voice-ai-integration-engineer.md"
     },
     {
       "slug": "engineering-webassembly-engineer",
-      "nameSlug": "webassembly-engineer",
       "name": "WebAssembly Engineer",
       "division": "engineering",
       "group": null,
@@ -2284,12 +2129,10 @@
         "Advanced Capabilities"
       ],
       "words": 1892,
-      "path": "engineering/engineering-webassembly-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-webassembly-engineer.md"
+      "path": "engineering/engineering-webassembly-engineer.md"
     },
     {
       "slug": "engineering-wechat-mini-program-developer",
-      "nameSlug": "wechat-mini-program-developer",
       "name": "WeChat Mini Program Developer",
       "division": "engineering",
       "group": null,
@@ -2312,12 +2155,10 @@
         "Advanced Capabilities"
       ],
       "words": 1940,
-      "path": "engineering/engineering-wechat-mini-program-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-wechat-mini-program-developer.md"
+      "path": "engineering/engineering-wechat-mini-program-developer.md"
     },
     {
       "slug": "engineering-wordpress-performance",
-      "nameSlug": "wordpress-performance-engineer",
       "name": "WordPress Performance Engineer",
       "division": "engineering",
       "group": null,
@@ -2341,12 +2182,10 @@
         "Advanced Capabilities"
       ],
       "words": 3261,
-      "path": "engineering/engineering-wordpress-performance.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-wordpress-performance.md"
+      "path": "engineering/engineering-wordpress-performance.md"
     },
     {
       "slug": "engineering-wordpress-shopping-cart",
-      "nameSlug": "wordpress-shopping-cart-engineer",
       "name": "WordPress Shopping Cart Engineer",
       "division": "engineering",
       "group": null,
@@ -2370,12 +2209,10 @@
         "Advanced Capabilities"
       ],
       "words": 2860,
-      "path": "engineering/engineering-wordpress-shopping-cart.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-wordpress-shopping-cart.md"
+      "path": "engineering/engineering-wordpress-shopping-cart.md"
     },
     {
       "slug": "finance-bookkeeper-controller",
-      "nameSlug": "bookkeeper-controller",
       "name": "Bookkeeper & Controller",
       "division": "finance",
       "group": null,
@@ -2398,12 +2235,10 @@
         "Advanced Capabilities"
       ],
       "words": 2131,
-      "path": "finance/finance-bookkeeper-controller.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/finance/finance-bookkeeper-controller.md"
+      "path": "finance/finance-bookkeeper-controller.md"
     },
     {
       "slug": "finance-financial-analyst",
-      "nameSlug": "financial-analyst",
       "name": "Financial Analyst",
       "division": "finance",
       "group": null,
@@ -2426,12 +2261,10 @@
         "Advanced Capabilities"
       ],
       "words": 1988,
-      "path": "finance/finance-financial-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/finance/finance-financial-analyst.md"
+      "path": "finance/finance-financial-analyst.md"
     },
     {
       "slug": "finance-fpa-analyst",
-      "nameSlug": "fp-a-analyst",
       "name": "FP&A Analyst",
       "division": "finance",
       "group": null,
@@ -2454,12 +2287,10 @@
         "Advanced Capabilities"
       ],
       "words": 2516,
-      "path": "finance/finance-fpa-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/finance/finance-fpa-analyst.md"
+      "path": "finance/finance-fpa-analyst.md"
     },
     {
       "slug": "finance-investment-researcher",
-      "nameSlug": "investment-researcher",
       "name": "Investment Researcher",
       "division": "finance",
       "group": null,
@@ -2482,12 +2313,10 @@
         "Advanced Capabilities"
       ],
       "words": 2184,
-      "path": "finance/finance-investment-researcher.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/finance/finance-investment-researcher.md"
+      "path": "finance/finance-investment-researcher.md"
     },
     {
       "slug": "finance-tax-strategist",
-      "nameSlug": "tax-strategist",
       "name": "Tax Strategist",
       "division": "finance",
       "group": null,
@@ -2510,12 +2339,10 @@
         "Advanced Capabilities"
       ],
       "words": 1884,
-      "path": "finance/finance-tax-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/finance/finance-tax-strategist.md"
+      "path": "finance/finance-tax-strategist.md"
     },
     {
       "slug": "blender-addon-engineer",
-      "nameSlug": "blender-add-on-engineer",
       "name": "Blender Add-on Engineer",
       "division": "game-development",
       "group": "blender",
@@ -2538,12 +2365,10 @@
         "Advanced Capabilities"
       ],
       "words": 1414,
-      "path": "game-development/blender/blender-addon-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/blender/blender-addon-engineer.md"
+      "path": "game-development/blender/blender-addon-engineer.md"
     },
     {
       "slug": "economy-designer",
-      "nameSlug": "economy-designer",
       "name": "Economy Designer",
       "division": "game-development",
       "group": null,
@@ -2566,12 +2391,10 @@
         "Advanced Capabilities"
       ],
       "words": 1266,
-      "path": "game-development/economy-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/economy-designer.md"
+      "path": "game-development/economy-designer.md"
     },
     {
       "slug": "game-audio-engineer",
-      "nameSlug": "game-audio-engineer",
       "name": "Game Audio Engineer",
       "division": "game-development",
       "group": null,
@@ -2593,12 +2416,10 @@
         "Advanced Capabilities"
       ],
       "words": 1662,
-      "path": "game-development/game-audio-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/game-audio-engineer.md"
+      "path": "game-development/game-audio-engineer.md"
     },
     {
       "slug": "game-designer",
-      "nameSlug": "game-designer",
       "name": "Game Designer",
       "division": "game-development",
       "group": null,
@@ -2620,12 +2441,10 @@
         "Advanced Capabilities"
       ],
       "words": 1200,
-      "path": "game-development/game-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/game-designer.md"
+      "path": "game-development/game-designer.md"
     },
     {
       "slug": "godot-gameplay-scripter",
-      "nameSlug": "godot-gameplay-scripter",
       "name": "Godot Gameplay Scripter",
       "division": "game-development",
       "group": "godot",
@@ -2648,12 +2467,10 @@
         "Advanced Capabilities"
       ],
       "words": 2035,
-      "path": "game-development/godot/godot-gameplay-scripter.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/godot/godot-gameplay-scripter.md"
+      "path": "game-development/godot/godot-gameplay-scripter.md"
     },
     {
       "slug": "godot-multiplayer-engineer",
-      "nameSlug": "godot-multiplayer-engineer",
       "name": "Godot Multiplayer Engineer",
       "division": "game-development",
       "group": "godot",
@@ -2675,12 +2492,10 @@
         "Advanced Capabilities"
       ],
       "words": 1693,
-      "path": "game-development/godot/godot-multiplayer-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/godot/godot-multiplayer-engineer.md"
+      "path": "game-development/godot/godot-multiplayer-engineer.md"
     },
     {
       "slug": "godot-shader-developer",
-      "nameSlug": "godot-shader-developer",
       "name": "Godot Shader Developer",
       "division": "game-development",
       "group": "godot",
@@ -2702,12 +2517,10 @@
         "Advanced Capabilities"
       ],
       "words": 1789,
-      "path": "game-development/godot/godot-shader-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/godot/godot-shader-developer.md"
+      "path": "game-development/godot/godot-shader-developer.md"
     },
     {
       "slug": "level-designer",
-      "nameSlug": "level-designer",
       "name": "Level Designer",
       "division": "game-development",
       "group": null,
@@ -2729,12 +2542,10 @@
         "Advanced Capabilities"
       ],
       "words": 1486,
-      "path": "game-development/level-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/level-designer.md"
+      "path": "game-development/level-designer.md"
     },
     {
       "slug": "narrative-designer",
-      "nameSlug": "narrative-designer",
       "name": "Narrative Designer",
       "division": "game-development",
       "group": null,
@@ -2756,12 +2567,10 @@
         "Advanced Capabilities"
       ],
       "words": 1892,
-      "path": "game-development/narrative-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/narrative-designer.md"
+      "path": "game-development/narrative-designer.md"
     },
     {
       "slug": "roblox-avatar-creator",
-      "nameSlug": "roblox-avatar-creator",
       "name": "Roblox Avatar Creator",
       "division": "game-development",
       "group": "roblox-studio",
@@ -2783,12 +2592,10 @@
         "Advanced Capabilities"
       ],
       "words": 1966,
-      "path": "game-development/roblox-studio/roblox-avatar-creator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/roblox-studio/roblox-avatar-creator.md"
+      "path": "game-development/roblox-studio/roblox-avatar-creator.md"
     },
     {
       "slug": "roblox-experience-designer",
-      "nameSlug": "roblox-experience-designer",
       "name": "Roblox Experience Designer",
       "division": "game-development",
       "group": "roblox-studio",
@@ -2810,12 +2617,10 @@
         "Advanced Capabilities"
       ],
       "words": 1992,
-      "path": "game-development/roblox-studio/roblox-experience-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/roblox-studio/roblox-experience-designer.md"
+      "path": "game-development/roblox-studio/roblox-experience-designer.md"
     },
     {
       "slug": "roblox-systems-scripter",
-      "nameSlug": "roblox-systems-scripter",
       "name": "Roblox Systems Scripter",
       "division": "game-development",
       "group": "roblox-studio",
@@ -2837,12 +2642,10 @@
         "Advanced Capabilities"
       ],
       "words": 1833,
-      "path": "game-development/roblox-studio/roblox-systems-scripter.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/roblox-studio/roblox-systems-scripter.md"
+      "path": "game-development/roblox-studio/roblox-systems-scripter.md"
     },
     {
       "slug": "technical-artist",
-      "nameSlug": "technical-artist",
       "name": "Technical Artist",
       "division": "game-development",
       "group": null,
@@ -2864,12 +2667,10 @@
         "Advanced Capabilities"
       ],
       "words": 1658,
-      "path": "game-development/technical-artist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/technical-artist.md"
+      "path": "game-development/technical-artist.md"
     },
     {
       "slug": "unity-architect",
-      "nameSlug": "unity-architect",
       "name": "Unity Architect",
       "division": "game-development",
       "group": "unity",
@@ -2892,12 +2693,10 @@
         "Advanced Capabilities"
       ],
       "words": 1520,
-      "path": "game-development/unity/unity-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unity/unity-architect.md"
+      "path": "game-development/unity/unity-architect.md"
     },
     {
       "slug": "unity-editor-tool-developer",
-      "nameSlug": "unity-editor-tool-developer",
       "name": "Unity Editor Tool Developer",
       "division": "game-development",
       "group": "unity",
@@ -2919,12 +2718,10 @@
         "Advanced Capabilities"
       ],
       "words": 1678,
-      "path": "game-development/unity/unity-editor-tool-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unity/unity-editor-tool-developer.md"
+      "path": "game-development/unity/unity-editor-tool-developer.md"
     },
     {
       "slug": "unity-multiplayer-engineer",
-      "nameSlug": "unity-multiplayer-engineer",
       "name": "Unity Multiplayer Engineer",
       "division": "game-development",
       "group": "unity",
@@ -2946,12 +2743,10 @@
         "Advanced Capabilities"
       ],
       "words": 1686,
-      "path": "game-development/unity/unity-multiplayer-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unity/unity-multiplayer-engineer.md"
+      "path": "game-development/unity/unity-multiplayer-engineer.md"
     },
     {
       "slug": "unity-shader-graph-artist",
-      "nameSlug": "unity-shader-graph-artist",
       "name": "Unity Shader Graph Artist",
       "division": "game-development",
       "group": "unity",
@@ -2973,12 +2768,10 @@
         "Advanced Capabilities"
       ],
       "words": 1640,
-      "path": "game-development/unity/unity-shader-graph-artist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unity/unity-shader-graph-artist.md"
+      "path": "game-development/unity/unity-shader-graph-artist.md"
     },
     {
       "slug": "unreal-multiplayer-architect",
-      "nameSlug": "unreal-multiplayer-architect",
       "name": "Unreal Multiplayer Architect",
       "division": "game-development",
       "group": "unreal-engine",
@@ -3000,12 +2793,10 @@
         "Advanced Capabilities"
       ],
       "words": 1876,
-      "path": "game-development/unreal-engine/unreal-multiplayer-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unreal-engine/unreal-multiplayer-architect.md"
+      "path": "game-development/unreal-engine/unreal-multiplayer-architect.md"
     },
     {
       "slug": "unreal-systems-engineer",
-      "nameSlug": "unreal-systems-engineer",
       "name": "Unreal Systems Engineer",
       "division": "game-development",
       "group": "unreal-engine",
@@ -3028,12 +2819,10 @@
         "Advanced Capabilities"
       ],
       "words": 1968,
-      "path": "game-development/unreal-engine/unreal-systems-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unreal-engine/unreal-systems-engineer.md"
+      "path": "game-development/unreal-engine/unreal-systems-engineer.md"
     },
     {
       "slug": "unreal-technical-artist",
-      "nameSlug": "unreal-technical-artist",
       "name": "Unreal Technical Artist",
       "division": "game-development",
       "group": "unreal-engine",
@@ -3055,12 +2844,10 @@
         "Advanced Capabilities"
       ],
       "words": 1659,
-      "path": "game-development/unreal-engine/unreal-technical-artist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unreal-engine/unreal-technical-artist.md"
+      "path": "game-development/unreal-engine/unreal-technical-artist.md"
     },
     {
       "slug": "unreal-world-builder",
-      "nameSlug": "unreal-world-builder",
       "name": "Unreal World Builder",
       "division": "game-development",
       "group": "unreal-engine",
@@ -3082,12 +2869,10 @@
         "Advanced Capabilities"
       ],
       "words": 2029,
-      "path": "game-development/unreal-engine/unreal-world-builder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/game-development/unreal-engine/unreal-world-builder.md"
+      "path": "game-development/unreal-engine/unreal-world-builder.md"
     },
     {
       "slug": "gis-3d-scene-developer",
-      "nameSlug": "3d-scene-developer",
       "name": "3D & Scene Developer",
       "division": "gis",
       "group": null,
@@ -3107,12 +2892,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 804,
-      "path": "gis/gis-3d-scene-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-3d-scene-developer.md"
+      "path": "gis/gis-3d-scene-developer.md"
     },
     {
       "slug": "gis-analyst",
-      "nameSlug": "gis-analyst",
       "name": "GIS Analyst",
       "division": "gis",
       "group": null,
@@ -3132,12 +2915,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 627,
-      "path": "gis/gis-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-analyst.md"
+      "path": "gis/gis-analyst.md"
     },
     {
       "slug": "gis-bim-specialist",
-      "nameSlug": "bim-gis-specialist",
       "name": "BIM/GIS Specialist",
       "division": "gis",
       "group": null,
@@ -3157,12 +2938,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 810,
-      "path": "gis/gis-bim-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-bim-specialist.md"
+      "path": "gis/gis-bim-specialist.md"
     },
     {
       "slug": "gis-cartography-designer",
-      "nameSlug": "cartography-designer",
       "name": "Cartography Designer",
       "division": "gis",
       "group": null,
@@ -3183,12 +2962,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 956,
-      "path": "gis/gis-cartography-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-cartography-designer.md"
+      "path": "gis/gis-cartography-designer.md"
     },
     {
       "slug": "gis-drone-reality-mapping",
-      "nameSlug": "drone-reality-mapping-specialist",
       "name": "Drone/Reality Mapping Specialist",
       "division": "gis",
       "group": null,
@@ -3208,12 +2985,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 821,
-      "path": "gis/gis-drone-reality-mapping.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-drone-reality-mapping.md"
+      "path": "gis/gis-drone-reality-mapping.md"
     },
     {
       "slug": "gis-geoai-ml-engineer",
-      "nameSlug": "geoai-ml-engineer",
       "name": "GeoAI/ML Engineer",
       "division": "gis",
       "group": null,
@@ -3233,12 +3008,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 667,
-      "path": "gis/gis-geoai-ml-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-geoai-ml-engineer.md"
+      "path": "gis/gis-geoai-ml-engineer.md"
     },
     {
       "slug": "gis-geoprocessing-specialist",
-      "nameSlug": "geoprocessing-specialist",
       "name": "Geoprocessing Specialist",
       "division": "gis",
       "group": null,
@@ -3258,12 +3031,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 621,
-      "path": "gis/gis-geoprocessing-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-geoprocessing-specialist.md"
+      "path": "gis/gis-geoprocessing-specialist.md"
     },
     {
       "slug": "gis-qa-engineer",
-      "nameSlug": "gis-qa-engineer",
       "name": "GIS QA Engineer",
       "division": "gis",
       "group": null,
@@ -3284,12 +3055,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 692,
-      "path": "gis/gis-qa-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-qa-engineer.md"
+      "path": "gis/gis-qa-engineer.md"
     },
     {
       "slug": "gis-solution-engineer",
-      "nameSlug": "solution-engineer",
       "name": "Solution Engineer",
       "division": "gis",
       "group": null,
@@ -3309,12 +3078,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 658,
-      "path": "gis/gis-solution-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-solution-engineer.md"
+      "path": "gis/gis-solution-engineer.md"
     },
     {
       "slug": "gis-spatial-data-engineer",
-      "nameSlug": "spatial-data-engineer",
       "name": "Spatial Data Engineer",
       "division": "gis",
       "group": null,
@@ -3334,12 +3101,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 691,
-      "path": "gis/gis-spatial-data-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-spatial-data-engineer.md"
+      "path": "gis/gis-spatial-data-engineer.md"
     },
     {
       "slug": "gis-spatial-data-scientist",
-      "nameSlug": "spatial-data-scientist",
       "name": "Spatial Data Scientist",
       "division": "gis",
       "group": null,
@@ -3359,12 +3124,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 748,
-      "path": "gis/gis-spatial-data-scientist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-spatial-data-scientist.md"
+      "path": "gis/gis-spatial-data-scientist.md"
     },
     {
       "slug": "gis-technical-consultant",
-      "nameSlug": "technical-consultant",
       "name": "Technical Consultant",
       "division": "gis",
       "group": null,
@@ -3384,12 +3147,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 613,
-      "path": "gis/gis-technical-consultant.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-technical-consultant.md"
+      "path": "gis/gis-technical-consultant.md"
     },
     {
       "slug": "gis-web-gis-developer",
-      "nameSlug": "web-gis-developer",
       "name": "Web GIS Developer",
       "division": "gis",
       "group": null,
@@ -3409,12 +3170,10 @@
         "When NOT to Use This Agent"
       ],
       "words": 752,
-      "path": "gis/gis-web-gis-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/gis/gis-web-gis-developer.md"
+      "path": "gis/gis-web-gis-developer.md"
     },
     {
       "slug": "healthcare-clinical-evidence-agent",
-      "nameSlug": "clinical-evidence-agent",
       "name": "Clinical Evidence Agent",
       "division": "healthcare",
       "group": null,
@@ -3439,12 +3198,10 @@
         "What This Agent Does Not Do"
       ],
       "words": 1444,
-      "path": "healthcare/healthcare-clinical-evidence-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/healthcare/healthcare-clinical-evidence-agent.md"
+      "path": "healthcare/healthcare-clinical-evidence-agent.md"
     },
     {
       "slug": "healthcare-innovation-strategist",
-      "nameSlug": "healthcare-innovation-strategist",
       "name": "Healthcare Innovation Strategist",
       "division": "healthcare",
       "group": null,
@@ -3471,12 +3228,10 @@
         "What This Agent Does Not Do"
       ],
       "words": 2838,
-      "path": "healthcare/healthcare-innovation-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/healthcare/healthcare-innovation-strategist.md"
+      "path": "healthcare/healthcare-innovation-strategist.md"
     },
     {
       "slug": "healthcare-sovereign-health-systems-agent",
-      "nameSlug": "sovereign-health-systems-agent",
       "name": "Sovereign Health Systems Agent",
       "division": "healthcare",
       "group": null,
@@ -3502,12 +3257,10 @@
         "What This Agent Does Not Do"
       ],
       "words": 1978,
-      "path": "healthcare/healthcare-sovereign-health-systems-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/healthcare/healthcare-sovereign-health-systems-agent.md"
+      "path": "healthcare/healthcare-sovereign-health-systems-agent.md"
     },
     {
       "slug": "marketing-aeo-foundations",
-      "nameSlug": "aeo-foundations-architect",
       "name": "AEO Foundations Architect",
       "division": "marketing",
       "group": null,
@@ -3530,12 +3283,10 @@
         "Advanced Capabilities"
       ],
       "words": 2135,
-      "path": "marketing/marketing-aeo-foundations.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-aeo-foundations.md"
+      "path": "marketing/marketing-aeo-foundations.md"
     },
     {
       "slug": "marketing-agentic-search-optimizer",
-      "nameSlug": "agentic-search-optimizer",
       "name": "Agentic Search Optimizer",
       "division": "marketing",
       "group": null,
@@ -3567,12 +3318,10 @@
         "Collaboration with Complementary Agents"
       ],
       "words": 2059,
-      "path": "marketing/marketing-agentic-search-optimizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-agentic-search-optimizer.md"
+      "path": "marketing/marketing-agentic-search-optimizer.md"
     },
     {
       "slug": "marketing-ai-citation-strategist",
-      "nameSlug": "ai-citation-strategist",
       "name": "AI Citation Strategist",
       "division": "marketing",
       "group": null,
@@ -3600,12 +3349,10 @@
         "Prompt Pattern Engineering"
       ],
       "words": 1300,
-      "path": "marketing/marketing-ai-citation-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-ai-citation-strategist.md"
+      "path": "marketing/marketing-ai-citation-strategist.md"
     },
     {
       "slug": "marketing-app-store-optimizer",
-      "nameSlug": "app-store-optimizer",
       "name": "App Store Optimizer",
       "division": "marketing",
       "group": null,
@@ -3617,24 +3364,22 @@
       "emoji": "📱",
       "color": "blue",
       "headings": [
-        ">à Your Identity & Memory",
-        "<¯ Your Core Mission",
-        "=¨ Critical Rules You Must Follow",
-        "=Ë Your Technical Deliverables",
-        "=\u0004 Your Workflow Process",
-        "=Ë Your Deliverable Template",
+        "Your Identity & Memory",
+        "Your Core Mission",
+        "Critical Rules You Must Follow",
+        "Your Technical Deliverables",
+        "Your Workflow Process",
+        "Your Deliverable Template",
         "Your Communication Style",
-        "=\u0004 Learning & Memory",
-        "<¯ Your Success Metrics",
-        "= Advanced Capabilities"
+        "Learning & Memory",
+        "Your Success Metrics",
+        "Advanced Capabilities"
       ],
       "words": 1702,
-      "path": "marketing/marketing-app-store-optimizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-app-store-optimizer.md"
+      "path": "marketing/marketing-app-store-optimizer.md"
     },
     {
       "slug": "marketing-baidu-seo-specialist",
-      "nameSlug": "baidu-seo-specialist",
       "name": "Baidu SEO Specialist",
       "division": "marketing",
       "group": null,
@@ -3657,12 +3402,10 @@
         "Advanced Capabilities"
       ],
       "words": 1684,
-      "path": "marketing/marketing-baidu-seo-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-baidu-seo-specialist.md"
+      "path": "marketing/marketing-baidu-seo-specialist.md"
     },
     {
       "slug": "marketing-bilibili-content-strategist",
-      "nameSlug": "bilibili-content-strategist",
       "name": "Bilibili Content Strategist",
       "division": "marketing",
       "group": null,
@@ -3685,12 +3428,10 @@
         "Advanced Capabilities"
       ],
       "words": 1474,
-      "path": "marketing/marketing-bilibili-content-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-bilibili-content-strategist.md"
+      "path": "marketing/marketing-bilibili-content-strategist.md"
     },
     {
       "slug": "marketing-book-co-author",
-      "nameSlug": "book-co-author",
       "name": "Book Co-Author",
       "division": "marketing",
       "group": null,
@@ -3710,12 +3451,10 @@
         "Success Metrics"
       ],
       "words": 683,
-      "path": "marketing/marketing-book-co-author.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-book-co-author.md"
+      "path": "marketing/marketing-book-co-author.md"
     },
     {
       "slug": "marketing-carousel-growth-engine",
-      "nameSlug": "carousel-growth-engine",
       "name": "Carousel Growth Engine",
       "division": "marketing",
       "group": null,
@@ -3751,12 +3490,10 @@
         "Advanced Capabilities"
       ],
       "words": 1865,
-      "path": "marketing/marketing-carousel-growth-engine.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-carousel-growth-engine.md"
+      "path": "marketing/marketing-carousel-growth-engine.md"
     },
     {
       "slug": "marketing-china-ecommerce-operator",
-      "nameSlug": "china-e-commerce-operator",
       "name": "China E-Commerce Operator",
       "division": "marketing",
       "group": null,
@@ -3779,12 +3516,10 @@
         "Advanced Capabilities"
       ],
       "words": 2255,
-      "path": "marketing/marketing-china-ecommerce-operator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-china-ecommerce-operator.md"
+      "path": "marketing/marketing-china-ecommerce-operator.md"
     },
     {
       "slug": "marketing-china-market-localization-strategist",
-      "nameSlug": "china-market-localization-strategist",
       "name": "China Market Localization Strategist",
       "division": "marketing",
       "group": null,
@@ -3807,12 +3542,10 @@
         "Advanced Capabilities"
       ],
       "words": 2244,
-      "path": "marketing/marketing-china-market-localization-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-china-market-localization-strategist.md"
+      "path": "marketing/marketing-china-market-localization-strategist.md"
     },
     {
       "slug": "marketing-content-creator",
-      "nameSlug": "content-creator",
       "name": "Content Creator",
       "division": "marketing",
       "group": null,
@@ -3837,12 +3570,10 @@
         "Success Metrics"
       ],
       "words": 335,
-      "path": "marketing/marketing-content-creator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-content-creator.md"
+      "path": "marketing/marketing-content-creator.md"
     },
     {
       "slug": "marketing-cross-border-ecommerce",
-      "nameSlug": "cross-border-e-commerce-specialist",
       "name": "Cross-Border E-Commerce Specialist",
       "division": "marketing",
       "group": null,
@@ -3863,12 +3594,10 @@
         "Success Metrics"
       ],
       "words": 2397,
-      "path": "marketing/marketing-cross-border-ecommerce.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-cross-border-ecommerce.md"
+      "path": "marketing/marketing-cross-border-ecommerce.md"
     },
     {
       "slug": "marketing-developer-community-builder",
-      "nameSlug": "developer-community-builder",
       "name": "Developer Community Builder",
       "division": "marketing",
       "group": null,
@@ -3891,12 +3620,10 @@
         "Advanced Capabilities"
       ],
       "words": 1970,
-      "path": "marketing/marketing-developer-community-builder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-developer-community-builder.md"
+      "path": "marketing/marketing-developer-community-builder.md"
     },
     {
       "slug": "marketing-douyin-strategist",
-      "nameSlug": "douyin-strategist",
       "name": "Douyin Strategist",
       "division": "marketing",
       "group": null,
@@ -3917,12 +3644,10 @@
         "Success Metrics"
       ],
       "words": 1017,
-      "path": "marketing/marketing-douyin-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-douyin-strategist.md"
+      "path": "marketing/marketing-douyin-strategist.md"
     },
     {
       "slug": "marketing-email-strategist",
-      "nameSlug": "email-marketing-strategist",
       "name": "Email Marketing Strategist",
       "division": "marketing",
       "group": null,
@@ -3945,12 +3670,10 @@
         "Advanced Capabilities"
       ],
       "words": 2408,
-      "path": "marketing/marketing-email-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-email-strategist.md"
+      "path": "marketing/marketing-email-strategist.md"
     },
     {
       "slug": "marketing-global-podcast-strategist",
-      "nameSlug": "global-podcast-strategist",
       "name": "Global Podcast Strategist",
       "division": "marketing",
       "group": null,
@@ -3973,12 +3696,10 @@
         "Advanced Capabilities"
       ],
       "words": 2956,
-      "path": "marketing/marketing-global-podcast-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-global-podcast-strategist.md"
+      "path": "marketing/marketing-global-podcast-strategist.md"
     },
     {
       "slug": "marketing-growth-hacker",
-      "nameSlug": "growth-hacker",
       "name": "Growth Hacker",
       "division": "marketing",
       "group": null,
@@ -4003,12 +3724,10 @@
         "Success Metrics"
       ],
       "words": 340,
-      "path": "marketing/marketing-growth-hacker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-growth-hacker.md"
+      "path": "marketing/marketing-growth-hacker.md"
     },
     {
       "slug": "marketing-instagram-curator",
-      "nameSlug": "instagram-curator",
       "name": "Instagram Curator",
       "division": "marketing",
       "group": null,
@@ -4031,12 +3750,10 @@
         "Advanced Capabilities"
       ],
       "words": 770,
-      "path": "marketing/marketing-instagram-curator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-instagram-curator.md"
+      "path": "marketing/marketing-instagram-curator.md"
     },
     {
       "slug": "marketing-kuaishou-strategist",
-      "nameSlug": "kuaishou-strategist",
       "name": "Kuaishou Strategist",
       "division": "marketing",
       "group": null,
@@ -4059,12 +3776,10 @@
         "Advanced Capabilities"
       ],
       "words": 1799,
-      "path": "marketing/marketing-kuaishou-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-kuaishou-strategist.md"
+      "path": "marketing/marketing-kuaishou-strategist.md"
     },
     {
       "slug": "marketing-linkedin-content-creator",
-      "nameSlug": "linkedin-content-creator",
       "name": "LinkedIn Content Creator",
       "division": "marketing",
       "group": null,
@@ -4087,12 +3802,10 @@
         "Advanced Capabilities"
       ],
       "words": 2012,
-      "path": "marketing/marketing-linkedin-content-creator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-linkedin-content-creator.md"
+      "path": "marketing/marketing-linkedin-content-creator.md"
     },
     {
       "slug": "marketing-livestream-commerce-coach",
-      "nameSlug": "livestream-commerce-coach",
       "name": "Livestream Commerce Coach",
       "division": "marketing",
       "group": null,
@@ -4113,12 +3826,10 @@
         "Success Metrics"
       ],
       "words": 2683,
-      "path": "marketing/marketing-livestream-commerce-coach.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-livestream-commerce-coach.md"
+      "path": "marketing/marketing-livestream-commerce-coach.md"
     },
     {
       "slug": "marketing-multi-platform-publisher",
-      "nameSlug": "multi-platform-publisher",
       "name": "Multi-Platform Publisher",
       "division": "marketing",
       "group": null,
@@ -4157,12 +3868,10 @@
         "Advanced Capabilities"
       ],
       "words": 1690,
-      "path": "marketing/marketing-multi-platform-publisher.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-multi-platform-publisher.md"
+      "path": "marketing/marketing-multi-platform-publisher.md"
     },
     {
       "slug": "marketing-podcast-strategist",
-      "nameSlug": "podcast-strategist",
       "name": "Podcast Strategist",
       "division": "marketing",
       "group": null,
@@ -4183,12 +3892,10 @@
         "Success Metrics"
       ],
       "words": 2475,
-      "path": "marketing/marketing-podcast-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-podcast-strategist.md"
+      "path": "marketing/marketing-podcast-strategist.md"
     },
     {
       "slug": "marketing-pr-communications-manager",
-      "nameSlug": "pr-communications-manager",
       "name": "PR & Communications Manager",
       "division": "marketing",
       "group": null,
@@ -4212,12 +3919,10 @@
         "Advanced Capabilities"
       ],
       "words": 3438,
-      "path": "marketing/marketing-pr-communications-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-pr-communications-manager.md"
+      "path": "marketing/marketing-pr-communications-manager.md"
     },
     {
       "slug": "marketing-private-domain-operator",
-      "nameSlug": "private-domain-operator",
       "name": "Private Domain Operator",
       "division": "marketing",
       "group": null,
@@ -4238,12 +3943,10 @@
         "Success Metrics"
       ],
       "words": 2081,
-      "path": "marketing/marketing-private-domain-operator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-private-domain-operator.md"
+      "path": "marketing/marketing-private-domain-operator.md"
     },
     {
       "slug": "marketing-reddit-community-builder",
-      "nameSlug": "reddit-community-builder",
       "name": "Reddit Community Builder",
       "division": "marketing",
       "group": null,
@@ -4266,12 +3969,10 @@
         "Advanced Capabilities"
       ],
       "words": 878,
-      "path": "marketing/marketing-reddit-community-builder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-reddit-community-builder.md"
+      "path": "marketing/marketing-reddit-community-builder.md"
     },
     {
       "slug": "marketing-seo-specialist",
-      "nameSlug": "seo-specialist",
       "name": "SEO Specialist",
       "division": "marketing",
       "group": null,
@@ -4300,12 +4001,10 @@
         "Advanced Capabilities"
       ],
       "words": 2944,
-      "path": "marketing/marketing-seo-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-seo-specialist.md"
+      "path": "marketing/marketing-seo-specialist.md"
     },
     {
       "slug": "marketing-short-video-editing-coach",
-      "nameSlug": "short-video-editing-coach",
       "name": "Short-Video Editing Coach",
       "division": "marketing",
       "group": null,
@@ -4325,12 +4024,10 @@
         "Success Metrics"
       ],
       "words": 4387,
-      "path": "marketing/marketing-short-video-editing-coach.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-short-video-editing-coach.md"
+      "path": "marketing/marketing-short-video-editing-coach.md"
     },
     {
       "slug": "marketing-social-media-strategist",
-      "nameSlug": "social-media-strategist",
       "name": "Social Media Strategist",
       "division": "marketing",
       "group": null,
@@ -4362,12 +4059,10 @@
         "Learning & Memory"
       ],
       "words": 865,
-      "path": "marketing/marketing-social-media-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-social-media-strategist.md"
+      "path": "marketing/marketing-social-media-strategist.md"
     },
     {
       "slug": "marketing-tiktok-strategist",
-      "nameSlug": "tiktok-strategist",
       "name": "TikTok Strategist",
       "division": "marketing",
       "group": null,
@@ -4390,12 +4085,10 @@
         "Advanced Capabilities"
       ],
       "words": 888,
-      "path": "marketing/marketing-tiktok-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-tiktok-strategist.md"
+      "path": "marketing/marketing-tiktok-strategist.md"
     },
     {
       "slug": "marketing-twitter-engager",
-      "nameSlug": "twitter-engager",
       "name": "Twitter Engager",
       "division": "marketing",
       "group": null,
@@ -4418,12 +4111,10 @@
         "Advanced Capabilities"
       ],
       "words": 906,
-      "path": "marketing/marketing-twitter-engager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-twitter-engager.md"
+      "path": "marketing/marketing-twitter-engager.md"
     },
     {
       "slug": "marketing-video-optimization-specialist",
-      "nameSlug": "video-optimization-specialist",
       "name": "Video Optimization Specialist",
       "division": "marketing",
       "group": null,
@@ -4444,12 +4135,10 @@
         "Your Success Metrics"
       ],
       "words": 825,
-      "path": "marketing/marketing-video-optimization-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-video-optimization-specialist.md"
+      "path": "marketing/marketing-video-optimization-specialist.md"
     },
     {
       "slug": "marketing-wechat-official-account",
-      "nameSlug": "wechat-official-account-manager",
       "name": "WeChat Official Account Manager",
       "division": "marketing",
       "group": null,
@@ -4472,12 +4161,10 @@
         "Advanced Capabilities"
       ],
       "words": 1203,
-      "path": "marketing/marketing-wechat-official-account.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-wechat-official-account.md"
+      "path": "marketing/marketing-wechat-official-account.md"
     },
     {
       "slug": "marketing-weibo-strategist",
-      "nameSlug": "weibo-strategist",
       "name": "Weibo Strategist",
       "division": "marketing",
       "group": null,
@@ -4498,12 +4185,10 @@
         "Success Metrics"
       ],
       "words": 2128,
-      "path": "marketing/marketing-weibo-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-weibo-strategist.md"
+      "path": "marketing/marketing-weibo-strategist.md"
     },
     {
       "slug": "marketing-x-twitter-intelligence-analyst",
-      "nameSlug": "x-twitter-intelligence-analyst",
       "name": "X/Twitter Intelligence Analyst",
       "division": "marketing",
       "group": null,
@@ -4532,12 +4217,10 @@
         "Advanced Capabilities"
       ],
       "words": 1197,
-      "path": "marketing/marketing-x-twitter-intelligence-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-x-twitter-intelligence-analyst.md"
+      "path": "marketing/marketing-x-twitter-intelligence-analyst.md"
     },
     {
       "slug": "marketing-xiaohongshu-specialist",
-      "nameSlug": "xiaohongshu-specialist",
       "name": "Xiaohongshu Specialist",
       "division": "marketing",
       "group": null,
@@ -4560,12 +4243,10 @@
         "Advanced Capabilities"
       ],
       "words": 1147,
-      "path": "marketing/marketing-xiaohongshu-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-xiaohongshu-specialist.md"
+      "path": "marketing/marketing-xiaohongshu-specialist.md"
     },
     {
       "slug": "marketing-zhihu-strategist",
-      "nameSlug": "zhihu-strategist",
       "name": "Zhihu Strategist",
       "division": "marketing",
       "group": null,
@@ -4588,12 +4269,10 @@
         "Advanced Capabilities"
       ],
       "words": 1494,
-      "path": "marketing/marketing-zhihu-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-zhihu-strategist.md"
+      "path": "marketing/marketing-zhihu-strategist.md"
     },
     {
       "slug": "paid-media-auditor",
-      "nameSlug": "paid-media-auditor",
       "name": "Paid Media Auditor",
       "division": "paid-media",
       "group": null,
@@ -4620,12 +4299,10 @@
         "Success Metrics"
       ],
       "words": 650,
-      "path": "paid-media/paid-media-auditor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-auditor.md"
+      "path": "paid-media/paid-media-auditor.md"
     },
     {
       "slug": "paid-media-creative-strategist",
-      "nameSlug": "ad-creative-strategist",
       "name": "Ad Creative Strategist",
       "division": "paid-media",
       "group": null,
@@ -4652,12 +4329,10 @@
         "Success Metrics"
       ],
       "words": 632,
-      "path": "paid-media/paid-media-creative-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-creative-strategist.md"
+      "path": "paid-media/paid-media-creative-strategist.md"
     },
     {
       "slug": "paid-media-paid-social-strategist",
-      "nameSlug": "paid-social-strategist",
       "name": "Paid Social Strategist",
       "division": "paid-media",
       "group": null,
@@ -4684,12 +4359,10 @@
         "Success Metrics"
       ],
       "words": 647,
-      "path": "paid-media/paid-media-paid-social-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-paid-social-strategist.md"
+      "path": "paid-media/paid-media-paid-social-strategist.md"
     },
     {
       "slug": "paid-media-ppc-strategist",
-      "nameSlug": "ppc-campaign-strategist",
       "name": "PPC Campaign Strategist",
       "division": "paid-media",
       "group": null,
@@ -4716,12 +4389,10 @@
         "Success Metrics"
       ],
       "words": 598,
-      "path": "paid-media/paid-media-ppc-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-ppc-strategist.md"
+      "path": "paid-media/paid-media-ppc-strategist.md"
     },
     {
       "slug": "paid-media-programmatic-buyer",
-      "nameSlug": "programmatic-display-buyer",
       "name": "Programmatic & Display Buyer",
       "division": "paid-media",
       "group": null,
@@ -4748,12 +4419,10 @@
         "Success Metrics"
       ],
       "words": 622,
-      "path": "paid-media/paid-media-programmatic-buyer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-programmatic-buyer.md"
+      "path": "paid-media/paid-media-programmatic-buyer.md"
     },
     {
       "slug": "paid-media-search-query-analyst",
-      "nameSlug": "search-query-analyst",
       "name": "Search Query Analyst",
       "division": "paid-media",
       "group": null,
@@ -4780,12 +4449,10 @@
         "Success Metrics"
       ],
       "words": 615,
-      "path": "paid-media/paid-media-search-query-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-search-query-analyst.md"
+      "path": "paid-media/paid-media-search-query-analyst.md"
     },
     {
       "slug": "paid-media-tracking-specialist",
-      "nameSlug": "tracking-measurement-specialist",
       "name": "Tracking & Measurement Specialist",
       "division": "paid-media",
       "group": null,
@@ -4812,12 +4479,10 @@
         "Success Metrics"
       ],
       "words": 620,
-      "path": "paid-media/paid-media-tracking-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-tracking-specialist.md"
+      "path": "paid-media/paid-media-tracking-specialist.md"
     },
     {
       "slug": "product-behavioral-nudge-engine",
-      "nameSlug": "behavioral-nudge-engine",
       "name": "Behavioral Nudge Engine",
       "division": "product",
       "group": null,
@@ -4840,12 +4505,10 @@
         "Advanced Capabilities"
       ],
       "words": 740,
-      "path": "product/product-behavioral-nudge-engine.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-behavioral-nudge-engine.md"
+      "path": "product/product-behavioral-nudge-engine.md"
     },
     {
       "slug": "product-dx-engineer",
-      "nameSlug": "dx-engineer",
       "name": "DX Engineer",
       "division": "product",
       "group": null,
@@ -4868,12 +4531,10 @@
         "Advanced Capabilities"
       ],
       "words": 2198,
-      "path": "product/product-dx-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-dx-engineer.md"
+      "path": "product/product-dx-engineer.md"
     },
     {
       "slug": "product-feedback-synthesizer",
-      "nameSlug": "feedback-synthesizer",
       "name": "Feedback Synthesizer",
       "division": "product",
       "group": null,
@@ -4902,12 +4563,10 @@
         "Continuous Improvement"
       ],
       "words": 849,
-      "path": "product/product-feedback-synthesizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-feedback-synthesizer.md"
+      "path": "product/product-feedback-synthesizer.md"
     },
     {
       "slug": "product-manager",
-      "nameSlug": "product-manager",
       "name": "Product Manager",
       "division": "product",
       "group": null,
@@ -4935,12 +4594,10 @@
         "Personality Highlights"
       ],
       "words": 3619,
-      "path": "product/product-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-manager.md"
+      "path": "product/product-manager.md"
     },
     {
       "slug": "product-sprint-prioritizer",
-      "nameSlug": "sprint-prioritizer",
       "name": "Sprint Prioritizer",
       "division": "product",
       "group": null,
@@ -4971,12 +4628,10 @@
         "Continuous Improvement"
       ],
       "words": 1102,
-      "path": "product/product-sprint-prioritizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-sprint-prioritizer.md"
+      "path": "product/product-sprint-prioritizer.md"
     },
     {
       "slug": "product-trend-researcher",
-      "nameSlug": "trend-researcher",
       "name": "Trend Researcher",
       "division": "product",
       "group": null,
@@ -5007,12 +4662,10 @@
         "Continuous Intelligence"
       ],
       "words": 1189,
-      "path": "product/product-trend-researcher.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/product/product-trend-researcher.md"
+      "path": "product/product-trend-researcher.md"
     },
     {
       "slug": "project-management-experiment-tracker",
-      "nameSlug": "experiment-tracker",
       "name": "Experiment Tracker",
       "division": "project-management",
       "group": null,
@@ -5036,12 +4689,10 @@
         "Advanced Capabilities"
       ],
       "words": 1123,
-      "path": "project-management/project-management-experiment-tracker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-experiment-tracker.md"
+      "path": "project-management/project-management-experiment-tracker.md"
     },
     {
       "slug": "project-management-jira-workflow-steward",
-      "nameSlug": "jira-workflow-steward",
       "name": "Jira Workflow Steward",
       "division": "project-management",
       "group": null,
@@ -5064,12 +4715,10 @@
         "Advanced Capabilities"
       ],
       "words": 1881,
-      "path": "project-management/project-management-jira-workflow-steward.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-jira-workflow-steward.md"
+      "path": "project-management/project-management-jira-workflow-steward.md"
     },
     {
       "slug": "project-management-meeting-notes-specialist",
-      "nameSlug": "meeting-notes-specialist",
       "name": "Meeting Notes Specialist",
       "division": "project-management",
       "group": null,
@@ -5095,12 +4744,10 @@
         "Success Metrics"
       ],
       "words": 825,
-      "path": "project-management/project-management-meeting-notes-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-meeting-notes-specialist.md"
+      "path": "project-management/project-management-meeting-notes-specialist.md"
     },
     {
       "slug": "project-management-project-shepherd",
-      "nameSlug": "project-shepherd",
       "name": "Project Shepherd",
       "division": "project-management",
       "group": null,
@@ -5124,12 +4771,10 @@
         "Advanced Capabilities"
       ],
       "words": 1172,
-      "path": "project-management/project-management-project-shepherd.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-project-shepherd.md"
+      "path": "project-management/project-management-project-shepherd.md"
     },
     {
       "slug": "project-management-studio-operations",
-      "nameSlug": "studio-operations",
       "name": "Studio Operations",
       "division": "project-management",
       "group": null,
@@ -5153,12 +4798,10 @@
         "Advanced Capabilities"
       ],
       "words": 1195,
-      "path": "project-management/project-management-studio-operations.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-studio-operations.md"
+      "path": "project-management/project-management-studio-operations.md"
     },
     {
       "slug": "project-management-studio-producer",
-      "nameSlug": "studio-producer",
       "name": "Studio Producer",
       "division": "project-management",
       "group": null,
@@ -5182,12 +4825,10 @@
         "Advanced Capabilities"
       ],
       "words": 1281,
-      "path": "project-management/project-management-studio-producer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-studio-producer.md"
+      "path": "project-management/project-management-studio-producer.md"
     },
     {
       "slug": "project-manager-senior",
-      "nameSlug": "senior-project-manager",
       "name": "Senior Project Manager",
       "division": "project-management",
       "group": null,
@@ -5208,12 +4849,10 @@
         "Learning & Improvement"
       ],
       "words": 686,
-      "path": "project-management/project-manager-senior.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-manager-senior.md"
+      "path": "project-management/project-manager-senior.md"
     },
     {
       "slug": "research-synthesist",
-      "nameSlug": "research-synthesist",
       "name": "Research Synthesist",
       "division": "research",
       "group": null,
@@ -5236,12 +4875,10 @@
         "Advanced Capabilities"
       ],
       "words": 1506,
-      "path": "research/research-synthesist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/research/research-synthesist.md"
+      "path": "research/research-synthesist.md"
     },
     {
       "slug": "sales-account-strategist",
-      "nameSlug": "account-strategist",
       "name": "Account Strategist",
       "division": "sales",
       "group": null,
@@ -5264,12 +4901,10 @@
         "Advanced Capabilities"
       ],
       "words": 2124,
-      "path": "sales/sales-account-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-account-strategist.md"
+      "path": "sales/sales-account-strategist.md"
     },
     {
       "slug": "sales-coach",
-      "nameSlug": "sales-coach",
       "name": "Sales Coach",
       "division": "sales",
       "group": null,
@@ -5292,12 +4927,10 @@
         "Advanced Capabilities"
       ],
       "words": 3238,
-      "path": "sales/sales-coach.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-coach.md"
+      "path": "sales/sales-coach.md"
     },
     {
       "slug": "sales-deal-strategist",
-      "nameSlug": "deal-strategist",
       "name": "Deal Strategist",
       "division": "sales",
       "group": null,
@@ -5321,12 +4954,10 @@
         "Success Metrics"
       ],
       "words": 1993,
-      "path": "sales/sales-deal-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-deal-strategist.md"
+      "path": "sales/sales-deal-strategist.md"
     },
     {
       "slug": "sales-discovery-coach",
-      "nameSlug": "discovery-coach",
       "name": "Discovery Coach",
       "division": "sales",
       "group": null,
@@ -5347,12 +4978,10 @@
         "Communication Style"
       ],
       "words": 2182,
-      "path": "sales/sales-discovery-coach.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-discovery-coach.md"
+      "path": "sales/sales-discovery-coach.md"
     },
     {
       "slug": "sales-engineer",
-      "nameSlug": "sales-engineer",
       "name": "Sales Engineer",
       "division": "sales",
       "group": null,
@@ -5375,12 +5004,10 @@
         "Success Metrics"
       ],
       "words": 2007,
-      "path": "sales/sales-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-engineer.md"
+      "path": "sales/sales-engineer.md"
     },
     {
       "slug": "sales-offer-lead-gen-strategist",
-      "nameSlug": "offer-lead-gen-strategist",
       "name": "Offer & Lead Gen Strategist",
       "division": "sales",
       "group": null,
@@ -5403,12 +5030,10 @@
         "Advanced Capabilities"
       ],
       "words": 2421,
-      "path": "sales/sales-offer-lead-gen-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-offer-lead-gen-strategist.md"
+      "path": "sales/sales-offer-lead-gen-strategist.md"
     },
     {
       "slug": "sales-outbound-strategist",
-      "nameSlug": "outbound-strategist",
       "name": "Outbound Strategist",
       "division": "sales",
       "group": null,
@@ -5430,12 +5055,10 @@
         "Communication Style"
       ],
       "words": 1618,
-      "path": "sales/sales-outbound-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-outbound-strategist.md"
+      "path": "sales/sales-outbound-strategist.md"
     },
     {
       "slug": "sales-pipeline-analyst",
-      "nameSlug": "pipeline-analyst",
       "name": "Pipeline Analyst",
       "division": "sales",
       "group": null,
@@ -5458,12 +5081,10 @@
         "Advanced Capabilities"
       ],
       "words": 2588,
-      "path": "sales/sales-pipeline-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-pipeline-analyst.md"
+      "path": "sales/sales-pipeline-analyst.md"
     },
     {
       "slug": "sales-proposal-strategist",
-      "nameSlug": "proposal-strategist",
       "name": "Proposal Strategist",
       "division": "sales",
       "group": null,
@@ -5486,12 +5107,10 @@
         "Advanced Capabilities"
       ],
       "words": 1976,
-      "path": "sales/sales-proposal-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-proposal-strategist.md"
+      "path": "sales/sales-proposal-strategist.md"
     },
     {
       "slug": "security-ai-generated-code-auditor",
-      "nameSlug": "ai-generated-code-security-auditor",
       "name": "AI-Generated Code Security Auditor",
       "division": "security",
       "group": null,
@@ -5514,12 +5133,10 @@
         "Advanced Capabilities"
       ],
       "words": 2636,
-      "path": "security/security-ai-generated-code-auditor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-ai-generated-code-auditor.md"
+      "path": "security/security-ai-generated-code-auditor.md"
     },
     {
       "slug": "security-appsec-engineer",
-      "nameSlug": "application-security-engineer",
       "name": "Application Security Engineer",
       "division": "security",
       "group": null,
@@ -5542,12 +5159,10 @@
         "Advanced Capabilities"
       ],
       "words": 3595,
-      "path": "security/security-appsec-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-appsec-engineer.md"
+      "path": "security/security-appsec-engineer.md"
     },
     {
       "slug": "security-architect",
-      "nameSlug": "security-architect",
       "name": "Security Architect",
       "division": "security",
       "group": null,
@@ -5568,12 +5183,10 @@
         "Advanced Capabilities"
       ],
       "words": 2285,
-      "path": "security/security-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-architect.md"
+      "path": "security/security-architect.md"
     },
     {
       "slug": "security-blockchain-security-auditor",
-      "nameSlug": "blockchain-security-auditor",
       "name": "Blockchain Security Auditor",
       "division": "security",
       "group": null,
@@ -5596,12 +5209,10 @@
         "Advanced Capabilities"
       ],
       "words": 2900,
-      "path": "security/security-blockchain-security-auditor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-blockchain-security-auditor.md"
+      "path": "security/security-blockchain-security-auditor.md"
     },
     {
       "slug": "security-cloud-security-architect",
-      "nameSlug": "cloud-security-architect",
       "name": "Cloud Security Architect",
       "division": "security",
       "group": null,
@@ -5624,12 +5235,10 @@
         "Advanced Capabilities"
       ],
       "words": 3066,
-      "path": "security/security-cloud-security-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-cloud-security-architect.md"
+      "path": "security/security-cloud-security-architect.md"
     },
     {
       "slug": "security-compliance-auditor",
-      "nameSlug": "compliance-auditor",
       "name": "Compliance Auditor",
       "division": "security",
       "group": null,
@@ -5648,12 +5257,10 @@
         "Your Workflow"
       ],
       "words": 1021,
-      "path": "security/security-compliance-auditor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-compliance-auditor.md"
+      "path": "security/security-compliance-auditor.md"
     },
     {
       "slug": "security-incident-responder",
-      "nameSlug": "incident-responder",
       "name": "Incident Responder",
       "division": "security",
       "group": null,
@@ -5676,12 +5283,10 @@
         "Advanced Capabilities"
       ],
       "words": 3230,
-      "path": "security/security-incident-responder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-incident-responder.md"
+      "path": "security/security-incident-responder.md"
     },
     {
       "slug": "security-penetration-tester",
-      "nameSlug": "penetration-tester",
       "name": "Penetration Tester",
       "division": "security",
       "group": null,
@@ -5704,12 +5309,10 @@
         "Advanced Capabilities"
       ],
       "words": 2776,
-      "path": "security/security-penetration-tester.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-penetration-tester.md"
+      "path": "security/security-penetration-tester.md"
     },
     {
       "slug": "security-secrets-credential-engineer",
-      "nameSlug": "secrets-credential-hygiene-engineer",
       "name": "Secrets & Credential Hygiene Engineer",
       "division": "security",
       "group": null,
@@ -5732,12 +5335,10 @@
         "Advanced Capabilities"
       ],
       "words": 2164,
-      "path": "security/security-secrets-credential-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-secrets-credential-engineer.md"
+      "path": "security/security-secrets-credential-engineer.md"
     },
     {
       "slug": "security-senior-secops",
-      "nameSlug": "senior-secops-engineer",
       "name": "Senior SecOps Engineer",
       "division": "security",
       "group": null,
@@ -5763,12 +5364,10 @@
         "Advanced Capabilities"
       ],
       "words": 4240,
-      "path": "security/security-senior-secops.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-senior-secops.md"
+      "path": "security/security-senior-secops.md"
     },
     {
       "slug": "security-threat-detection-engineer",
-      "nameSlug": "threat-detection-engineer",
       "name": "Threat Detection Engineer",
       "division": "security",
       "group": null,
@@ -5791,12 +5390,10 @@
         "Advanced Capabilities"
       ],
       "words": 3355,
-      "path": "security/security-threat-detection-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-threat-detection-engineer.md"
+      "path": "security/security-threat-detection-engineer.md"
     },
     {
       "slug": "security-threat-intelligence-analyst",
-      "nameSlug": "threat-intelligence-analyst",
       "name": "Threat Intelligence Analyst",
       "division": "security",
       "group": null,
@@ -5819,12 +5416,10 @@
         "Advanced Capabilities"
       ],
       "words": 3403,
-      "path": "security/security-threat-intelligence-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-threat-intelligence-analyst.md"
+      "path": "security/security-threat-intelligence-analyst.md"
     },
     {
       "slug": "macos-spatial-metal-engineer",
-      "nameSlug": "macos-spatial-metal-engineer",
       "name": "macOS Spatial/Metal Engineer",
       "division": "spatial-computing",
       "group": null,
@@ -5847,12 +5442,10 @@
         "Advanced Capabilities"
       ],
       "words": 1397,
-      "path": "spatial-computing/macos-spatial-metal-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/macos-spatial-metal-engineer.md"
+      "path": "spatial-computing/macos-spatial-metal-engineer.md"
     },
     {
       "slug": "terminal-integration-specialist",
-      "nameSlug": "terminal-integration-specialist",
       "name": "Terminal Integration Specialist",
       "division": "spatial-computing",
       "group": null,
@@ -5873,12 +5466,10 @@
         "Limitations"
       ],
       "words": 443,
-      "path": "spatial-computing/terminal-integration-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/terminal-integration-specialist.md"
+      "path": "spatial-computing/terminal-integration-specialist.md"
     },
     {
       "slug": "visionos-spatial-engineer",
-      "nameSlug": "visionos-spatial-engineer",
       "name": "visionOS Spatial Engineer",
       "division": "spatial-computing",
       "group": null,
@@ -5897,12 +5488,10 @@
         "Limitations"
       ],
       "words": 343,
-      "path": "spatial-computing/visionos-spatial-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/visionos-spatial-engineer.md"
+      "path": "spatial-computing/visionos-spatial-engineer.md"
     },
     {
       "slug": "xr-cockpit-interaction-specialist",
-      "nameSlug": "xr-cockpit-interaction-specialist",
       "name": "XR Cockpit Interaction Specialist",
       "division": "spatial-computing",
       "group": null,
@@ -5919,12 +5508,10 @@
         "What You Can Do"
       ],
       "words": 201,
-      "path": "spatial-computing/xr-cockpit-interaction-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/xr-cockpit-interaction-specialist.md"
+      "path": "spatial-computing/xr-cockpit-interaction-specialist.md"
     },
     {
       "slug": "xr-immersive-developer",
-      "nameSlug": "xr-immersive-developer",
       "name": "XR Immersive Developer",
       "division": "spatial-computing",
       "group": null,
@@ -5941,12 +5528,10 @@
         "What You Can Do"
       ],
       "words": 214,
-      "path": "spatial-computing/xr-immersive-developer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/xr-immersive-developer.md"
+      "path": "spatial-computing/xr-immersive-developer.md"
     },
     {
       "slug": "xr-interface-architect",
-      "nameSlug": "xr-interface-architect",
       "name": "XR Interface Architect",
       "division": "spatial-computing",
       "group": null,
@@ -5963,12 +5548,10 @@
         "What You Can Do"
       ],
       "words": 192,
-      "path": "spatial-computing/xr-interface-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/xr-interface-architect.md"
+      "path": "spatial-computing/xr-interface-architect.md"
     },
     {
       "slug": "accounts-payable-agent",
-      "nameSlug": "accounts-payable-agent",
       "name": "Accounts Payable Agent",
       "division": "specialized",
       "group": null,
@@ -5990,12 +5573,10 @@
         "Works With"
       ],
       "words": 950,
-      "path": "specialized/accounts-payable-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/accounts-payable-agent.md"
+      "path": "specialized/accounts-payable-agent.md"
     },
     {
       "slug": "agentic-identity-trust",
-      "nameSlug": "agentic-identity-trust-architect",
       "name": "Agentic Identity & Trust Architect",
       "division": "specialized",
       "group": null,
@@ -6019,12 +5600,10 @@
         "Working with the Identity Graph Operator"
       ],
       "words": 2296,
-      "path": "specialized/agentic-identity-trust.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/agentic-identity-trust.md"
+      "path": "specialized/agentic-identity-trust.md"
     },
     {
       "slug": "agents-orchestrator",
-      "nameSlug": "agents-orchestrator",
       "name": "Agents Orchestrator",
       "division": "specialized",
       "group": null,
@@ -6050,12 +5629,10 @@
         "Orchestrator Launch Command"
       ],
       "words": 1947,
-      "path": "specialized/agents-orchestrator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/agents-orchestrator.md"
+      "path": "specialized/agents-orchestrator.md"
     },
     {
       "slug": "automation-governance-architect",
-      "nameSlug": "automation-governance-architect",
       "name": "Automation Governance Architect",
       "division": "specialized",
       "group": null,
@@ -6084,12 +5661,10 @@
         "Launch Command"
       ],
       "words": 777,
-      "path": "specialized/automation-governance-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/automation-governance-architect.md"
+      "path": "specialized/automation-governance-architect.md"
     },
     {
       "slug": "business-strategist",
-      "nameSlug": "business-strategist",
       "name": "Business Strategist",
       "division": "specialized",
       "group": null,
@@ -6113,12 +5688,10 @@
         "Advanced Capabilities"
       ],
       "words": 3264,
-      "path": "specialized/business-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/business-strategist.md"
+      "path": "specialized/business-strategist.md"
     },
     {
       "slug": "change-management-consultant",
-      "nameSlug": "change-management-consultant",
       "name": "Change Management Consultant",
       "division": "specialized",
       "group": null,
@@ -6142,12 +5715,10 @@
         "Advanced Capabilities"
       ],
       "words": 3511,
-      "path": "specialized/change-management-consultant.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/change-management-consultant.md"
+      "path": "specialized/change-management-consultant.md"
     },
     {
       "slug": "chief-financial-officer",
-      "nameSlug": "chief-financial-officer",
       "name": "Chief Financial Officer",
       "division": "specialized",
       "group": null,
@@ -6174,12 +5745,10 @@
         "CFO Communication Templates"
       ],
       "words": 2825,
-      "path": "specialized/chief-financial-officer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/chief-financial-officer.md"
+      "path": "specialized/chief-financial-officer.md"
     },
     {
       "slug": "corporate-training-designer",
-      "nameSlug": "corporate-training-designer",
       "name": "Corporate Training Designer",
       "division": "specialized",
       "group": null,
@@ -6199,12 +5768,10 @@
         "Success Metrics"
       ],
       "words": 1988,
-      "path": "specialized/corporate-training-designer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/corporate-training-designer.md"
+      "path": "specialized/corporate-training-designer.md"
     },
     {
       "slug": "customer-service",
-      "nameSlug": "customer-service",
       "name": "Customer Service",
       "division": "specialized",
       "group": null,
@@ -6228,12 +5795,10 @@
         "Advanced Capabilities"
       ],
       "words": 2694,
-      "path": "specialized/customer-service.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/customer-service.md"
+      "path": "specialized/customer-service.md"
     },
     {
       "slug": "customer-success-manager",
-      "nameSlug": "customer-success-manager",
       "name": "Customer Success Manager",
       "division": "specialized",
       "group": null,
@@ -6257,12 +5822,10 @@
         "Advanced Capabilities"
       ],
       "words": 3225,
-      "path": "specialized/customer-success-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/customer-success-manager.md"
+      "path": "specialized/customer-success-manager.md"
     },
     {
       "slug": "data-consolidation-agent",
-      "nameSlug": "data-consolidation-agent",
       "name": "Data Consolidation Agent",
       "division": "specialized",
       "group": null,
@@ -6282,12 +5845,10 @@
         "Success Metrics"
       ],
       "words": 304,
-      "path": "specialized/data-consolidation-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/data-consolidation-agent.md"
+      "path": "specialized/data-consolidation-agent.md"
     },
     {
       "slug": "data-privacy-officer",
-      "nameSlug": "data-privacy-officer",
       "name": "Data Privacy Officer",
       "division": "specialized",
       "group": null,
@@ -6314,12 +5875,10 @@
         "Privacy Notice Template Structure"
       ],
       "words": 3300,
-      "path": "specialized/data-privacy-officer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/data-privacy-officer.md"
+      "path": "specialized/data-privacy-officer.md"
     },
     {
       "slug": "esg-sustainability-officer",
-      "nameSlug": "esg-sustainability-officer",
       "name": "ESG & Sustainability Officer",
       "division": "specialized",
       "group": null,
@@ -6348,12 +5907,10 @@
         "Quick-Reference Acronyms"
       ],
       "words": 3067,
-      "path": "specialized/esg-sustainability-officer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/esg-sustainability-officer.md"
+      "path": "specialized/esg-sustainability-officer.md"
     },
     {
       "slug": "government-digital-presales-consultant",
-      "nameSlug": "government-digital-presales-consultant",
       "name": "Government Digital Presales Consultant",
       "division": "specialized",
       "group": null,
@@ -6374,12 +5931,10 @@
         "Success Metrics"
       ],
       "words": 3144,
-      "path": "specialized/government-digital-presales-consultant.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/government-digital-presales-consultant.md"
+      "path": "specialized/government-digital-presales-consultant.md"
     },
     {
       "slug": "grant-writer",
-      "nameSlug": "grant-writer",
       "name": "Grant Writer",
       "division": "specialized",
       "group": null,
@@ -6403,12 +5958,10 @@
         "Advanced Capabilities"
       ],
       "words": 3514,
-      "path": "specialized/grant-writer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/grant-writer.md"
+      "path": "specialized/grant-writer.md"
     },
     {
       "slug": "healthcare-aging-parent-care-companion",
-      "nameSlug": "aging-parent-care-companion",
       "name": "Aging Parent Care Companion",
       "division": "specialized",
       "group": null,
@@ -6432,12 +5985,10 @@
         "Advanced Capabilities"
       ],
       "words": 3709,
-      "path": "specialized/healthcare-aging-parent-care-companion.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/healthcare-aging-parent-care-companion.md"
+      "path": "specialized/healthcare-aging-parent-care-companion.md"
     },
     {
       "slug": "healthcare-customer-service",
-      "nameSlug": "healthcare-customer-service",
       "name": "Healthcare Customer Service",
       "division": "specialized",
       "group": null,
@@ -6461,12 +6012,10 @@
         "Advanced Capabilities"
       ],
       "words": 3059,
-      "path": "specialized/healthcare-customer-service.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/healthcare-customer-service.md"
+      "path": "specialized/healthcare-customer-service.md"
     },
     {
       "slug": "healthcare-marketing-compliance",
-      "nameSlug": "healthcare-marketing-compliance-specialist",
       "name": "Healthcare Marketing Compliance Specialist",
       "division": "specialized",
       "group": null,
@@ -6487,12 +6036,10 @@
         "Success Metrics"
       ],
       "words": 4638,
-      "path": "specialized/healthcare-marketing-compliance.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/healthcare-marketing-compliance.md"
+      "path": "specialized/healthcare-marketing-compliance.md"
     },
     {
       "slug": "hospitality-guest-services",
-      "nameSlug": "hospitality-guest-services",
       "name": "Hospitality Guest Services",
       "division": "specialized",
       "group": null,
@@ -6516,12 +6063,10 @@
         "Advanced Capabilities"
       ],
       "words": 3751,
-      "path": "specialized/hospitality-guest-services.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/hospitality-guest-services.md"
+      "path": "specialized/hospitality-guest-services.md"
     },
     {
       "slug": "hr-onboarding",
-      "nameSlug": "hr-onboarding",
       "name": "HR Onboarding",
       "division": "specialized",
       "group": null,
@@ -6545,12 +6090,10 @@
         "Advanced Capabilities"
       ],
       "words": 3269,
-      "path": "specialized/hr-onboarding.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/hr-onboarding.md"
+      "path": "specialized/hr-onboarding.md"
     },
     {
       "slug": "identity-graph-operator",
-      "nameSlug": "identity-graph-operator",
       "name": "Identity Graph Operator",
       "division": "specialized",
       "group": null,
@@ -6574,16 +6117,14 @@
         "Integration with Other Agency Agents"
       ],
       "words": 2059,
-      "path": "specialized/identity-graph-operator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/identity-graph-operator.md"
+      "path": "specialized/identity-graph-operator.md"
     },
     {
       "slug": "language-translator",
-      "nameSlug": "language-translator",
       "name": "Language Translator",
       "division": "specialized",
       "group": null,
-      "description": "Real-time Spanish English translation specialist with cultural context, regional dialect awareness, travel phrase guidance, and tone-appropriate communication for everyday, business, and emergency situations",
+      "description": "Real-time Spanish ↔ English translation specialist with cultural context, regional dialect awareness, travel phrase guidance, and tone-appropriate communication for everyday, business, and emergency situations",
       "vibe": "Bridges languages with precision, cultural respect, and the fluency of a native speaker who's lived in both worlds.",
       "tools": [],
       "author": null,
@@ -6603,12 +6144,10 @@
         "Advanced Capabilities"
       ],
       "words": 2166,
-      "path": "specialized/language-translator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/language-translator.md"
+      "path": "specialized/language-translator.md"
     },
     {
       "slug": "legal-billing-time-tracking",
-      "nameSlug": "legal-billing-time-tracking",
       "name": "Legal Billing & Time Tracking",
       "division": "specialized",
       "group": null,
@@ -6632,12 +6171,10 @@
         "Advanced Capabilities"
       ],
       "words": 3585,
-      "path": "specialized/legal-billing-time-tracking.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/legal-billing-time-tracking.md"
+      "path": "specialized/legal-billing-time-tracking.md"
     },
     {
       "slug": "legal-client-intake",
-      "nameSlug": "legal-client-intake",
       "name": "Legal Client Intake",
       "division": "specialized",
       "group": null,
@@ -6661,12 +6198,10 @@
         "Advanced Capabilities"
       ],
       "words": 3451,
-      "path": "specialized/legal-client-intake.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/legal-client-intake.md"
+      "path": "specialized/legal-client-intake.md"
     },
     {
       "slug": "legal-document-review",
-      "nameSlug": "legal-document-review",
       "name": "Legal Document Review",
       "division": "specialized",
       "group": null,
@@ -6690,12 +6225,10 @@
         "Advanced Capabilities"
       ],
       "words": 2943,
-      "path": "specialized/legal-document-review.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/legal-document-review.md"
+      "path": "specialized/legal-document-review.md"
     },
     {
       "slug": "loan-officer-assistant",
-      "nameSlug": "loan-officer-assistant",
       "name": "Loan Officer Assistant",
       "division": "specialized",
       "group": null,
@@ -6719,12 +6252,10 @@
         "Advanced Capabilities"
       ],
       "words": 3675,
-      "path": "specialized/loan-officer-assistant.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/loan-officer-assistant.md"
+      "path": "specialized/loan-officer-assistant.md"
     },
     {
       "slug": "lsp-index-engineer",
-      "nameSlug": "lsp-index-engineer",
       "name": "LSP/Index Engineer",
       "division": "specialized",
       "group": null,
@@ -6747,12 +6278,10 @@
         "Advanced Capabilities"
       ],
       "words": 1374,
-      "path": "specialized/lsp-index-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/lsp-index-engineer.md"
+      "path": "specialized/lsp-index-engineer.md"
     },
     {
       "slug": "ma-integration-manager",
-      "nameSlug": "m-a-integration-manager",
       "name": "M&A Integration Manager",
       "division": "specialized",
       "group": null,
@@ -6779,12 +6308,10 @@
         "100-Day Integration Report — Executive Structure"
       ],
       "words": 3201,
-      "path": "specialized/ma-integration-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/ma-integration-manager.md"
+      "path": "specialized/ma-integration-manager.md"
     },
     {
       "slug": "medical-billing-coding-specialist",
-      "nameSlug": "medical-billing-coding-specialist",
       "name": "Medical Billing & Coding Specialist",
       "division": "specialized",
       "group": null,
@@ -6808,12 +6335,10 @@
         "Advanced Capabilities"
       ],
       "words": 3219,
-      "path": "specialized/medical-billing-coding-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/medical-billing-coding-specialist.md"
+      "path": "specialized/medical-billing-coding-specialist.md"
     },
     {
       "slug": "operations-manager",
-      "nameSlug": "operations-manager",
       "name": "Operations Manager",
       "division": "specialized",
       "group": null,
@@ -6839,12 +6364,10 @@
         "Continuous Improvement Cadence"
       ],
       "words": 2822,
-      "path": "specialized/operations-manager.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/operations-manager.md"
+      "path": "specialized/operations-manager.md"
     },
     {
       "slug": "organizational-psychologist",
-      "nameSlug": "organizational-psychologist",
       "name": "Organizational Psychologist",
       "division": "specialized",
       "group": null,
@@ -6870,12 +6393,10 @@
         "Organizational Psychological Assessment Toolkit"
       ],
       "words": 3274,
-      "path": "specialized/organizational-psychologist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/organizational-psychologist.md"
+      "path": "specialized/organizational-psychologist.md"
     },
     {
       "slug": "personal-growth-mentor",
-      "nameSlug": "personal-growth-mentor",
       "name": "Personal Growth Mentor",
       "division": "specialized",
       "group": null,
@@ -6898,12 +6419,10 @@
         "Advanced Capabilities"
       ],
       "words": 1067,
-      "path": "specialized/personal-growth-mentor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/personal-growth-mentor.md"
+      "path": "specialized/personal-growth-mentor.md"
     },
     {
       "slug": "real-estate-buyer-seller",
-      "nameSlug": "real-estate-buyer-seller",
       "name": "Real Estate Buyer & Seller",
       "division": "specialized",
       "group": null,
@@ -6927,12 +6446,10 @@
         "Advanced Capabilities"
       ],
       "words": 3787,
-      "path": "specialized/real-estate-buyer-seller.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/real-estate-buyer-seller.md"
+      "path": "specialized/real-estate-buyer-seller.md"
     },
     {
       "slug": "recruitment-specialist",
-      "nameSlug": "recruitment-specialist",
       "name": "Recruitment Specialist",
       "division": "specialized",
       "group": null,
@@ -6961,12 +6478,10 @@
         "Advanced Capabilities"
       ],
       "words": 3559,
-      "path": "specialized/recruitment-specialist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/recruitment-specialist.md"
+      "path": "specialized/recruitment-specialist.md"
     },
     {
       "slug": "report-distribution-agent",
-      "nameSlug": "report-distribution-agent",
       "name": "Report Distribution Agent",
       "division": "specialized",
       "group": null,
@@ -6986,12 +6501,10 @@
         "Success Metrics"
       ],
       "words": 336,
-      "path": "specialized/report-distribution-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/report-distribution-agent.md"
+      "path": "specialized/report-distribution-agent.md"
     },
     {
       "slug": "resume-tailor",
-      "nameSlug": "resume-tailor",
       "name": "Resume Tailor",
       "division": "specialized",
       "group": null,
@@ -7014,12 +6527,10 @@
         "Advanced Capabilities"
       ],
       "words": 1541,
-      "path": "specialized/resume-tailor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/resume-tailor.md"
+      "path": "specialized/resume-tailor.md"
     },
     {
       "slug": "retail-customer-returns",
-      "nameSlug": "retail-customer-returns",
       "name": "Retail Customer Returns",
       "division": "specialized",
       "group": null,
@@ -7043,12 +6554,10 @@
         "Advanced Capabilities"
       ],
       "words": 3734,
-      "path": "specialized/retail-customer-returns.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/retail-customer-returns.md"
+      "path": "specialized/retail-customer-returns.md"
     },
     {
       "slug": "sales-data-extraction-agent",
-      "nameSlug": "sales-data-extraction-agent",
       "name": "Sales Data Extraction Agent",
       "division": "specialized",
       "group": null,
@@ -7068,12 +6577,10 @@
         "Success Metrics"
       ],
       "words": 371,
-      "path": "specialized/sales-data-extraction-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/sales-data-extraction-agent.md"
+      "path": "specialized/sales-data-extraction-agent.md"
     },
     {
       "slug": "sales-outreach",
-      "nameSlug": "sales-outreach",
       "name": "Sales Outreach",
       "division": "specialized",
       "group": null,
@@ -7097,12 +6604,10 @@
         "Advanced Capabilities"
       ],
       "words": 3006,
-      "path": "specialized/sales-outreach.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/sales-outreach.md"
+      "path": "specialized/sales-outreach.md"
     },
     {
       "slug": "specialized-chief-of-staff",
-      "nameSlug": "chief-of-staff",
       "name": "Chief of Staff",
       "division": "specialized",
       "group": null,
@@ -7126,12 +6631,10 @@
         "When to Activate This Agent"
       ],
       "words": 2961,
-      "path": "specialized/specialized-chief-of-staff.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-chief-of-staff.md"
+      "path": "specialized/specialized-chief-of-staff.md"
     },
     {
       "slug": "specialized-civil-engineer",
-      "nameSlug": "civil-engineer",
       "name": "Civil Engineer",
       "division": "specialized",
       "group": null,
@@ -7155,12 +6658,10 @@
         "Advanced Capabilities"
       ],
       "words": 2505,
-      "path": "specialized/specialized-civil-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-civil-engineer.md"
+      "path": "specialized/specialized-civil-engineer.md"
     },
     {
       "slug": "specialized-codebase-archaeologist",
-      "nameSlug": "codebase-archaeologist",
       "name": "Codebase Archaeologist",
       "division": "specialized",
       "group": null,
@@ -7183,12 +6684,10 @@
         "Advanced Capabilities"
       ],
       "words": 3999,
-      "path": "specialized/specialized-codebase-archaeologist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-codebase-archaeologist.md"
+      "path": "specialized/specialized-codebase-archaeologist.md"
     },
     {
       "slug": "specialized-cultural-intelligence-strategist",
-      "nameSlug": "cultural-intelligence-strategist",
       "name": "Cultural Intelligence Strategist",
       "division": "specialized",
       "group": null,
@@ -7211,12 +6710,10 @@
         "Advanced Capabilities"
       ],
       "words": 853,
-      "path": "specialized/specialized-cultural-intelligence-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-cultural-intelligence-strategist.md"
+      "path": "specialized/specialized-cultural-intelligence-strategist.md"
     },
     {
       "slug": "specialized-developer-advocate",
-      "nameSlug": "developer-advocate",
       "name": "Developer Advocate",
       "division": "specialized",
       "group": null,
@@ -7239,12 +6736,10 @@
         "Advanced Capabilities"
       ],
       "words": 2148,
-      "path": "specialized/specialized-developer-advocate.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-developer-advocate.md"
+      "path": "specialized/specialized-developer-advocate.md"
     },
     {
       "slug": "specialized-document-generator",
-      "nameSlug": "document-generator",
       "name": "Document Generator",
       "division": "specialized",
       "group": null,
@@ -7262,12 +6757,10 @@
         "Communication Style"
       ],
       "words": 275,
-      "path": "specialized/specialized-document-generator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-document-generator.md"
+      "path": "specialized/specialized-document-generator.md"
     },
     {
       "slug": "specialized-fedramp-rmf-compliance",
-      "nameSlug": "fedramp-rmf-compliance-engineer",
       "name": "FedRAMP & RMF Compliance Engineer",
       "division": "specialized",
       "group": null,
@@ -7291,12 +6784,10 @@
         "Advanced Capabilities"
       ],
       "words": 4314,
-      "path": "specialized/specialized-fedramp-rmf-compliance.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-fedramp-rmf-compliance.md"
+      "path": "specialized/specialized-fedramp-rmf-compliance.md"
     },
     {
       "slug": "specialized-focus-music-architect",
-      "nameSlug": "focus-music-architect",
       "name": "Focus Music Architect",
       "division": "specialized",
       "group": null,
@@ -7318,12 +6809,10 @@
         "Your Success Metrics"
       ],
       "words": 1368,
-      "path": "specialized/specialized-focus-music-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-focus-music-architect.md"
+      "path": "specialized/specialized-focus-music-architect.md"
     },
     {
       "slug": "specialized-french-consulting-market",
-      "nameSlug": "french-consulting-market-navigator",
       "name": "French Consulting Market Navigator",
       "division": "specialized",
       "group": null,
@@ -7345,12 +6834,10 @@
         "Advanced Capabilities"
       ],
       "words": 1477,
-      "path": "specialized/specialized-french-consulting-market.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-french-consulting-market.md"
+      "path": "specialized/specialized-french-consulting-market.md"
     },
     {
       "slug": "specialized-korean-business-navigator",
-      "nameSlug": "korean-business-navigator",
       "name": "Korean Business Navigator",
       "division": "specialized",
       "group": null,
@@ -7371,12 +6858,10 @@
         "Proof Project Strategy"
       ],
       "words": 2013,
-      "path": "specialized/specialized-korean-business-navigator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-korean-business-navigator.md"
+      "path": "specialized/specialized-korean-business-navigator.md"
     },
     {
       "slug": "specialized-master-plan-architect",
-      "nameSlug": "master-plan-architect",
       "name": "Master Plan Architect",
       "division": "specialized",
       "group": null,
@@ -7399,12 +6884,10 @@
         "Advanced Capabilities"
       ],
       "words": 1346,
-      "path": "specialized/specialized-master-plan-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-master-plan-architect.md"
+      "path": "specialized/specialized-master-plan-architect.md"
     },
     {
       "slug": "specialized-mcp-builder",
-      "nameSlug": "mcp-builder",
       "name": "MCP Builder",
       "division": "specialized",
       "group": null,
@@ -7427,12 +6910,10 @@
         "Advanced Capabilities"
       ],
       "words": 1724,
-      "path": "specialized/specialized-mcp-builder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-mcp-builder.md"
+      "path": "specialized/specialized-mcp-builder.md"
     },
     {
       "slug": "specialized-model-qa",
-      "nameSlug": "model-qa-specialist",
       "name": "Model QA Specialist",
       "division": "specialized",
       "group": null,
@@ -7456,12 +6937,10 @@
         "Advanced Capabilities"
       ],
       "words": 2673,
-      "path": "specialized/specialized-model-qa.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-model-qa.md"
+      "path": "specialized/specialized-model-qa.md"
     },
     {
       "slug": "specialized-pricing-analyst",
-      "nameSlug": "pricing-analyst",
       "name": "Pricing Analyst",
       "division": "specialized",
       "group": null,
@@ -7490,12 +6969,10 @@
         "Advanced Capabilities"
       ],
       "words": 1705,
-      "path": "specialized/specialized-pricing-analyst.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-pricing-analyst.md"
+      "path": "specialized/specialized-pricing-analyst.md"
     },
     {
       "slug": "specialized-salesforce-architect",
-      "nameSlug": "salesforce-architect",
       "name": "Salesforce Architect",
       "division": "specialized",
       "group": null,
@@ -7517,12 +6994,10 @@
         "Advanced Capabilities"
       ],
       "words": 1309,
-      "path": "specialized/specialized-salesforce-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-salesforce-architect.md"
+      "path": "specialized/specialized-salesforce-architect.md"
     },
     {
       "slug": "specialized-strategy-duel-agent",
-      "nameSlug": "strategy-duel-agent",
       "name": "Strategy Duel Agent",
       "division": "specialized",
       "group": null,
@@ -7545,12 +7020,10 @@
         "Advanced Capabilities"
       ],
       "words": 707,
-      "path": "specialized/specialized-strategy-duel-agent.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-strategy-duel-agent.md"
+      "path": "specialized/specialized-strategy-duel-agent.md"
     },
     {
       "slug": "specialized-workflow-architect",
-      "nameSlug": "workflow-architect",
       "name": "Workflow Architect",
       "division": "specialized",
       "group": null,
@@ -7562,23 +7035,21 @@
       "emoji": "🗺️",
       "color": "orange",
       "headings": [
-        "brain: Your Identity & Memory",
-        "dart: Your Core Mission",
-        "rotating_light: Critical Rules You Must Follow",
-        "clipboard: Your Technical Deliverables",
-        "arrows_counterclockwise: Your Workflow Process",
-        "speech_balloon: Your Communication Style",
-        "arrows_counterclockwise: Learning & Memory",
-        "dart: Your Success Metrics",
-        "rocket: Advanced Capabilities"
+        "Your Identity & Memory",
+        "Your Core Mission",
+        "Critical Rules You Must Follow",
+        "Your Technical Deliverables",
+        "Your Workflow Process",
+        "Your Communication Style",
+        "Learning & Memory",
+        "Your Success Metrics",
+        "Advanced Capabilities"
       ],
       "words": 4104,
-      "path": "specialized/specialized-workflow-architect.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-workflow-architect.md"
+      "path": "specialized/specialized-workflow-architect.md"
     },
     {
       "slug": "study-abroad-advisor",
-      "nameSlug": "study-abroad-advisor",
       "name": "Study Abroad Advisor",
       "division": "specialized",
       "group": null,
@@ -7599,12 +7070,10 @@
         "Success Metrics"
       ],
       "words": 2352,
-      "path": "specialized/study-abroad-advisor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/study-abroad-advisor.md"
+      "path": "specialized/study-abroad-advisor.md"
     },
     {
       "slug": "supply-chain-strategist",
-      "nameSlug": "supply-chain-strategist",
       "name": "Supply Chain Strategist",
       "division": "specialized",
       "group": null,
@@ -7634,12 +7103,10 @@
         "Advanced Capabilities"
       ],
       "words": 3670,
-      "path": "specialized/supply-chain-strategist.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/supply-chain-strategist.md"
+      "path": "specialized/supply-chain-strategist.md"
     },
     {
       "slug": "zk-steward",
-      "nameSlug": "zk-steward",
       "name": "ZK Steward",
       "division": "specialized",
       "group": null,
@@ -7664,12 +7131,10 @@
         "Companion Skills (Optional)"
       ],
       "words": 1502,
-      "path": "specialized/zk-steward.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/specialized/zk-steward.md"
+      "path": "specialized/zk-steward.md"
     },
     {
       "slug": "support-analytics-reporter",
-      "nameSlug": "analytics-reporter",
       "name": "Analytics Reporter",
       "division": "support",
       "group": null,
@@ -7693,12 +7158,10 @@
         "Advanced Capabilities"
       ],
       "words": 1852,
-      "path": "support/support-analytics-reporter.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-analytics-reporter.md"
+      "path": "support/support-analytics-reporter.md"
     },
     {
       "slug": "support-executive-summary-generator",
-      "nameSlug": "executive-summary-generator",
       "name": "Executive Summary Generator",
       "division": "support",
       "group": null,
@@ -7722,12 +7185,10 @@
         "Advanced Capabilities"
       ],
       "words": 1186,
-      "path": "support/support-executive-summary-generator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-executive-summary-generator.md"
+      "path": "support/support-executive-summary-generator.md"
     },
     {
       "slug": "support-finance-tracker",
-      "nameSlug": "finance-tracker",
       "name": "Finance Tracker",
       "division": "support",
       "group": null,
@@ -7751,12 +7212,10 @@
         "Advanced Capabilities"
       ],
       "words": 2110,
-      "path": "support/support-finance-tracker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-finance-tracker.md"
+      "path": "support/support-finance-tracker.md"
     },
     {
       "slug": "support-infrastructure-maintainer",
-      "nameSlug": "infrastructure-maintainer",
       "name": "Infrastructure Maintainer",
       "division": "support",
       "group": null,
@@ -7780,12 +7239,10 @@
         "Advanced Capabilities"
       ],
       "words": 2505,
-      "path": "support/support-infrastructure-maintainer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-infrastructure-maintainer.md"
+      "path": "support/support-infrastructure-maintainer.md"
     },
     {
       "slug": "support-legal-compliance-checker",
-      "nameSlug": "legal-compliance-checker",
       "name": "Legal Compliance Checker",
       "division": "support",
       "group": null,
@@ -7809,12 +7266,10 @@
         "Advanced Capabilities"
       ],
       "words": 2594,
-      "path": "support/support-legal-compliance-checker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-legal-compliance-checker.md"
+      "path": "support/support-legal-compliance-checker.md"
     },
     {
       "slug": "support-support-responder",
-      "nameSlug": "support-responder",
       "name": "Support Responder",
       "division": "support",
       "group": null,
@@ -7838,12 +7293,10 @@
         "Advanced Capabilities"
       ],
       "words": 2410,
-      "path": "support/support-support-responder.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/support/support-support-responder.md"
+      "path": "support/support-support-responder.md"
     },
     {
       "slug": "testing-accessibility-auditor",
-      "nameSlug": "accessibility-auditor",
       "name": "Accessibility Auditor",
       "division": "testing",
       "group": null,
@@ -7866,12 +7319,10 @@
         "Advanced Capabilities"
       ],
       "words": 2218,
-      "path": "testing/testing-accessibility-auditor.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-accessibility-auditor.md"
+      "path": "testing/testing-accessibility-auditor.md"
     },
     {
       "slug": "testing-api-tester",
-      "nameSlug": "api-tester",
       "name": "API Tester",
       "division": "testing",
       "group": null,
@@ -7895,12 +7346,10 @@
         "Advanced Capabilities"
       ],
       "words": 1597,
-      "path": "testing/testing-api-tester.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-api-tester.md"
+      "path": "testing/testing-api-tester.md"
     },
     {
       "slug": "testing-evidence-collector",
-      "nameSlug": "evidence-collector",
       "name": "Evidence Collector",
       "division": "testing",
       "group": null,
@@ -7923,12 +7372,10 @@
         "Your Success Metrics"
       ],
       "words": 1141,
-      "path": "testing/testing-evidence-collector.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-evidence-collector.md"
+      "path": "testing/testing-evidence-collector.md"
     },
     {
       "slug": "testing-performance-benchmarker",
-      "nameSlug": "performance-benchmarker",
       "name": "Performance Benchmarker",
       "division": "testing",
       "group": null,
@@ -7952,12 +7399,10 @@
         "Advanced Capabilities"
       ],
       "words": 1573,
-      "path": "testing/testing-performance-benchmarker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-performance-benchmarker.md"
+      "path": "testing/testing-performance-benchmarker.md"
     },
     {
       "slug": "testing-reality-checker",
-      "nameSlug": "reality-checker",
       "name": "Reality Checker",
       "division": "testing",
       "group": null,
@@ -7981,12 +7426,10 @@
         "Your Success Metrics"
       ],
       "words": 1327,
-      "path": "testing/testing-reality-checker.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-reality-checker.md"
+      "path": "testing/testing-reality-checker.md"
     },
     {
       "slug": "testing-test-automation-engineer",
-      "nameSlug": "test-automation-engineer",
       "name": "Test Automation Engineer",
       "division": "testing",
       "group": null,
@@ -8009,12 +7452,10 @@
         "Advanced Capabilities"
       ],
       "words": 1739,
-      "path": "testing/testing-test-automation-engineer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-test-automation-engineer.md"
+      "path": "testing/testing-test-automation-engineer.md"
     },
     {
       "slug": "testing-test-results-analyzer",
-      "nameSlug": "test-results-analyzer",
       "name": "Test Results Analyzer",
       "division": "testing",
       "group": null,
@@ -8038,12 +7479,10 @@
         "Advanced Capabilities"
       ],
       "words": 1675,
-      "path": "testing/testing-test-results-analyzer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-test-results-analyzer.md"
+      "path": "testing/testing-test-results-analyzer.md"
     },
     {
       "slug": "testing-tool-evaluator",
-      "nameSlug": "tool-evaluator",
       "name": "Tool Evaluator",
       "division": "testing",
       "group": null,
@@ -8067,12 +7506,10 @@
         "Advanced Capabilities"
       ],
       "words": 1901,
-      "path": "testing/testing-tool-evaluator.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-tool-evaluator.md"
+      "path": "testing/testing-tool-evaluator.md"
     },
     {
       "slug": "testing-workflow-optimizer",
-      "nameSlug": "workflow-optimizer",
       "name": "Workflow Optimizer",
       "division": "testing",
       "group": null,
@@ -8096,8 +7533,7 @@
         "Advanced Capabilities"
       ],
       "words": 2090,
-      "path": "testing/testing-workflow-optimizer.md",
-      "sourceUrl": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-workflow-optimizer.md"
+      "path": "testing/testing-workflow-optimizer.md"
     }
   ],
   "runbooks": [
@@ -8107,7 +7543,7 @@
       "mode": "NEXUS-Sprint",
       "duration": "4-6 weeks",
       "summary": "Idea to live product with real users, fast — without skipping QA.",
-      "docUrl": "https://github.com/msitarzewski/agency-agents/blob/main/strategy/runbooks/scenario-startup-mvp.md",
+      "doc": "strategy/runbooks/scenario-startup-mvp.md",
       "roster": [
         {
           "group": "Core Team",
@@ -8153,7 +7589,7 @@
       "mode": "NEXUS-Sprint",
       "duration": "6-12 weeks",
       "summary": "Ship a major feature into an existing enterprise product with non-negotiable compliance, security, and quality gates, and multi-stakeholder alignment.",
-      "docUrl": "https://github.com/msitarzewski/agency-agents/blob/main/strategy/runbooks/scenario-enterprise-feature.md",
+      "doc": "strategy/runbooks/scenario-enterprise-feature.md",
       "roster": [
         {
           "group": "Core Team",
@@ -8203,7 +7639,7 @@
       "mode": "NEXUS-Sprint",
       "duration": "2-4 weeks",
       "summary": "Launch a coordinated, brand-consistent campaign across channels that drives measurable acquisition and engagement.",
-      "docUrl": "https://github.com/msitarzewski/agency-agents/blob/main/strategy/runbooks/scenario-marketing-campaign.md",
+      "doc": "strategy/runbooks/scenario-marketing-campaign.md",
       "roster": [
         {
           "group": "Campaign Core",
@@ -8245,7 +7681,7 @@
       "mode": "NEXUS-Micro",
       "duration": "Minutes to hours",
       "summary": "Detection through post-mortem for a production incident — fast response without cutting corners.",
-      "docUrl": "https://github.com/msitarzewski/agency-agents/blob/main/strategy/runbooks/scenario-incident-response.md",
+      "doc": "strategy/runbooks/scenario-incident-response.md",
       "roster": [
         {
           "group": "P0 Critical Response",

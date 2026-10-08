@@ -118,7 +118,7 @@ export function Collection() {
 
         {/* search + categories */}
         {/* z stays below the pinned Worlds section, which scrolls over this. */}
-        <div className="sticky top-[57px] z-sticky -mx-6 mt-6 border-y border-rule bg-ink/92 px-6 py-3 backdrop-blur">
+        <div className="sticky top-[57px] z-sticky -mx-6 mt-6 border-y border-rule bg-ink/90 px-6 py-3 backdrop-blur">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <input
               value={query}

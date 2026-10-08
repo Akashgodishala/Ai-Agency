@@ -1,15 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import type { AgencyDivision } from "@/lib/agency";
 
 /**
  * Agents per division, as a sorted bar list that is also the division filter.
  *
- * One series, one hue: every bar is the accent, and a selected division is
- * told apart by the others stepping back, not by a second colour. Marks are
- * thin, the track is a hairline, and the value sits at the tip — the count is
- * what you came to read, so it is written rather than left to the eye.
+ * One series, one hue: every bar is the accent. A selected division is told
+ * apart by weight (its label is set bold) and by the other bars stepping back
+ * to a lighter wash — never by fading their text, which would drop it under
+ * the 4.5:1 floor the house keeps. Marks are thin, the track is a hairline,
+ * and the value sits at the tip: the count is what you came to read.
+ *
+ * The bars grow in with a CSS animation rather than a state flip, so they are
+ * already drawn in the server HTML and need no JavaScript to appear; under
+ * reduced motion the global rule collapses both duration and delay.
  */
 export function DivisionBars({
   divisions,
@@ -24,14 +28,6 @@ export function DivisionBars({
   const sorted = [...divisions].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
   const max = Math.max(1, ...sorted.map((d) => d.count));
 
-  // Bars grow in on first paint. Reduced motion collapses the transition to
-  // nothing via the global rule in globals.css, so they simply appear.
-  const [grown, setGrown] = useState(false);
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setGrown(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
   return (
     <div
       role="group"
@@ -40,37 +36,34 @@ export function DivisionBars({
     >
       {sorted.map((d, i) => {
         const selected = active === d.id;
-        const dimmed = active !== null && !selected;
+        const stepped = active !== null && !selected;
         return (
           <button
             key={d.id}
             type="button"
             aria-pressed={selected}
             onClick={() => onPick(selected ? null : d.id)}
-            className={`group grid grid-cols-[9.5rem_1fr_2.5rem] items-center gap-3 py-1.5 text-left transition-colors duration-300 ease-struck sm:grid-cols-[11rem_1fr_2.5rem] ${
-              dimmed ? "opacity-60 hover:opacity-100" : ""
-            }`}
+            className="group grid grid-cols-[9.5rem_1fr_2.5rem] items-center gap-3 py-1.5 text-left sm:grid-cols-[11rem_1fr_2.5rem]"
           >
             <span
-              className={`truncate text-[0.86rem] transition-colors duration-300 ease-struck ${
-                selected ? "text-paper" : "text-muted group-hover:text-paper"
+              className={`truncate text-[0.86rem] transition-colors duration-300 ease-struck group-hover:text-paper group-focus-visible:text-paper ${
+                selected ? "font-semibold text-paper" : stepped ? "text-dim" : "text-muted"
               }`}
             >
               {d.label}
             </span>
-            <span className="relative h-1.5 w-full overflow-hidden rounded-struck bg-rule">
+            <span className="relative h-1.5 w-full overflow-hidden rounded-struck bg-rule" aria-hidden="true">
               <span
-                className={`absolute inset-y-0 left-0 block origin-left rounded-struck transition-transform duration-700 ease-struck ${
-                  dimmed ? "bg-mint/40 group-hover:bg-mint" : "bg-mint"
+                className={`bar-grow absolute inset-y-0 left-0 block origin-left rounded-struck transition-colors duration-300 ease-struck group-hover:bg-mint group-focus-visible:bg-mint ${
+                  stepped ? "bg-mint/40" : "bg-mint"
                 }`}
-                style={{
-                  width: `${(d.count / max) * 100}%`,
-                  transform: grown ? "scaleX(1)" : "scaleX(0)",
-                  transitionDelay: grown ? `${i * 30}ms` : "0ms",
-                }}
+                style={{ width: `${(d.count / max) * 100}%`, animationDelay: `${i * 30}ms` }}
               />
             </span>
-            <span className="font-mono text-xs tabular-nums text-dim">{d.count}</span>
+            <span className="font-mono text-xs tabular-nums text-dim">
+              {d.count}
+              <span className="sr-only"> agents</span>
+            </span>
           </button>
         );
       })}
